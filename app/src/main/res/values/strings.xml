@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Foodster - Food Planner</string>
     <string name="app_title">Foodster</string>
+    <string name="user_name">User Name</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="logout">Logout</string>
 </resources>
