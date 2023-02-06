@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="foodsterYellow">#f69e31</color>
+    <color name="foodsterBlack">#363130</color>
+    <color name="foodsterWhite">#faf9fc</color>
+    <color name="foodsterRed">#cf0606</color>
 </resources>
