@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline3.1"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:tint="@color/palette_offblack" />
+            app:tint="@color/foodster_black" />
 
 
         <!--        <com.google.android.material.button.MaterialButton-->
@@ -122,7 +122,7 @@
                 android:layout_gravity="center"
                 android:text="@string/meal_text"
                 android:textAlignment="center"
-                android:textColor="@color/palette_offblack" />
+                android:textColor="@color/foodster_black" />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline

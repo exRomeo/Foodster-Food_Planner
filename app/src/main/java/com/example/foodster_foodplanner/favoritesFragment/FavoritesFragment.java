@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.RemoteDataSource.NetworkDelegate;
-import com.example.foodster_foodplanner.RemoteDataSource.RetrofitClient;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
 import com.example.foodster_foodplanner.models.Meal;
 
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FavoritesFragment extends Fragment implements NetworkDelegate {
+public class FavoritesFragment extends Fragment {
     FragmentFavoritesBinding binder;
     FavoritesAdapter favoritesAdapter;
     List<Meal> mealList;
@@ -46,26 +44,12 @@ public class FavoritesFragment extends Fragment implements NetworkDelegate {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binder = FragmentFavoritesBinding.bind(view);
+        //TODO ------
+/*        binder = FragmentFavoritesBinding.bind(view);
         favoritesAdapter = new FavoritesAdapter(this.requireContext(), mealList);
-        makeNetworkCalls();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.requireContext(), 2);
         binder.mealsGrid.setAdapter(favoritesAdapter);
-        binder.mealsGrid.setLayoutManager(gridLayoutManager);
-    }
-    void makeNetworkCalls(){
-        for(int i = 0 ; i<100; i++) {
-            RetrofitClient.getInstance().fetchARandom(this);
-        }
-    }
-    @Override
-    public void onResponseSuccess(List<Meal> mealList) {
-        this.mealList.add(mealList.get(0));
-        favoritesAdapter.notifyDataSetChanged();
+        binder.mealsGrid.setLayoutManager(gridLayoutManager);*/
     }
 
-    @Override
-    public void onResponseFailure(String message) {
-
-    }
 }

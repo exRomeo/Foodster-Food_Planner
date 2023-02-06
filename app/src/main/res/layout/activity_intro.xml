@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/palette_off_white_blueish"
+    android:background="@color/foodster_white"
     tools:context=".IntroActivity">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/rfbarbariskarough2_regular"
         android:text="@string/foodster"
-        android:textColor="@color/palette_offblack"
+        android:textColor="@color/foodster_black"
         android:textSize="@dimen/title_large"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
