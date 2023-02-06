@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Foodster - Food Planner</string>
+    <string name="app_title">Foodster</string>
+    <string name="user_name">User Name</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="logout">Logout</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="Enteruser_name">User Name</string>
+    <string name="enter_password">Password</string>
+    <string name="ask_to_signup">Don\'t have an account?</string>
+    <string name="signupHyperLink">SignUp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="meal_image">Meal Image</string>
@@ -25,6 +34,4 @@
 - Ingredient Three Amount
 - Ingredient Four Amount
 - Ingredient Five Amount</string>
-
-
 </resources>
