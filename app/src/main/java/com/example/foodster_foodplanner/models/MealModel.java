@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.model;
+package com.example.foodster_foodplanner.models;
 
 import java.util.List;
 

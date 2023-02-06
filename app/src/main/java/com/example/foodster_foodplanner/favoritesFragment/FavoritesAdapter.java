@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.model.Meal;
+import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
@@ -35,12 +37,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
         Meal currentMeal = list.get(position);
         // TODO: 2/6/2023  implement the required view fillers
+        // Done ?
+
+        holder.getRemoveButton().setOnClickListener(view -> Toast.makeText(context,currentMeal.getStrMeal(),Toast.LENGTH_SHORT).show());
+        holder.getTitle().setText(currentMeal.getStrMeal());
+        Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/meal_card"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
 
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
     app:cardCornerRadius="25dp"
-    app:cardElevation="15dp"
-    tools:layout_margin="16dp">
+    app:cardElevation="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="175dp"
@@ -51,7 +51,7 @@
             android:id="@+id/remove_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/circular_background"
+            android:background="@drawable/circular_shape"
             android:contentDescription="@string/cross_button"
             android:scaleType="center"
             android:src="@drawable/cross"
@@ -107,9 +107,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="#80FFFFFF"
+            app:cardBackgroundColor="#B3FFFFFF"
             app:cardCornerRadius="25dp"
-            app:cardElevation="0dp"
+            app:cardElevation="20dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -121,7 +121,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/meal_text"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/palette_offblack" />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
