@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/meal_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="175dp"
+        android:layout_height="175dp">
+
+        <ImageView
+            android:id="@+id/meal_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/meal_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sample_meal" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <ImageView
+            android:id="@+id/remove_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/circular_shape"
+            android:contentDescription="@string/cross_button"
+            android:scaleType="center"
+            android:src="@drawable/cross"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2.1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline3.1"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:tint="@color/foodster_black" />
+
+
+        <!--        <com.google.android.material.button.MaterialButton-->
+        <!--            android:id="@+id/remove_button"-->
+        <!--            style="@style/Widget.Material3.Button.Icon"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:background="@drawable/circular_background"-->
+        <!--            android:insetLeft="0dp"-->
+        <!--            android:insetTop="0dp"-->
+        <!--            android:insetRight="0dp"-->
+        <!--            android:insetBottom="0dp"-->
+        <!--            app:backgroundTint="@color/palette_off_white_blueish"-->
+        <!--            app:icon="@drawable/cross"-->
+        <!--            app:iconGravity="textStart"-->
+        <!--            app:iconPadding="-8dp"-->
+        <!--            app:iconSize="20dp"-->
+        <!--            app:iconTint="@color/palette_offblack"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline2.1"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/guideline3.1"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/guideline2" />-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="#B3FFFFFF"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="@+id/guideline4.1">
+
+            <TextView
+                android:id="@+id/meal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/meal_text"
+                android:textAlignment="center"
+                android:textColor="@color/foodster_black" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

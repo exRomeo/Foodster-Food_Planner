@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/foodsterWhite"
+    android:background="@color/foodster_white"
     tools:context=".LoginActivity">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/manropelight"
         android:text="@string/Enteruser_name"
-        android:textColor="@color/foodsterBlack"
+        android:textColor="@color/foodster_black"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/editUserName"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,7 +75,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/manropelight"
         android:text="@string/enter_password"
-        android:textColor="@color/foodsterBlack"
+        android:textColor="@color/foodster_black"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/editPassword"
         app:layout_constraintStart_toStartOf="parent" />
@@ -100,7 +100,7 @@
         android:contentDescription="login using google"
         android:fontFamily="@font/manropesemibold"
         android:text="@string/signupHyperLink"
-        android:textColor="@color/foodsterBlack"
+        android:textColor="@color/foodster_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -113,7 +113,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/barbariska"
         android:text="@string/app_title"
-        android:textColor="@color/foodsterBlack"
+        android:textColor="@color/foodster_black"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/foodsterWhite"
+        android:backgroundTint="@color/foodster_white"
         android:contentDescription="use google to login"
         android:padding="20dp"
         app:layout_constraintEnd_toStartOf="@+id/facebookButton"
@@ -139,7 +139,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:backgroundTint="@color/foodsterWhite"
+        android:backgroundTint="@color/foodster_white"
         android:contentDescription="use facebook to login"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,9 +152,9 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:backgroundTint="@color/foodsterYellow"
+        android:backgroundTint="@color/foodster_yellow"
         android:text="LOGIN"
-        android:textColor="@color/foodsterBlack"
+        android:textColor="@color/foodster_black"
         app:cornerRadius="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
