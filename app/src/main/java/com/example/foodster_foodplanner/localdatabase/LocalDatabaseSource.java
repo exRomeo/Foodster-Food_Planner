@@ -9,7 +9,6 @@ import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
-@Database(entities = {Meal.class}, version = 1, exportSchema = false)
 public class LocalDatabaseSource implements RoomInterface {
 
     private static LocalDatabaseSource LOCAL_INSTANCE;
