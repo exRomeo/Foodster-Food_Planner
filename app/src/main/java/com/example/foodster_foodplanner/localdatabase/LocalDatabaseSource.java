@@ -12,10 +12,9 @@ import java.util.List;
 public class LocalDatabaseSource implements RoomInterface {
 
     private static LocalDatabaseSource LOCAL_INSTANCE = null;
-    private static Context context;
+    private Context context;
     private MealDao mealDao;
     private LiveData<List<Meal>> mealsList;
-
 
 
     private LocalDatabaseSource(Context context) {
@@ -24,7 +23,7 @@ public class LocalDatabaseSource implements RoomInterface {
         mealDao = db.mealDao();
     }
 
-    public static LocalDatabaseSource getInstance() {
+    public static LocalDatabaseSource getInstance(Context context) {
         if (LOCAL_INSTANCE == null)
             LOCAL_INSTANCE = new LocalDatabaseSource(context);
 
