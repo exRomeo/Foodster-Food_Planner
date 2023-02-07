@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.favoritesFragment;
+package com.example.foodster_foodplanner.Fragments;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,33 +16,35 @@ import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
-public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
+public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.ViewHolder> {
     private final Context context;
     private final List<Meal> list;
+    private final OnCardClickListener onCardClickListener;
+    private final int icon;
 
-    public FavoritesAdapter(Context context, List<Meal> mealList){
+    public CardsGridAdapter(Context context, List<Meal> mealList, OnCardClickListener onCardClickListener, int icon) {
         this.list = mealList;
         this.context = context;
+        this.onCardClickListener = onCardClickListener;
+        this.icon = icon;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_square_card,parent,false);
+        View view = layoutInflater.inflate(R.layout.item_square_card, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoritesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardsGridAdapter.ViewHolder holder, int position) {
         Meal currentMeal = list.get(position);
-        // TODO: 2/6/2023  implement the required view fillers
-        // Done ?
-
-        holder.getRemoveButton().setOnClickListener(view -> Toast.makeText(context,currentMeal.getStrMeal(),Toast.LENGTH_SHORT).show());
+        holder.getTopRightButton().setOnClickListener(view -> onCardClickListener.onClick(currentMeal));
+        holder.getTopRightButton().setImageResource(icon);
         holder.getTitle().setText(currentMeal.getStrMeal());
         Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
     }
-
 
     @Override
     public int getItemCount() {
@@ -53,12 +54,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView title;
         private final ImageView mealImg;
-        private final ImageView removeButton;
-        ViewHolder(View view){
+        private final ImageView topRightButton;
+
+        ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.meal_title);
             mealImg = view.findViewById(R.id.meal_img);
-            removeButton = view.findViewById(R.id.remove_button);
+            topRightButton = view.findViewById(R.id.top_right_button);
         }
 
         public TextView getTitle() {
@@ -69,8 +71,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             return mealImg;
         }
 
-        public ImageView getRemoveButton() {
-            return removeButton;
+        public ImageView getTopRightButton() {
+            return topRightButton;
         }
     }
 }

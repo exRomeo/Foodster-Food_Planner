@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.signupFragment;
+package com.example.foodster_foodplanner.Fragments.signup;
 
 import android.os.Bundle;
 

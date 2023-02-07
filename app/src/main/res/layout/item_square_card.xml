@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
 
     android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
     android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
     app:cardCornerRadius="25dp"
     app:cardElevation="15dp">
 
@@ -48,40 +48,18 @@
             app:layout_constraintGuide_percent="0.05" />
 
         <ImageView
-            android:id="@+id/remove_button"
+            android:id="@+id/top_right_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/circular_shape"
-            android:contentDescription="@string/cross_button"
+            android:contentDescription="@string/top_right_button"
             android:scaleType="center"
             android:src="@drawable/cross"
             app:layout_constraintBottom_toTopOf="@+id/guideline2.1"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline3.1"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:tint="@color/foodster_black" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-
-        <!--        <com.google.android.material.button.MaterialButton-->
-        <!--            android:id="@+id/remove_button"-->
-        <!--            style="@style/Widget.Material3.Button.Icon"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:background="@drawable/circular_background"-->
-        <!--            android:insetLeft="0dp"-->
-        <!--            android:insetTop="0dp"-->
-        <!--            android:insetRight="0dp"-->
-        <!--            android:insetBottom="0dp"-->
-        <!--            app:backgroundTint="@color/palette_off_white_blueish"-->
-        <!--            app:icon="@drawable/cross"-->
-        <!--            app:iconGravity="textStart"-->
-        <!--            app:iconPadding="-8dp"-->
-        <!--            app:iconSize="20dp"-->
-        <!--            app:iconTint="@color/palette_offblack"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/guideline2.1"-->
-        <!--            app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/guideline3.1"-->
-        <!--            app:layout_constraintTop_toTopOf="@+id/guideline2" />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
