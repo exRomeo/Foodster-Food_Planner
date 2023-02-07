@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="@dimen/textedit_height"
-    tools:context=".signupFragment.SignupFragment">
+    tools:context=".fragments.signup.SignupFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
