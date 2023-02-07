@@ -44,7 +44,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        presenter = new FavoritesPresenterImpl(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        presenter = new FavoritesPresenterImpl(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         mealList = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
