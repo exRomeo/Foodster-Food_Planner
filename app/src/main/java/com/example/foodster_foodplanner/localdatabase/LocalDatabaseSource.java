@@ -12,9 +12,11 @@ import java.util.List;
 public class LocalDatabaseSource implements RoomInterface {
 
     private static LocalDatabaseSource LOCAL_INSTANCE = null;
+    private static Context context;
     private MealDao mealDao;
     private LiveData<List<Meal>> mealsList;
-    static Context context;
+
+
 
     private LocalDatabaseSource(Context context) {
         this.context = context;
@@ -31,8 +33,8 @@ public class LocalDatabaseSource implements RoomInterface {
 
 
     @Override
-    public void insertToFavorites(Meal meal) {
-
+    public void addToFavorites(Meal meal) {
+        mealDao.addFavorite(meal);
     }
 
     @Override
@@ -46,8 +48,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public List<Meal> getListOfFavorites() {
-        return null;
+    public LiveData<List<Meal>> getListOfFavorites() {
+        return mealDao.getFavoritesList();
     }
 
     @Override
@@ -61,8 +63,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public Meal getFavoriteMeal(int idMeal) {
-        return null;
+    public LiveData<Meal> getFavoriteMeal(int idMeal) {
+        return mealDao.getFavorite(idMeal);
     }
 
     @Override
@@ -76,8 +78,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public void removeFavoriteMeal(int idMeal) {
-
+    public void removeFavoriteMeal(Meal meal) {
+        mealDao.removeFavorite(meal);
     }
 
     @Override
