@@ -1,8 +1,8 @@
-package com.example.foodster_foodplanner.Fragments.Favorites;
+package com.example.foodster_foodplanner.fragments.favorites;
 
 import com.example.foodster_foodplanner.models.Meal;
 
-public class FavoritesPresenterImpl implements FavoritesPresenter {
+class FavoritesPresenterImpl implements FavoritesPresenter {
     //    TODO waiting on repository >:c
     private final FavoritesView favoritesView;
 

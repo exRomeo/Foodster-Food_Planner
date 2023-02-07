@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.Fragments;
+package com.example.foodster_foodplanner.fragments;
 
 import android.content.Context;
 import android.view.LayoutInflater;

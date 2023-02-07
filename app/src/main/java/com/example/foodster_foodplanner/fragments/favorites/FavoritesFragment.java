@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.Fragments.Favorites;
+package com.example.foodster_foodplanner.fragments.favorites;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.example.foodster_foodplanner.Fragments.CardsGridAdapter;
-import com.example.foodster_foodplanner.Fragments.OnCardClickListener;
+import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
+import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
 import com.example.foodster_foodplanner.models.Meal;

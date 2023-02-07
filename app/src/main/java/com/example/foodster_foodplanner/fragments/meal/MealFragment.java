@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.mealFragment;
+package com.example.foodster_foodplanner.fragments.meal;
 
 import android.os.Bundle;
 
