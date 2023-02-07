@@ -11,16 +11,24 @@ import java.util.List;
 
 public class LocalDatabaseSource implements RoomInterface {
 
-    private static LocalDatabaseSource LOCAL_INSTANCE;
+    private static LocalDatabaseSource LOCAL_INSTANCE = null;
     private MealDao mealDao;
     private LiveData<List<Meal>> mealsList;
-    Context context;
+    static Context context;
 
-    public LocalDatabaseSource(Context context) {
+    private LocalDatabaseSource(Context context) {
         this.context = context;
         LocalDatabase db = LocalDatabase.getInstance(context.getApplicationContext());
         mealDao = db.mealDao();
     }
+
+    public static LocalDatabaseSource getInstance() {
+        if (LOCAL_INSTANCE == null)
+            LOCAL_INSTANCE = new LocalDatabaseSource(context);
+
+        return LOCAL_INSTANCE;
+    }
+
 
     @Override
     public void insertToFavorites(Meal meal) {
