@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.fragments.meal.MealFragment;
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -44,6 +46,9 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
         holder.getTopRightButton().setImageResource(icon);
         holder.getTitle().setText(currentMeal.getStrMeal());
         Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
+        holder.getCardView().setOnClickListener(v -> {
+            //TODO navigation functionality
+        });
     }
 
     @Override
@@ -52,6 +57,7 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        private final CardView cardView;
         private final TextView title;
         private final ImageView mealImg;
         private final ImageView topRightButton;
@@ -61,6 +67,7 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
             title = view.findViewById(R.id.meal_title);
             mealImg = view.findViewById(R.id.meal_img);
             topRightButton = view.findViewById(R.id.top_right_button);
+            cardView = view.findViewById(R.id.meal_card);
         }
 
         public TextView getTitle() {
@@ -73,6 +80,10 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
 
         public ImageView getTopRightButton() {
             return topRightButton;
+        }
+
+        public CardView getCardView() {
+            return cardView;
         }
     }
 }

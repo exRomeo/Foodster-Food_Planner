@@ -12,11 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.Repository.RepositoryImpl;
+import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
-import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
+import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +44,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        presenter = new FavoritesPresenterImpl(this);
+//        presenter = new FavoritesPresenterImpl(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         mealList = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
