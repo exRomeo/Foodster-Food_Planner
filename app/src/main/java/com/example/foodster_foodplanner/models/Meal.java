@@ -1,8 +1,19 @@
 package com.example.foodster_foodplanner.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.foodster_foodplanner.localdatabase.DateConverter;
+
 import java.util.Date;
 
+@Entity(tableName = "meal")
+@TypeConverters({DateConverter.class})
 public class Meal {
+    @PrimaryKey
+    @NonNull
     int idMeal;
     String strMeal;
     String strDrinkAlternate;
