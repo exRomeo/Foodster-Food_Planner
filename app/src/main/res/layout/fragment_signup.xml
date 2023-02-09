@@ -150,7 +150,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/mealImage"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="96dp"
