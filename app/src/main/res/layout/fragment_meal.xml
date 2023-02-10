@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,12 +15,12 @@
             android:id="@+id/meal_image"
             android:layout_width="0dp"
             android:layout_height="360dp"
+            android:contentDescription="@string/meal_image"
             android:scaleType="centerCrop"
             android:src="@drawable/sample_meal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/meal_image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -33,7 +33,6 @@
             app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/meal_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toBottomOf="@+id/meal_image">
@@ -121,7 +120,45 @@
             app:layout_constraintStart_toEndOf="@+id/ingredient"
             app:layout_constraintTop_toBottomOf="@+id/amounts" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fav_button_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
 
+        <Button
+            android:id="@+id/right_bottom_button"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:background="@drawable/side_button"
+            app:backgroundTint="@color/foodster_white"
+            app:icon="@drawable/heart"
+            app:iconTint="@color/foodster_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fav_button_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/circular_shape"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline16"
+            app:srcCompat="@drawable/arrow_small_left" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

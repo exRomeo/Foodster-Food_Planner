@@ -15,7 +15,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/manropelight"
-        android:text="@string/Enteruser_name"
+        android:text="@string/enter_user_name"
         android:textColor="@color/foodster_black"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/editUserName"

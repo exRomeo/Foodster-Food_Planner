@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.fragments.meal.MealFragment;
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -48,6 +47,9 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
         Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
         holder.getCardView().setOnClickListener(v -> {
             //TODO navigation functionality
+            /** make it go to the meal view and show meal details
+             * cant really picture how would the code look right
+             * will do after stitching the ui together :D */
         });
     }
 

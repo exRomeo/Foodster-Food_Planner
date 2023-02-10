@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.planner.PlannerFragment">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/this_week"
+        android:textSize="@dimen/default_size"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/saturday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toTopOf="@+id/guideline20">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/saturday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/saturday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/saturday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/saturday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/saturday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/saturday_guideline26" />
+
+            <TextView
+                android:id="@+id/saturday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/saturday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/saturday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/saturday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/saturday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/saturday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/saturday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sunday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/saturday_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sunday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/sunday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/sunday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/sunday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/sunday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/sunday_guideline26" />
+
+            <TextView
+                android:id="@+id/sunday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/sunday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/sunday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/sunday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sunday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sunday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sunday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/monday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/sunday_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/monday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/monday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/monday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/monday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/monday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/monday_guideline26" />
+
+            <TextView
+                android:id="@+id/monday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/monday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/monday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/monday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/monday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/monday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/monday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tuesday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/monday_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tuesday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/tuesday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/tuesday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/tuesday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/tuesday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/tuesday_guideline26" />
+
+            <TextView
+                android:id="@+id/tuesday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/tuesday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/tuesday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/tuesday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tuesday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tuesday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/tuesday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/wednesday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/tuesday_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/wednesday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/wednesday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/wednesday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/wednesday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/wednesday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/wednesday_guideline26" />
+
+            <TextView
+                android:id="@+id/wednesday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/wednesday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/wednesday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/wednesday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/wednesday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/wednesday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/wednesday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/thursday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/wednesday_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/thursday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/thursday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/thursday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/thursday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/thursday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/thursday_guideline26" />
+
+            <TextView
+                android:id="@+id/thursday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/thursday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/thursday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/thursday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/thursday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/thursday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/thursday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/friday_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/foodster_yellow"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline19"
+        app:layout_constraintTop_toBottomOf="@+id/thursday_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/friday_guideline23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <TextView
+                android:id="@+id/friday_textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/friday"
+                android:textSize="@dimen/default_size"
+                app:layout_constraintBottom_toTopOf="@+id/friday_guideline25"
+                app:layout_constraintStart_toStartOf="@+id/friday_guideline23"
+                app:layout_constraintTop_toTopOf="@+id/friday_guideline26" />
+
+            <TextView
+                android:id="@+id/friday_add"
+                android:layout_width="105dp"
+                android:layout_height="20dp"
+                android:background="@drawable/round_rect_no_stroke"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/add_from_favorites"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/friday_textView9"
+                app:layout_constraintEnd_toStartOf="@+id/friday_guideline24"
+                app:layout_constraintTop_toTopOf="@+id/friday_textView9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/friday_guideline24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/friday_guideline25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.90" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/friday_guideline26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

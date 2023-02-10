@@ -1,14 +1,14 @@
 package com.example.foodster_foodplanner.fragments.meal;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
@@ -43,6 +43,9 @@ public class MealFragment extends Fragment implements MealView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMealBinding.bind(view);
+        binding.rightBottomButton.setOnClickListener(v -> addToFavorites(MealPresenterImpl.getMeal()));
+        //TODO make it go back for real :D
+        binding.backButton.setOnClickListener(v -> Toast.makeText(this.requireContext(), "go bak >:( !", Toast.LENGTH_SHORT).show());
 
     }
 
@@ -57,7 +60,7 @@ public class MealFragment extends Fragment implements MealView {
 
     @Override
     public void addToFavorites(Meal meal) {
-
+        mealPresenter.addToFavorites(meal);
     }
 
     @Override
