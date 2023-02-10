@@ -28,7 +28,7 @@
             android:layout_height="80dp"
             android:background="@android:color/transparent"
             android:visibility="visible"
-            app:cardBackgroundColor="#80FFFFFF"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/meal_image"
