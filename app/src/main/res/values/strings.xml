@@ -35,4 +35,7 @@
 - Ingredient Four Amount
 - Ingredient Five Amount</string>
     <string name="daily_title">"Your 10 Daily Magical Meals "</string>
+    <string name="country_search">Search By Country</string>
+    <string name="search_category">Search By Category</string>
+    <string name="search_ing">Search By Ingredients</string>
 </resources>
