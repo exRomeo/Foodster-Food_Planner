@@ -46,7 +46,7 @@ public class MealFragment extends Fragment implements MealView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMealBinding.bind(view);
-//        binding.rightBottomButton.setOnClickListener(v -> addToFavorites(MealPresenterImpl.getMeal()));
+        showMeal(MealPresenterImpl.getMeal());
         //TODO make it go back for real :D
         String[] days = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         AtomicInteger checkedItem = new AtomicInteger(-1);
@@ -60,11 +60,8 @@ public class MealFragment extends Fragment implements MealView {
 
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-
-
-        binding.rightBottomButton.setOnClickListener(v -> builder.show());
-
-
+        binding.addToPlan.setOnClickListener(v -> builder.show());
+        binding.rightBottomButton.setOnClickListener(v -> addToFavorites(MealPresenterImpl.getMeal()));
         binding.backButton.setOnClickListener(v -> Toast.makeText(this.requireContext(), "go bak >:( !", Toast.LENGTH_SHORT).show());
 
     }

@@ -1,24 +1,23 @@
 package com.example.foodster_foodplanner.home;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.databinding.FragmentHomeBinding;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
+import com.example.foodster_foodplanner.fragments.meal.MealFragment;
+import com.example.foodster_foodplanner.fragments.meal.MealPresenterImpl;
 import com.example.foodster_foodplanner.models.Meal;
-import com.example.foodster_foodplanner.retrofitclient.API;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
@@ -63,6 +62,16 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     @Override
     public void onClick(Meal meal) {
         Toast.makeText(this.requireContext(), "Meal Clicked"+meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+
+
+
+        MealPresenterImpl.setMeal(meal);
+        Fragment fragment = new MealFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
     }
 

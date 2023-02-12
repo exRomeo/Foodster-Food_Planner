@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "283596832584",
+    "project_id": "foodster-d5005",
+    "storage_bucket": "foodster-d5005.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283596832584:android:a3134fc394e0f81fe1fd7d",
+        "android_client_info": {
+          "package_name": "com.example.foodster_foodplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283596832584-vdo1mevil86r2tr9vumbam48p6v3027j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX5GhFp8T_IuWC4rqoyQqtXn91kUZp45A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283596832584-vdo1mevil86r2tr9vumbam48p6v3027j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

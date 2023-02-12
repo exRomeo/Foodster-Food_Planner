@@ -19,7 +19,7 @@ public class MealPresenterImpl implements MealPresenter {
     @Override
     public String getIngredients(Meal meal) {
         StringBuilder ingredients = new StringBuilder();
-        meal.getMeasuresList().forEach(s -> ingredients.append("\n").append(s));
+        meal.getIngredientsList().forEach(s -> ingredients.append("\n").append(s));
         return ingredients.toString();
     }
 
