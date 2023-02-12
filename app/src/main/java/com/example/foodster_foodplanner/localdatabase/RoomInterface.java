@@ -6,6 +6,8 @@ import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public interface RoomInterface {
     void addToFavorites(Meal meal);
 
@@ -13,13 +15,13 @@ public interface RoomInterface {
 
     void insertWeekly(Meal meal);
 
-    LiveData<List<Meal>> getListOfFavorites();
+    Flowable<List<Meal>> getListOfFavorites();
 
     List<Meal> getListOfDaily();
 
     List<Meal> getListOfWeekly();
 
-    LiveData<Meal> getFavoriteMeal(int idMeal);
+    Flowable<Meal> getFavoriteMeal(int idMeal);
 
     Meal getDailyMeal(int idMeal);
 

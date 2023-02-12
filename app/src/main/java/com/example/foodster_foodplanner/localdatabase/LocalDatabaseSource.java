@@ -9,6 +9,8 @@ import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public class LocalDatabaseSource implements RoomInterface {
 
     private static LocalDatabaseSource LOCAL_INSTANCE = null;
@@ -47,7 +49,7 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public LiveData<List<Meal>> getListOfFavorites() {
+    public Flowable<List<Meal>> getListOfFavorites() {
         return mealDao.getFavoritesList();
     }
 
@@ -62,7 +64,7 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public LiveData<Meal> getFavoriteMeal(int idMeal) {
+    public Flowable<Meal> getFavoriteMeal(int idMeal) {
         return mealDao.getFavorite(idMeal);
     }
 
