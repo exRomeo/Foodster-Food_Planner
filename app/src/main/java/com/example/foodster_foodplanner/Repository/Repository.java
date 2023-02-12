@@ -1,14 +1,14 @@
 package com.example.foodster_foodplanner.Repository;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public interface Repository {
 
-    LiveData<List<Meal>> getFavoritesList();
+    Flowable<List<Meal>> getFavoritesList();
 
     void removeFavorite(Meal meal);
 

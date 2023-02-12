@@ -14,7 +14,7 @@ class FavoritesPresenterImpl implements FavoritesPresenter {
 
     @Override
     public void getFavorites() {
-        repository.getFavoritesList().observe(((FavoritesFragment)favoritesView).requireActivity(), favoritesView::showMeals);
+        repository.getFavoritesList().subscribe(favoritesView::showMeals);
     }
 
     @Override

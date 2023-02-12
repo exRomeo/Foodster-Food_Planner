@@ -1,12 +1,12 @@
 package com.example.foodster_foodplanner.Repository;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.foodster_foodplanner.localdatabase.RoomInterface;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClient;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Flowable;
 
 public class RepositoryImpl implements Repository{
     private static Repository repository;
@@ -23,7 +23,7 @@ public class RepositoryImpl implements Repository{
         return repository;
     }
     @Override
-    public LiveData<List<Meal>> getFavoritesList() {
+    public Flowable<List<Meal>> getFavoritesList() {
         return roomInterface.getListOfFavorites();
     }
 
