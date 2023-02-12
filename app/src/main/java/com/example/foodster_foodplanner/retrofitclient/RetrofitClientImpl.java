@@ -35,6 +35,23 @@ public class RetrofitClientImpl implements RetrofitClient {
     @Override
     public void getRandomMeal(NetworkDelegate networkDelegate) {
         //TODO
+      /**  for (int i = 0; i <= 9; i++) {
+            Call<MealModel> randomMeal = api.getRandomMeal();
+            randomMeal.enqueue(new Callback<MealModel>() {
+                @Override
+                public void onResponse(Call<MealModel> call, Response<MealModel> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        mealList.addAll(response.body().getMeals());
+                        networkDelegate.onResponseSuccess(mealList);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MealModel> call, Throwable t) {
+                    networkDelegate.onResponseFailure(t.getMessage());
+                }
+            });
+        }**/
     }
 
     @Override
