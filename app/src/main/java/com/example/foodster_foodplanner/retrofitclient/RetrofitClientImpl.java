@@ -8,6 +8,7 @@ import java.util.List;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -41,20 +42,18 @@ public class RetrofitClientImpl implements RetrofitClient {
         Observable<MealModel> randomCall = api.getRandomMeal();
 
         Observer<MealModel> observer =new Observer<MealModel>() {
-
-
             @Override
-            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealModel mealModel) {
+            public void onNext(@NonNull MealModel mealModel) {
                    networkDelegate.onResponseSuccess(mealModel.getMeals());
             }
 
             @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+            public void onError(@NonNull Throwable e) {
                networkDelegate.onResponseFailure(e.getMessage());
             }
 

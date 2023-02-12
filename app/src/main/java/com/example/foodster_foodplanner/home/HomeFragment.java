@@ -14,9 +14,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.Repository.Repository;
+import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.fragments.meal.MealFragment;
 import com.example.foodster_foodplanner.fragments.meal.MealPresenterImpl;
+import com.example.foodster_foodplanner.localdatabase.RoomInterface;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
@@ -32,6 +35,8 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     private PageViewerAdapter adapter;
     private RetrofitClientImpl retrofit;
 
+
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -45,7 +50,6 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -53,14 +57,15 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         retrofit = RetrofitClientImpl.getInstance();
-        createCall();
+        viewPager2 = view.findViewById(R.id.viewPager);
+        dailyTen=null;
+        retrofit.getRandomMeal(this);
+        retrofit.getRandomMeal(this);
+        retrofit.getRandomMeal(this);
         adapter = new PageViewerAdapter(dailyTen, viewPager2, this,
                 this, this.requireContext());
         viewPager2.setAdapter(adapter);
-        viewPager2 = view.findViewById(R.id.viewPager);
-
     }
-
     @Override
     public void onClick(Meal meal) {
         Toast.makeText(this.requireContext(), "Meal Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
@@ -78,12 +83,14 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     @Override
     public void onClickFav(Meal meal) {
         Toast.makeText(this.requireContext(), "Fav Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {
-        dailyTen.add(meals.get(0));
+        dailyTen.addAll(meals);
     }
+
      public  void createCall(){
         for (int i=0;i<9;i++){
             retrofit.getRandomMeal(this);
