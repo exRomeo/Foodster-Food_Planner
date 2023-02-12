@@ -1,39 +1,93 @@
 <resources>
     <string name="app_name">Foodster - Food Planner</string>
+
     <string name="app_title">Foodster</string>
+
     <string name="user_name">User Name</string>
+
     <string name="dark_mode">Dark Mode</string>
+
     <string name="logout">Logout</string>
+
     <string name="meal_name">Meal Name</string>
-    <string name="Enteruser_name">User Name</string>
+
+    <string name="enter_user_name">User Name</string>
+
     <string name="enter_password">Password</string>
+
     <string name="ask_to_signup">Don\'t have an account?</string>
+
     <string name="signupHyperLink">SignUp</string>
+
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="meal_image">Meal Image</string>
+
     <string name="meal_text">Spanish Tortilla</string>
+
     <string name="top_right_button">Top Right Item Button</string>
+
     <string name="confirm_password">Confirm Password</string>
+
     <string name="password">Password</string>
+
     <string name="name">Name</string>
+
     <string name="foodster">Foodster</string>
+
     <string name="signup">Sign Up</string>
+
     <string name="already_have_an_account">Already Have an Account?</string>
+
     <string name="login">LOGIN</string>
+
     <string name="ingredient">Ingredient</string>
+
     <string name="amount">Amount</string>
+
     <string name="meal_origin">Origin : British</string>
+
     <string name="ingredients_sample_text">- Ingredient one
+
 - Ingredient Two
+
 - Ingredient Three
+
 - Ingredient Four
+
 - Ingredient Five</string>
+
     <string name="ingredient_amounts_sample">- ingredient one amount
+
 - Ingredient Two Amount
+
 - Ingredient Three Amount
+
 - Ingredient Four Amount
+
 - Ingredient Five Amount</string>
+
+    <string name="favorites_header">The Meals You Love!</string>
+
+    <string name="this_week">This Week</string>
+
+
+    <string name="saturday">Saturday</string>
+
+    <string name="sunday">Sunday</string>
+
+    <string name="monday">Monday</string>
+
+    <string name="tuesday">Tuesday</string>
+
+    <string name="wednesday">Wednesday</string>
+
+    <string name="thursday">Thursday</string>
+
+    <string name="friday">Friday</string>
+    <string name="add_from_favorites">Add From Favs</string>
     <string name="daily_title">"Your 10 Daily Magical Meals "</string>
     <string name="country_search">Search By Country</string>
     <string name="search_category">Search By Category</string>

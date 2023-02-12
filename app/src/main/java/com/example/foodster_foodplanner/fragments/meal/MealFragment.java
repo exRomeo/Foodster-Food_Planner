@@ -1,19 +1,22 @@
 package com.example.foodster_foodplanner.fragments.meal;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.databinding.FragmentMealBinding;
 import com.example.foodster_foodplanner.models.Meal;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MealFragment extends Fragment implements MealView {
@@ -43,6 +46,26 @@ public class MealFragment extends Fragment implements MealView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMealBinding.bind(view);
+//        binding.rightBottomButton.setOnClickListener(v -> addToFavorites(MealPresenterImpl.getMeal()));
+        //TODO make it go back for real :D
+        String[] days = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+        AtomicInteger checkedItem = new AtomicInteger(-1);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this.requireContext());
+        builder.setTitle("Planning for which day ?");
+        builder.setSingleChoiceItems(days, checkedItem.get(), (dialog, which) -> checkedItem.set(which));
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            if (checkedItem.get() != -1) {
+                Toast.makeText(this.requireContext(), days[checkedItem.get()], Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+
+        binding.rightBottomButton.setOnClickListener(v -> builder.show());
+
+
+        binding.backButton.setOnClickListener(v -> Toast.makeText(this.requireContext(), "go bak >:( !", Toast.LENGTH_SHORT).show());
 
     }
 
@@ -57,7 +80,7 @@ public class MealFragment extends Fragment implements MealView {
 
     @Override
     public void addToFavorites(Meal meal) {
-
+        mealPresenter.addToFavorites(meal);
     }
 
     @Override

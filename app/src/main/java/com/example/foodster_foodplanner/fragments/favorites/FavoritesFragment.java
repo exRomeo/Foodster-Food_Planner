@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
@@ -53,12 +52,9 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //TODO ------ TO.. DONE? >:D
         binder = FragmentFavoritesBinding.bind(view);
         cardsGridAdapter = new CardsGridAdapter(this.requireContext(),
                 mealList, this, R.drawable.cross);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.requireContext(), 2);
-        binder.mealsGrid.setLayoutManager(gridLayoutManager);
         binder.mealsGrid.setAdapter(cardsGridAdapter);
         presenter.getFavorites();
     }
