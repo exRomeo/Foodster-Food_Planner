@@ -35,7 +35,7 @@ public class RetrofitClientImpl implements RetrofitClient {
     @Override
     public void getRandomMeal(NetworkDelegate networkDelegate) {
         //TODO
-        for (int i = 0; i <= 9; i++) {
+      /**  for (int i = 0; i <= 9; i++) {
             Call<MealModel> randomMeal = api.getRandomMeal();
             randomMeal.enqueue(new Callback<MealModel>() {
                 @Override
@@ -51,7 +51,7 @@ public class RetrofitClientImpl implements RetrofitClient {
                     networkDelegate.onResponseFailure(t.getMessage());
                 }
             });
-        }
+        }**/
     }
 
     @Override
