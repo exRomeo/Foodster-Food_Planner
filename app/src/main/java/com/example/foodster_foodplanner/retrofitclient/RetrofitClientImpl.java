@@ -43,8 +43,6 @@ public class RetrofitClientImpl implements RetrofitClient {
     public void getRandomMeal(NetworkDelegate networkDelegate) {
         //TODO
         Observable<MealModel> randomCall = api.getRandomMeal();
-        randomCall.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
 
         Observer<MealModel> observer =new Observer<MealModel>() {
 
@@ -69,6 +67,9 @@ public class RetrofitClientImpl implements RetrofitClient {
 
             }
         };
+        randomCall.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+       // randomCall.subscribe(observer);
     }
 
     @Override
