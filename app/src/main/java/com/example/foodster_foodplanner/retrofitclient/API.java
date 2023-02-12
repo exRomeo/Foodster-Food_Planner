@@ -11,7 +11,7 @@ public interface API {
     String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
 
     @GET("random.php")
-    Call<MealModel> getRandomMeal();
+    Observable<MealModel> getRandomMeal();
 
     @GET("search.php?")
     Observable<MealModel> getMealByName(@Query("s") String name);
