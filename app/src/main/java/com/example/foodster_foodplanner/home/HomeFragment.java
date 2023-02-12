@@ -53,8 +53,10 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         retrofit = RetrofitClientImpl.getInstance();
-        retrofit.getRandomMeal(this);
-
+        createCall();
+        adapter = new PageViewerAdapter(dailyTen, viewPager2, this,
+                this, this.requireContext());
+        viewPager2.setAdapter(adapter);
         viewPager2 = view.findViewById(R.id.viewPager);
 
     }
@@ -80,12 +82,13 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {
-
-        adapter = new PageViewerAdapter(meals, viewPager2, this,
-                this, this.requireContext());
-        viewPager2.setAdapter(adapter);
+        dailyTen.add(meals.get(0));
     }
-
+     public  void createCall(){
+        for (int i=0;i<9;i++){
+            retrofit.getRandomMeal(this);
+        }
+     }
     @Override
     public void onResponseFailure(String errorMessage) {
         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
