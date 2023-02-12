@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_rectangle_shape"
+        android:background="@drawable/round_rect_stroke"
         android:ems="16"
         android:inputType="textPersonName"
         android:padding="15dp"
