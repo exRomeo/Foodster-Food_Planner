@@ -46,8 +46,7 @@ public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
     @Override
     public void onBindViewHolder(@NonNull PageViewerHolder holder, int position) {
         holder.mealName.setText(dailyMeals.get(position).getStrMeal());
-        Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).apply(new RequestOptions().override(150,150)).into(holder.mealImage);
-        holder.addToFavorites.setOnClickListener(view -> favoriteIconClickListener.onClickFav(dailyMeals.get(position)));
+        Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).apply(new RequestOptions()).into(holder.mealImage);        holder.addToFavorites.setOnClickListener(view -> favoriteIconClickListener.onClickFav(dailyMeals.get(position)));
         holder.mealImage.setOnClickListener(view -> cardClickListener.onClick(dailyMeals.get(position)));
     }
 
