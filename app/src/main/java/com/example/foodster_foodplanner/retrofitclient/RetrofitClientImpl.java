@@ -7,10 +7,16 @@ import com.example.foodster_foodplanner.models.MealModel;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientImpl implements RetrofitClient {
@@ -22,6 +28,7 @@ public class RetrofitClientImpl implements RetrofitClient {
     public RetrofitClientImpl() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
         api = retrofit.create(API.class);
     }
@@ -35,23 +42,33 @@ public class RetrofitClientImpl implements RetrofitClient {
     @Override
     public void getRandomMeal(NetworkDelegate networkDelegate) {
         //TODO
-      /**  for (int i = 0; i <= 9; i++) {
-            Call<MealModel> randomMeal = api.getRandomMeal();
-            randomMeal.enqueue(new Callback<MealModel>() {
-                @Override
-                public void onResponse(Call<MealModel> call, Response<MealModel> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        mealList.addAll(response.body().getMeals());
-                        networkDelegate.onResponseSuccess(mealList);
-                    }
-                }
+        Observable<MealModel> randomCall = api.getRandomMeal();
+        randomCall.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
 
-                @Override
-                public void onFailure(Call<MealModel> call, Throwable t) {
-                    networkDelegate.onResponseFailure(t.getMessage());
-                }
-            });
-        }**/
+        Observer<MealModel> observer =new Observer<MealModel>() {
+
+
+            @Override
+            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealModel mealModel) {
+                   networkDelegate.onResponseSuccess(mealModel.getMeals());
+            }
+
+            @Override
+            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+               networkDelegate.onResponseFailure(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     @Override

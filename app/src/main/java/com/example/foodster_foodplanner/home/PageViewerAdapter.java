@@ -17,16 +17,17 @@ import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
-    private ArrayList<Meal> dailyMeals;
+    private List<Meal> dailyMeals;
     private OnCardClickListener cardClickListener;
     private OnFavoriteIconClickListener favoriteIconClickListener;
     private ViewPager2 viewPager;
 
     private Context context;
 
-    public PageViewerAdapter(ArrayList<Meal> dailyMeals,ViewPager2 viewPager,OnCardClickListener cardClickListener,OnFavoriteIconClickListener favoriteIconClickListener, Context context ){
+    public PageViewerAdapter(List<Meal> dailyMeals, ViewPager2 viewPager, OnCardClickListener cardClickListener, OnFavoriteIconClickListener favoriteIconClickListener, Context context ){
         this.dailyMeals=dailyMeals;
         this.viewPager=viewPager;
         this.context=context;
