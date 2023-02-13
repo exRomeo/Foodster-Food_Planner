@@ -1,6 +1,8 @@
 package com.example.foodster_foodplanner.home;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,28 +16,25 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.Repository.Repository;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.fragments.meal.MealFragment;
 import com.example.foodster_foodplanner.fragments.meal.MealPresenterImpl;
-import com.example.foodster_foodplanner.localdatabase.RoomInterface;
+import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
-import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements OnFavoriteIconClickListener, OnCardClickListener, NetworkDelegate {
+public class HomeFragment extends Fragment implements OnFavoriteIconClickListener, OnCardClickListener, HomeView {
 
     private ViewPager2 viewPager2;
-    private List<Meal> dailyTen;
+    private List<Meal> daily;
     private PageViewerAdapter adapter;
-    private RetrofitClientImpl retrofit;
-
-
+    private Handler slider;
+    private HomePresenterImplementation presenter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -50,22 +49,28 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        daily = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        retrofit = RetrofitClientImpl.getInstance();
+        presenter = new HomePresenterImplementation(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         viewPager2 = view.findViewById(R.id.viewPager);
-        dailyTen=null;
-        retrofit.getRandomMeal(this);
-        retrofit.getRandomMeal(this);
-        retrofit.getRandomMeal(this);
-        adapter = new PageViewerAdapter(dailyTen, viewPager2, this,
-                this, this.requireContext());
-        viewPager2.setAdapter(adapter);
+        slider = new Handler();
+        presenter.getMeals();
+        setAdapter();
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                slider.removeCallbacks(sliderRunnable);
+                slider.postDelayed(sliderRunnable, 3000);
+            }
+        });
     }
+
     @Override
     public void onClick(Meal meal) {
         Toast.makeText(this.requireContext(), "Meal Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
@@ -82,23 +87,35 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
 
     @Override
     public void onClickFav(Meal meal) {
-        Toast.makeText(this.requireContext(), "Fav Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.requireContext(), "Meal is added: " + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+        presenter.addToFavs(meal);
+    }
+
+    @Override
+    public void showDailyMeals(List<Meal> dailyTen) {
+        daily.add(dailyTen.get(0));
+        adapter.notifyDataSetChanged();
 
     }
 
     @Override
-    public void onResponseSuccess(List<Meal> meals) {
-        dailyTen.addAll(meals);
+    public void showError(String errMsg) {
+        Toast.makeText(getActivity(), errMsg, Toast.LENGTH_SHORT).show();
+
     }
 
-     public  void createCall(){
-        for (int i=0;i<9;i++){
-            retrofit.getRandomMeal(this);
+    public void setAdapter() {
+        adapter = new PageViewerAdapter(daily, viewPager2, this, this, this.requireContext());
+        viewPager2.setAdapter(adapter);
+        Log.i("trace", "setAdapter: here");
+    }
+
+    private Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int current = viewPager2.getCurrentItem();
+            viewPager2.setCurrentItem(current + 1);
+
         }
-     }
-    @Override
-    public void onResponseFailure(String errorMessage) {
-        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
-
-    }
+    };
 }
