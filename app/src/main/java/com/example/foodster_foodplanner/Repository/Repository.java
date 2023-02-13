@@ -12,7 +12,7 @@ public interface Repository {
 
     void removeFavorite(Meal meal);
 
-    void getFavoriteById(int id);
+    Flowable<Meal> getFavoriteById(int id);
 
     void addFavorite(Meal meal);
 
