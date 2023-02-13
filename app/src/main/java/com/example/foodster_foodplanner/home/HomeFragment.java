@@ -55,41 +55,44 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
         retrofit = RetrofitClientImpl.getInstance();
         //add rx retrofit obs here
         retrofit.getRandomMeal(this);
-        viewPager2=view.findViewById(R.id.viewPager);
+        viewPager2 = view.findViewById(R.id.viewPager);
 
     }
 
     @Override
-    public void onClick(Meal meal) {
-        Toast.makeText(this.requireContext(), "Meal Clicked"+meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+    public void onFavoriteClick(Meal meal) {
 
 
+    }
 
+    @Override
+    public void onCardClick(Meal meal) {
+        Toast.makeText(this.requireContext(), "Meal Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
         MealPresenterImpl.setMeal(meal);
         Fragment fragment = new MealFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
     }
 
     @Override
     public void onClickFav(Meal meal) {
-        Toast.makeText(this.requireContext(), "Fav Clicked"+meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.requireContext(), "Fav Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {
-        adapter = new PageViewerAdapter(meals,viewPager2,this,
-                this,this.requireContext());
+        adapter = new PageViewerAdapter(meals, viewPager2, this,
+                this, this.requireContext());
         viewPager2.setAdapter(adapter);
     }
 
     @Override
     public void onResponseFailure(String errorMessage) {
-        Toast.makeText(getActivity(),errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -12,8 +12,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentMealBinding;
+import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MealFragment extends Fragment implements MealView {
     MealPresenterImpl mealPresenter;
     FragmentMealBinding binding;
+    Meal currentMeal;
 
     public MealFragment() {
         // Required empty public constructor
@@ -38,7 +42,7 @@ public class MealFragment extends Fragment implements MealView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mealPresenter = new MealPresenterImpl();
+        mealPresenter = new MealPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         return inflater.inflate(R.layout.fragment_meal, container, false);
     }
 
@@ -46,23 +50,11 @@ public class MealFragment extends Fragment implements MealView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMealBinding.bind(view);
-        showMeal(MealPresenterImpl.getMeal());
-        //TODO make it go back for real :D
-        String[] days = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        AtomicInteger checkedItem = new AtomicInteger(-1);
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this.requireContext());
-        builder.setTitle("Planning for which day ?");
-        builder.setSingleChoiceItems(days, checkedItem.get(), (dialog, which) -> checkedItem.set(which));
-        builder.setPositiveButton("OK", (dialog, which) -> {
-            if (checkedItem.get() != -1) {
-                Toast.makeText(this.requireContext(), days[checkedItem.get()], Toast.LENGTH_SHORT).show();
-            }
-
-        });
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        binding.addToPlan.setOnClickListener(v -> builder.show());
+        currentMeal = MealPresenterImpl.getMeal();
+        showMeal(currentMeal);
+        binding.addToPlan.setOnClickListener(v -> createDialog().show());
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(MealPresenterImpl.getMeal()));
-        binding.backButton.setOnClickListener(v -> Toast.makeText(this.requireContext(), "go bak >:( !", Toast.LENGTH_SHORT).show());
+        binding.backButton.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
     }
 
@@ -73,6 +65,7 @@ public class MealFragment extends Fragment implements MealView {
         binding.mealOrigin.setText("Origin : " + meal.getStrArea());
         binding.ingredientsText.setText(mealPresenter.getIngredients(meal));
         binding.amountsText.setText(mealPresenter.getMeasures(meal));
+        binding.instructionsText.setText(meal.getStrInstructions());
     }
 
     @Override
@@ -82,6 +75,23 @@ public class MealFragment extends Fragment implements MealView {
 
     @Override
     public void showError(String message) {
+        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
 
+
+    public MaterialAlertDialogBuilder createDialog() {
+        String[] days = {"None", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+        AtomicInteger checkedItem = new AtomicInteger(-1);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this.requireContext());
+        builder.setTitle("Planning for which day ?");
+        builder.setSingleChoiceItems(days, checkedItem.get(), (dialog, which) -> checkedItem.set(which));
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            if (checkedItem.get() != -1) {
+                Toast.makeText(this.requireContext(),"Planned for next\n" + days[checkedItem.get()], Toast.LENGTH_SHORT).show();
+                mealPresenter.planMeal(currentMeal, checkedItem.get());
+            }
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        return builder;
     }
 }

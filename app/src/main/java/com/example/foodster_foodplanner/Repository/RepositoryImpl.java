@@ -10,8 +10,8 @@ import io.reactivex.rxjava3.core.Flowable;
 
 public class RepositoryImpl implements Repository{
     private static Repository repository;
-    private RetrofitClient retrofitClient;
-    private RoomInterface roomInterface;
+    private final RetrofitClient retrofitClient;
+    private final RoomInterface roomInterface;
 
     private RepositoryImpl(RetrofitClient retrofitClient, RoomInterface roomInterface){
         this.retrofitClient = retrofitClient;
@@ -33,12 +33,13 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public void getFavoriteById(int id) {
-        roomInterface.getFavoriteMeal(id);
+    public Flowable<Meal> getFavoriteById(int id) {
+        return roomInterface.getFavoriteMeal(id);
     }
 
     @Override
     public void addFavorite(Meal meal) {
+        meal.setFavorite(true);
         roomInterface.addToFavorites(meal);
 
     }

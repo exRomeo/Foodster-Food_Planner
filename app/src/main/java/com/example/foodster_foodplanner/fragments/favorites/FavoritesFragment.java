@@ -10,12 +10,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
+import com.example.foodster_foodplanner.fragments.meal.MealFragment;
+import com.example.foodster_foodplanner.fragments.meal.MealPresenterImpl;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
@@ -28,7 +32,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
     FragmentFavoritesBinding binder;
     CardsGridAdapter cardsGridAdapter;
     FavoritesPresenter presenter;
-    List<Meal> mealList;
+
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -44,7 +48,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         presenter = new FavoritesPresenterImpl(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
-        mealList = new ArrayList<>();
+
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
@@ -54,19 +58,31 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
         super.onViewCreated(view, savedInstanceState);
         binder = FragmentFavoritesBinding.bind(view);
         cardsGridAdapter = new CardsGridAdapter(this.requireContext(),
-                mealList, this, R.drawable.cross);
+                new ArrayList<>(), this, R.drawable.cross);
         binder.mealsGrid.setAdapter(cardsGridAdapter);
         presenter.getFavorites();
     }
 
     @Override
-    public void onClick(Meal meal) {
+    public void onFavoriteClick(Meal meal) {
         removeButton(meal);
     }
+
+    @Override
+    public void onCardClick(Meal meal) {
+        MealPresenterImpl.setMeal(meal);
+        Fragment fragment = new MealFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void showMeals(List<Meal> meals) {
-        mealList = meals;
+        cardsGridAdapter.setList(meals);
         cardsGridAdapter.notifyDataSetChanged();
     }
     @Override

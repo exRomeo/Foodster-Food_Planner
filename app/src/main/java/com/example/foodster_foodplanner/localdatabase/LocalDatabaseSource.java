@@ -3,7 +3,6 @@ package com.example.foodster_foodplanner.localdatabase;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Database;
 
 import com.example.foodster_foodplanner.models.Meal;
 
@@ -35,7 +34,7 @@ public class LocalDatabaseSource implements RoomInterface {
 
     @Override
     public void addToFavorites(Meal meal) {
-        mealDao.addFavorite(meal);
+        new Thread(() -> mealDao.addFavorite(meal)).start();
     }
 
     @Override
@@ -80,11 +79,12 @@ public class LocalDatabaseSource implements RoomInterface {
 
     @Override
     public void removeFavoriteMeal(Meal meal) {
-        mealDao.removeFavorite(meal);
+        new Thread(() -> mealDao.removeFavorite(meal)).start();
     }
 
     @Override
     public void removeWeeklyMeal(int idMeal) {
 
     }
+
 }

@@ -1,7 +1,5 @@
 package com.example.foodster_foodplanner.localdatabase;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -30,5 +28,6 @@ public interface RoomInterface {
     void removeFavoriteMeal(Meal meal);
 
     void removeWeeklyMeal(int idMeal);
+
 
 }

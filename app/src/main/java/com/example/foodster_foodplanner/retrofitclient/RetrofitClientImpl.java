@@ -21,7 +21,7 @@ public class RetrofitClientImpl implements RetrofitClient {
     private static RetrofitClientImpl retrofitClientImpl;
     private final API api;
 
-    public RetrofitClientImpl() {
+    private RetrofitClientImpl() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -40,7 +40,7 @@ public class RetrofitClientImpl implements RetrofitClient {
         
         Observable<MealModel> randomCall = api.getRandomMeal();
 
-        Observer<MealModel> observer =new Observer<MealModel>() {
+        Observer<MealModel> observer = new Observer<>() {
 
 
             @Override
@@ -50,12 +50,12 @@ public class RetrofitClientImpl implements RetrofitClient {
 
             @Override
             public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealModel mealModel) {
-                   networkDelegate.onResponseSuccess(mealModel.getMeals());
+                networkDelegate.onResponseSuccess(mealModel.getMeals());
             }
 
             @Override
             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-               networkDelegate.onResponseFailure(e.getMessage());
+                networkDelegate.onResponseFailure(e.getMessage());
             }
 
             @Override
