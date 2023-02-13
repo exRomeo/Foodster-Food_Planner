@@ -17,7 +17,8 @@ public class PlannerPresenterImpl implements PlannerPresenter {
     }
 
     @Override
-    public void addToPlan(Meal meal) {
+    public void addToPlan(Meal meal, int day) {
+        meal.setDay(day);
         repository.addFavorite(meal);
     }
 

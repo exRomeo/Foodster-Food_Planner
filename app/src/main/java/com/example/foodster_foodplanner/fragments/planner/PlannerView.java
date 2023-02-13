@@ -5,6 +5,7 @@ import com.example.foodster_foodplanner.models.Meal;
 import java.util.List;
 
 public interface PlannerView {
-    void addMealToPlan(Meal meal);
+    String[] days = {"None", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    void addMealToPlan(Meal meal,int day);
     void updateList(List<Meal> mealList);
 }

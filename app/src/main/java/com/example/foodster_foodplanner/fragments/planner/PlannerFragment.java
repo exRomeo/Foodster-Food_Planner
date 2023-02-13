@@ -1,14 +1,12 @@
 package com.example.foodster_foodplanner.fragments.planner;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +25,7 @@ import java.util.List;
 public class PlannerFragment extends Fragment implements PlannerView {
     FragmentPlannerBinding binding;
     PlannerPresenter plannerPresenter;
-    MealListAdapter mla;
+    MealListAdapter listAdapter;
     RecyclerView recyclerView;
 
     public PlannerFragment() {
@@ -53,44 +51,40 @@ public class PlannerFragment extends Fragment implements PlannerView {
         super.onViewCreated(view, savedInstanceState);
         plannerPresenter = new PlannerPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())),this);
         binding = FragmentPlannerBinding.bind(view);
-        binding.saturdayAdd.setOnClickListener(v -> createDialog().show());
-//        binding.sundayAdd;
-//        binding.mondayAdd;
-//        binding.tuesdayAdd;
-//        binding.wednesdayAdd;
-//        binding.thursdayAdd;
-//        binding.fridayAdd;
+        binding.saturdayAdd.setOnClickListener(v -> createDialog(1).show());
+        binding.sundayAdd.setOnClickListener(v -> createDialog(2).show());
+        binding.mondayAdd.setOnClickListener(v -> createDialog(3).show());
+        binding.tuesdayAdd.setOnClickListener(v -> createDialog(4).show());
+        binding.wednesdayAdd.setOnClickListener(v -> createDialog(5).show());
+        binding.thursdayAdd.setOnClickListener(v -> createDialog(6).show());
+        binding.fridayAdd.setOnClickListener(v -> createDialog(7).show());
     }
 
-    public AlertDialog createDialog() {
-//        String[] days = {"None", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    public MaterialAlertDialogBuilder createDialog(int day) {
 
-//        AtomicInteger checkedItem = new AtomicInteger(-1);
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this.requireContext());
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this.requireContext());
         View v = getLayoutInflater().inflate(R.layout.dialog_list_view, null);
-        builder.setView(v);
+        dialog.setView(v);
         recyclerView = v.findViewById(R.id.rcv_meals);
-        mla = new MealListAdapter(this.requireContext(), new ArrayList<>());
+        listAdapter = new MealListAdapter(this.requireContext(), new ArrayList<>());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.requireContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(mla);
-        builder.setTitle("Planning for which day ?");
+        recyclerView.setAdapter(listAdapter);
+        dialog.setTitle("Planning for Next "+ PlannerView.days[day]);
         plannerPresenter.getMealList();
-
-
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        return builder.create();
+        dialog.setNegativeButton("Cancel", (d, which) -> d.dismiss());
+        dialog.setPositiveButton("Done", (dialogInterface, i) -> addMealToPlan(listAdapter.getSelectedItem(),day));
+        return dialog;
     }
 
     @Override
-    public void addMealToPlan(Meal meal) {
-
+    public void addMealToPlan(Meal meal,int day) {
+        plannerPresenter.addToPlan(listAdapter.getSelectedItem(),day);
     }
 
     @Override
     public void updateList(List<Meal> mealList){
-        mla.setList(mealList);
-        mla.notifyDataSetChanged();
-        Log.i("TAG", "updateList: called w/meal " + mealList.get(0).getStrMeal());
+        listAdapter.setList(mealList);
+        listAdapter.notifyDataSetChanged();
     }
 }

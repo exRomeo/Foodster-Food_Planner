@@ -27,9 +27,7 @@ public class MealPresenterImpl implements MealPresenter {
     public String getIngredients(Meal meal) {
         StringBuilder ingredients = new StringBuilder();
         meal.getIngredientsList().forEach(s -> {
-
             if (!Objects.equals(s, "") && s != null) {
-
                 ingredients.append("\n").append(s);
             }
         });
