@@ -7,7 +7,7 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Flowable;
 
 public interface RoomInterface {
-    void addToFavorites(Meal meal);
+    void updateMeal(Meal meal);
 
     void insertDaily(Meal meal);
 

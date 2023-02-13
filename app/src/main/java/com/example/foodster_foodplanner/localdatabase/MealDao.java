@@ -19,7 +19,7 @@ public interface MealDao {
     @Query("SELECT * FROM meal WHERE isFavorite = 1 AND idMeal =:idMeal")
     Flowable<Meal> getFavorite(int idMeal);
     @Upsert
-    void addFavorite(Meal meal);
+    void updateMeal(Meal meal);
 
     @Delete
     void removeFavorite(Meal meal);

@@ -33,8 +33,8 @@ public class LocalDatabaseSource implements RoomInterface {
 
 
     @Override
-    public void addToFavorites(Meal meal) {
-        new Thread(() -> mealDao.addFavorite(meal)).start();
+    public void updateMeal(Meal meal) {
+        new Thread(() -> mealDao.updateMeal(meal)).start();
     }
 
     @Override

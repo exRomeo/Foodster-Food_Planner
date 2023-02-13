@@ -94,4 +94,5 @@ public class MealFragment extends Fragment implements MealView {
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         return builder;
     }
+
 }

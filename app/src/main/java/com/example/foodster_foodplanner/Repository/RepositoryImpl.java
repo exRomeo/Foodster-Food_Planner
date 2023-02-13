@@ -29,7 +29,8 @@ public class RepositoryImpl implements Repository{
 
     @Override
     public void removeFavorite(Meal meal) {
-        roomInterface.removeFavoriteMeal(meal);
+        meal.setFavorite(false);
+        roomInterface.updateMeal(meal);
     }
 
     @Override
@@ -40,7 +41,13 @@ public class RepositoryImpl implements Repository{
     @Override
     public void addFavorite(Meal meal) {
         meal.setFavorite(true);
-        roomInterface.addToFavorites(meal);
+        roomInterface.updateMeal(meal);
 
+    }
+
+    @Override
+    public void planMeal(Meal meal, int day) {
+        meal.setDay(day);
+        roomInterface.updateMeal(meal);
     }
 }

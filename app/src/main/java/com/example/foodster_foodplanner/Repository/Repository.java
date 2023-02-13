@@ -15,6 +15,6 @@ public interface Repository {
     Flowable<Meal> getFavoriteById(int id);
 
     void addFavorite(Meal meal);
-
+    void planMeal(Meal meal,int day);
 
 }

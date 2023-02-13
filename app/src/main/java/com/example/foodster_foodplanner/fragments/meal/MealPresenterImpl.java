@@ -54,9 +54,9 @@ public class MealPresenterImpl implements MealPresenter {
     public static void setMeal(Meal meal) {
         _meal = meal;
     }
-    public void planMeal(Meal meal, int day){
-        meal.setDay(day);
-        repository.addFavorite(meal);
+
+    public void planMeal(Meal meal, int day) {
+        repository.planMeal(meal, day);
     }
 
 }
