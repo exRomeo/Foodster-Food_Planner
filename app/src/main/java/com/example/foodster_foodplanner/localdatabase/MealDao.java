@@ -23,4 +23,6 @@ public interface MealDao {
 
     @Delete
     void removeFavorite(Meal meal);
+    @Query("SELECT * FROM meal WHERE day = :day")
+    Flowable<List<Meal>> getPlannedMeals(int day);
 }

@@ -53,6 +53,11 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
+    public Flowable<List<Meal>> getPlannedMeals(int day) {
+        return mealDao.getPlannedMeals(day);
+    }
+
+    @Override
     public List<Meal> getListOfDaily() {
         return null;
     }

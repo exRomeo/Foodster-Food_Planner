@@ -50,4 +50,9 @@ public class RepositoryImpl implements Repository{
         meal.setDay(day);
         roomInterface.updateMeal(meal);
     }
+
+    @Override
+    public Flowable<List<Meal>> getPlannedMeals(int day) {
+        return roomInterface.getPlannedMeals(day);
+    }
 }

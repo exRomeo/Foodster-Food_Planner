@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,33 +18,29 @@ import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
 
-public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.ViewHolder> {
+public class DayListAdapter extends RecyclerView.Adapter<DayListAdapter.ViewHolder> {
     private final Context context;
     private List<Meal> list;
-    private int selectedItem = -1;
 
-
-    public MealListAdapter(Context context, List<Meal> mealList) {
-        this.list = mealList;
+    public DayListAdapter(Context context, List<Meal> list) {
         this.context = context;
-
+        this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.dialog_list_item, parent, false);
+        View view = layoutInflater.inflate(R.layout.meal_icon, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DayListAdapter.ViewHolder holder, int position) {
         Meal currentMeal = list.get(position);
         holder.tvMealTitle.setText(currentMeal.getStrMeal());
         Glide.with(context).load(currentMeal.getStrMealThumbPreview()).into(holder.ivMealImage);
-        holder.radioButton.setChecked(position == selectedItem);
-
+        holder.cvIcon.setOnClickListener(v -> Toast.makeText(context, currentMeal.getStrMeal(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -52,31 +49,21 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        RadioButton radioButton;
+
         final TextView tvMealTitle;
         final ImageView ivMealImage;
+        final CardView cvIcon;
 
         ViewHolder(View view) {
             super(view);
             tvMealTitle = view.findViewById(R.id.tv_meal_title);
             ivMealImage = view.findViewById(R.id.iv_meal_image);
-            radioButton = view.findViewById(R.id.radioButton);
-            radioButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    selectedItem = getAdapterPosition();
-                    notifyDataSetChanged();
-                }
-            });
+            cvIcon = view.findViewById(R.id.cv_icon);
         }
 
     }
 
     public void setList(List<Meal> list) {
         this.list = list;
-    }
-
-    public Meal getSelectedItem() {
-        return list.get(selectedItem);
     }
 }

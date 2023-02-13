@@ -14,6 +14,7 @@ public interface RoomInterface {
     void insertWeekly(Meal meal);
 
     Flowable<List<Meal>> getListOfFavorites();
+    Flowable<List<Meal>> getPlannedMeals(int day);
 
     List<Meal> getListOfDaily();
 
