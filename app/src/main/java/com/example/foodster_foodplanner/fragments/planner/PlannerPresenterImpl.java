@@ -3,13 +3,17 @@ package com.example.foodster_foodplanner.fragments.planner;
 import com.example.foodster_foodplanner.Repository.Repository;
 import com.example.foodster_foodplanner.models.Meal;
 
-import java.util.List;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PlannerPresenterImpl implements PlannerPresenter {
     Repository repository;
+    PlannerView plannerView;
 
-    PlannerPresenterImpl(Repository repository) {
+    PlannerPresenterImpl(Repository repository,PlannerView plannerView) {
         this.repository = repository;
+        this.plannerView=plannerView;
     }
 
     @Override
@@ -23,7 +27,7 @@ public class PlannerPresenterImpl implements PlannerPresenter {
     }
 
     @Override
-    public List<Meal> getMealList() {
-        return repository.getFavoritesList().toList().blockingGet().get(0);
+    public void getMealList() {
+       Disposable d = repository.getFavoritesList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(items -> plannerView.updateList(items));
     }
 }

@@ -3,22 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/round_rect_stroke"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/tv_popup_title"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_meals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:singleLine="true"
-        android:paddingStart="4dp"
-        android:text="View as:"
-        android:textColor="#4f4f4f" />
 
-    <ListView
-        android:id="@+id/lv_assignment_users"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/dialog_list_item"/>
+        tools:listitem="@layout/dialog_list_item" />
 </LinearLayout>

@@ -1,32 +1,38 @@
 package com.example.foodster_foodplanner.fragments.planner;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentPlannerBinding;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
+import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PlannerFragment extends Fragment {
+public class PlannerFragment extends Fragment implements PlannerView {
     FragmentPlannerBinding binding;
     PlannerPresenter plannerPresenter;
+    MealListAdapter mla;
+    RecyclerView recyclerView;
+
     public PlannerFragment() {
         // Required empty public constructor
     }
-
-
 
 
     @Override
@@ -45,9 +51,9 @@ public class PlannerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        plannerPresenter = new PlannerPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        plannerPresenter = new PlannerPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())),this);
         binding = FragmentPlannerBinding.bind(view);
-        binding.saturdayAdd.setOnClickListener(v-> createDialog());
+        binding.saturdayAdd.setOnClickListener(v -> createDialog().show());
 //        binding.sundayAdd;
 //        binding.mondayAdd;
 //        binding.tuesdayAdd;
@@ -56,33 +62,35 @@ public class PlannerFragment extends Fragment {
 //        binding.fridayAdd;
     }
 
-    public MaterialAlertDialogBuilder createDialog() {
-        String[] days = {"None", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    public AlertDialog createDialog() {
+//        String[] days = {"None", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
-        AtomicInteger checkedItem = new AtomicInteger(-1);
+//        AtomicInteger checkedItem = new AtomicInteger(-1);
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this.requireContext());
-        builder.setView(R.layout.dialog_list_view);
+        View v = getLayoutInflater().inflate(R.layout.dialog_list_view, null);
+        builder.setView(v);
+        recyclerView = v.findViewById(R.id.rcv_meals);
+        mla = new MealListAdapter(this.requireContext(), new ArrayList<>());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.requireContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(mla);
         builder.setTitle("Planning for which day ?");
-
-        builder.setSingleChoiceItems(new MealListAdapter(this.requireContext(),R.layout.dialog_list_item,plannerPresenter.getMealList())
-        , checkedItem.get(),(dialog, item) -> checkedItem.set(item));
+        plannerPresenter.getMealList();
 
 
-
-
-
-
-
-
-
-
-     builder.setPositiveButton("OK", (dialog, which) -> {
-            if (checkedItem.get() != -1) {
-                Toast.makeText(this.requireContext(),"Planned for next\n" + days[checkedItem.get()], Toast.LENGTH_SHORT).show();
-                /*mealPresenter.planMeal(currentMeal, checkedItem.get());*/
-            }
-        });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        return builder;
+        return builder.create();
+    }
+
+    @Override
+    public void addMealToPlan(Meal meal) {
+
+    }
+
+    @Override
+    public void updateList(List<Meal> mealList){
+        mla.setList(mealList);
+        mla.notifyDataSetChanged();
+        Log.i("TAG", "updateList: called w/meal " + mealList.get(0).getStrMeal());
     }
 }
