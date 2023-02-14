@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Flowable;
 public interface RoomInterface {
     void addToFavorites(Meal meal);
 
-    void insertDaily(Meal meal);
+    void insertDaily(List<Meal> meals);
 
     void insertWeekly(Meal meal);
 

@@ -59,6 +59,9 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
         presenter = new HomePresenterImplementation(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         viewPager2 = view.findViewById(R.id.viewPager);
         slider = new Handler();
+        //check in dp lw feh meals b date l nahrda .. ah? get them w add f list daily w eb3tha ll adapter
+        // w delete ll b date embarih
+        //mfish -> call presenter
         presenter.getMeals();
         setAdapter();
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -95,7 +98,8 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     public void showDailyMeals(List<Meal> dailyTen) {
         daily.add(dailyTen.get(0));
         adapter.notifyDataSetChanged();
-
+        //set date
+        //add to db
     }
 
     @Override
