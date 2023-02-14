@@ -22,17 +22,15 @@ import java.util.List;
 public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
     private List<Meal> dailyMeals;
     private OnCardClickListener cardClickListener;
-    private OnFavoriteIconClickListener favoriteIconClickListener;
     private ViewPager2 viewPager;
 
     private Context context;
 
-    public PageViewerAdapter(List<Meal> dailyMeals, ViewPager2 viewPager, OnCardClickListener cardClickListener, OnFavoriteIconClickListener favoriteIconClickListener, Context context ){
+    public PageViewerAdapter(List<Meal> dailyMeals, ViewPager2 viewPager, OnCardClickListener cardClickListener, Context context ){
         this.dailyMeals=dailyMeals;
         this.viewPager=viewPager;
         this.context=context;
         this.cardClickListener=cardClickListener;
-        this.favoriteIconClickListener=favoriteIconClickListener;
     }
 
     @NonNull
@@ -46,8 +44,8 @@ public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
     @Override
     public void onBindViewHolder(@NonNull PageViewerHolder holder, int position) {
         holder.mealName.setText(dailyMeals.get(position).getStrMeal());
-        Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).apply(new RequestOptions()).into(holder.mealImage);        holder.addToFavorites.setOnClickListener(view -> favoriteIconClickListener.onClickFav(dailyMeals.get(position)));
-        holder.mealImage.setOnClickListener(view -> cardClickListener.onClick(dailyMeals.get(position)));
+        Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).apply(new RequestOptions()).into(holder.mealImage);
+        holder.mealImage.setOnClickListener(view -> cardClickListener.onCardClick(dailyMeals.get(position)));
     }
 
     @Override
