@@ -62,7 +62,7 @@ public class MainSearchFragment extends Fragment implements NameSearchView {
                     Fragment fragment = new SearchResultFragment(searchResults);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
+                    fragmentTransaction.replace(R.id.filters, fragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
