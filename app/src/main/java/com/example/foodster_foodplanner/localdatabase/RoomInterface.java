@@ -1,7 +1,5 @@
 package com.example.foodster_foodplanner.localdatabase;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -9,13 +7,14 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Flowable;
 
 public interface RoomInterface {
-    void addToFavorites(Meal meal);
+    void updateMeal(Meal meal);
 
     void insertDaily(List<Meal> meals);
 
     void insertWeekly(Meal meal);
 
     Flowable<List<Meal>> getListOfFavorites();
+    Flowable<List<Meal>> getPlannedMeals(int day);
 
     List<Meal> getListOfDaily();
 
@@ -30,5 +29,6 @@ public interface RoomInterface {
     void removeFavoriteMeal(Meal meal);
 
     void removeWeeklyMeal(int idMeal);
+
 
 }

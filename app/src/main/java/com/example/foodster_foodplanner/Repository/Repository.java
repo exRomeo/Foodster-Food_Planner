@@ -10,11 +10,13 @@ public interface Repository {
 
     Flowable<List<Meal>> getFavoritesList();
 
+
     void removeFavorite(Meal meal);
 
-    void getFavoriteById(int id);
+    Flowable<Meal> getFavoriteById(int id);
 
     void addFavorite(Meal meal);
-
+    void planMeal(Meal meal,int day);
+    Flowable<List<Meal>> getPlannedMeals(int day);
 
 }

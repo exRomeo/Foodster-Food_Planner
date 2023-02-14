@@ -87,11 +87,12 @@
     <string name="thursday">Thursday</string>
 
     <string name="friday">Friday</string>
-    <string name="add_from_favorites">Add From Favs</string>
+    <string name="add_from_favorites">Add</string>
     <string name="daily_title">"Your 10 Daily Magical Meals "</string>
     <string name="country_search">Search By Country</string>
     <string name="search_category">Search By Category</string>
     <string name="search_ing">Search By Ingredients</string>
+    <string name="instructios">Instructions :</string>
     <string name="guestLogin">Login as a guest</string>
     <string name="search">Search</string>
 </resources>

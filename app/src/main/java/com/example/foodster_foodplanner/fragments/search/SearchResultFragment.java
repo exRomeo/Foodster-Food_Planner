@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchResultFragment extends Fragment implements OnCardClickListener, OnFavoriteIconClickListener {
+public class SearchResultFragment extends Fragment implements OnCardClickListener {
 
     private ArrayList<Meal> results;
     private CardsGridAdapter adapter;
@@ -69,7 +69,12 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
     }
 
     @Override
-    public void onClick(Meal meal) {
+    public void onFavoriteClick(Meal meal) {
+
+    }
+
+    @Override
+    public void onCardClick(Meal meal) {
         MealPresenterImpl.setMeal(meal);
         Fragment fragment = new MealFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -78,10 +83,4 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-    @Override
-    public void onClickFav(Meal meal) {
-        Toast.makeText(this.requireContext(), "Meal is added: " + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
-    }
-
 }

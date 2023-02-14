@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment implements OnFavoriteIconClickListener, OnCardClickListener, HomeView {
+public class HomeFragment extends Fragment implements OnCardClickListener, HomeView {
 
     private ViewPager2 viewPager2;
     private List<Meal> daily;
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     }
 
     @Override
-    public void onClick(Meal meal) {
+    public void onCardClick(Meal meal) {
         Toast.makeText(this.requireContext(), "Meal Clicked" + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
 
         MealPresenterImpl.setMeal(meal);
@@ -87,13 +87,6 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
         fragmentTransaction.commit();
 
     }
-
-    @Override
-    public void onClickFav(Meal meal) {
-        Toast.makeText(this.requireContext(), "Meal is added: " + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
-        presenter.addToFavs(meal);
-    }
-
     @Override
     public void showDailyMeals(List<Meal> dailyTen) {
         daily.add(dailyTen.get(0));
@@ -109,7 +102,7 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
     }
 
     public void setAdapter() {
-        adapter = new PageViewerAdapter(daily, viewPager2, this, this, this.requireContext());
+        adapter = new PageViewerAdapter(daily, viewPager2, this, this.requireContext());
         viewPager2.setAdapter(adapter);
         Log.i("trace", "setAdapter: here");
     }
@@ -122,4 +115,11 @@ public class HomeFragment extends Fragment implements OnFavoriteIconClickListene
 
         }
     };
+
+    @Override
+    public void onFavoriteClick(Meal meal) {
+        Toast.makeText(this.requireContext(), "Meal is added: " + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+        presenter.addToFavs(meal);
+    }
+
 }

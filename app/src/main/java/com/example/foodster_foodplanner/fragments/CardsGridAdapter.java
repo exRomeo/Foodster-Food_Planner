@@ -1,6 +1,7 @@
 package com.example.foodster_foodplanner.fragments;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.ViewHolder> {
     private final Context context;
-    private final List<Meal> list;
+    private List<Meal> list;
     private final OnCardClickListener onCardClickListener;
     private final int icon;
 
@@ -41,11 +42,19 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
     @Override
     public void onBindViewHolder(@NonNull CardsGridAdapter.ViewHolder holder, int position) {
         Meal currentMeal = list.get(position);
-        holder.getTopRightButton().setOnClickListener(view -> onCardClickListener.onClick(currentMeal));
+        holder.getTopRightButton().setOnClickListener(view -> onCardClickListener.onFavoriteClick(currentMeal));
         holder.getTopRightButton().setImageResource(icon);
         holder.getTitle().setText(currentMeal.getStrMeal());
+        Log.i("TAG", "onBindViewHolder: "+ currentMeal.getStrMeal());
         Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
-        holder.getCardView().setOnClickListener(v -> {
+        holder.getCardView().setOnClickListener(v -> { onCardClickListener.onCardClick(currentMeal);
+//            MealPresenterImpl.setMeal(currentMeal);
+//            Fragment fragment = new MealFragment();
+//            FragmentManager fragmentManager = context.getSupportFragmentManager();
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
+//            fragmentTransaction.addToBackStack(null);
+//            fragmentTransaction.commit();
             //TODO navigation functionality
             /** make it go to the meal view and show meal details
              * cant really picture how would the code look right
@@ -87,5 +96,9 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
         public CardView getCardView() {
             return cardView;
         }
+    }
+
+    public void setList(List<Meal> list) {
+        this.list = list;
     }
 }
