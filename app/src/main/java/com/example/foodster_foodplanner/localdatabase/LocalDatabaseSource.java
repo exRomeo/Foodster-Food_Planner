@@ -38,7 +38,7 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public void insertDaily(Meal meal) {
+    public void insertDaily(List<Meal> meals) {
 
     }
 

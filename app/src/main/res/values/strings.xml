@@ -93,4 +93,6 @@
     <string name="search_category">Search By Category</string>
     <string name="search_ing">Search By Ingredients</string>
     <string name="instructios">Instructions :</string>
+    <string name="guestLogin">Login as a guest</string>
+    <string name="search">Search</string>
 </resources>

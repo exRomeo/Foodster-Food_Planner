@@ -8,6 +8,7 @@ import java.util.List;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -21,7 +22,7 @@ public class RetrofitClientImpl implements RetrofitClient {
     private static RetrofitClientImpl retrofitClientImpl;
     private final API api;
 
-    private RetrofitClientImpl() {
+    public RetrofitClientImpl() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -40,22 +41,20 @@ public class RetrofitClientImpl implements RetrofitClient {
         
         Observable<MealModel> randomCall = api.getRandomMeal();
 
-        Observer<MealModel> observer = new Observer<>() {
-
-
+        Observer<MealModel> observer =new Observer<MealModel>() {
             @Override
-            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealModel mealModel) {
-                networkDelegate.onResponseSuccess(mealModel.getMeals());
+            public void onNext(@NonNull MealModel mealModel) {
+                   networkDelegate.onResponseSuccess(mealModel.getMeals());
             }
 
             @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                networkDelegate.onResponseFailure(e.getMessage());
+            public void onError(@NonNull Throwable e) {
+               networkDelegate.onResponseFailure(e.getMessage());
             }
 
             @Override
@@ -65,7 +64,6 @@ public class RetrofitClientImpl implements RetrofitClient {
         };
         randomCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
-       // randomCall.subscribe(observer);
 
     }
 

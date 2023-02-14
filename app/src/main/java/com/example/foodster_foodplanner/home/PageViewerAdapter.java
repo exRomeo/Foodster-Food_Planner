@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.models.Meal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
@@ -43,9 +46,8 @@ public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
     @Override
     public void onBindViewHolder(@NonNull PageViewerHolder holder, int position) {
         holder.mealName.setText(dailyMeals.get(position).getStrMeal());
-        Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).into(holder.mealImage);
-        holder.addToFavorites.setOnClickListener(view -> favoriteIconClickListener.onClickFav(dailyMeals.get(position)));
-        holder.mealImage.setOnClickListener(view -> cardClickListener.onCardClick(dailyMeals.get(position)));
+        Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).apply(new RequestOptions()).into(holder.mealImage);        holder.addToFavorites.setOnClickListener(view -> favoriteIconClickListener.onClickFav(dailyMeals.get(position)));
+        holder.mealImage.setOnClickListener(view -> cardClickListener.onClick(dailyMeals.get(position)));
     }
 
     @Override

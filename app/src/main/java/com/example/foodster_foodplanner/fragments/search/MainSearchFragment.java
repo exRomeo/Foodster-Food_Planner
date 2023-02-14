@@ -2,65 +2,82 @@ package com.example.foodster_foodplanner.fragments.search;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.models.Meal;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainSearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MainSearchFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class MainSearchFragment extends Fragment implements NameSearchView {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    EditText searchBar;
+    SearchPresenterImplementation presenter;
+    ArrayList<Meal> searchResults;
 
     public MainSearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainSearch.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainSearchFragment newInstance(String param1, String param2) {
-        MainSearchFragment fragment = new MainSearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        searchResults=new ArrayList<>();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_search, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        searchBar = view.findViewById(R.id.searchBar);
+        presenter = new SearchPresenterImplementation(this);
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((actionId == EditorInfo.IME_ACTION_DONE)) {
+                    //Your Action as go button
+                    String mealName = searchBar.getText().toString();
+                    Log.i("Text", "onEditorAction: " + mealName);
+                    presenter.searchByMealName(mealName);
+                    Fragment fragment = new SearchResultFragment(searchResults);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.filters, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void showResults(List<Meal> results) {
+        searchResults.addAll(results);
+    }
+
+    @Override
+    public void showErr(String error) {
+        Toast.makeText(this.requireContext(), error, Toast.LENGTH_SHORT).show();
     }
 }
