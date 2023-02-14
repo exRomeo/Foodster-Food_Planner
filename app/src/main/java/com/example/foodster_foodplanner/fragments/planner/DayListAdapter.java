@@ -39,7 +39,7 @@ public class DayListAdapter extends RecyclerView.Adapter<DayListAdapter.ViewHold
     public void onBindViewHolder(@NonNull DayListAdapter.ViewHolder holder, int position) {
         Meal currentMeal = list.get(position);
         holder.tvMealTitle.setText(currentMeal.getStrMeal());
-        Glide.with(context).load(currentMeal.getStrMealThumbPreview()).into(holder.ivMealImage);
+        Glide.with(context).asBitmap().load(currentMeal.getStrMealThumb()).override(150).into(holder.ivMealImage);
         holder.cvIcon.setOnClickListener(v -> Toast.makeText(context, currentMeal.getStrMeal(), Toast.LENGTH_SHORT).show());
     }
 

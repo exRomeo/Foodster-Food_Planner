@@ -59,6 +59,7 @@ public class PlannerFragment extends Fragment implements PlannerView {
         plannerPresenter = new PlannerPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())), this);
         binding = FragmentPlannerBinding.bind(view);
         createListenersForDays();
+        createAdapters();
         prepareRecyclerViews();
         plannerPresenter.updateRecyclerViews();
 
@@ -137,7 +138,7 @@ public class PlannerFragment extends Fragment implements PlannerView {
         fridayAdapter.notifyDataSetChanged();
     }
 
-    private void prepareRecyclerViews() {
+    private void createAdapters(){
         saturdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
         sundayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
         mondayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
@@ -146,20 +147,16 @@ public class PlannerFragment extends Fragment implements PlannerView {
         thursdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
         fridayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
 
+    }
+
+    private void prepareRecyclerViews() {
         binding.saturdayRecyclerView.setAdapter(saturdayAdapter);
-//        binding.saturdayRecyclerView.setHasFixedSize(true);
         binding.sundayRecyclerView.setAdapter(sundayAdapter);
-//        binding.sundayRecyclerView.setHasFixedSize(true);
         binding.mondayRecyclerView.setAdapter(mondayAdapter);
-//        binding.mondayRecyclerView.setHasFixedSize(true);
         binding.tuesdayRecyclerView.setAdapter(tuesdayAdapter);
-//        binding.tuesdayRecyclerView.setHasFixedSize(true);
         binding.wednesdayRecyclerView.setAdapter(wednesdayAdapter);
-//        binding.wednesdayRecyclerView.setHasFixedSize(true);
         binding.thursdayRecyclerView.setAdapter(thursdayAdapter);
-//        binding.thursdayRecyclerView.setHasFixedSize(true);
         binding.fridayRecyclerView.setAdapter(fridayAdapter);
-//        binding.sundayRecyclerView.setHasFixedSize(true);
     }
 
     private void createListenersForDays() {
