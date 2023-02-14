@@ -1,5 +1,7 @@
 package com.example.foodster_foodplanner.fragments.search;
 
+import android.util.Log;
+
 import com.example.foodster_foodplanner.Repository.Repository;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
@@ -11,17 +13,16 @@ public class SearchPresenterImplementation implements SearchPresenter, NetworkDe
 
     private RetrofitClientImpl retrofit;
     private Repository repository;
-    NameSearchPresenter presenter;
-    public SearchPresenterImplementation() {
-        //this.repository= repository;
-        retrofit = RetrofitClientImpl.getInstance();
+    NameSearchView view;
 
+    public SearchPresenterImplementation(NameSearchView view) {
+        this.view=view;
+        retrofit = RetrofitClientImpl.getInstance();
     }
 
     @Override
     public void searchByMealName(String mealName) {
         retrofit.searchByName(this, mealName);
-
     }
 
     @Override
@@ -31,11 +32,11 @@ public class SearchPresenterImplementation implements SearchPresenter, NetworkDe
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {
-        presenter.getMeals(meals);
+           view.showResults(meals);
     }
 
     @Override
     public void onResponseFailure(String errorMessage) {
-
+        view.showErr(errorMessage);
     }
 }

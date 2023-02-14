@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,11 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.models.Meal;
 
-public class MainSearchFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainSearchFragment extends Fragment implements NameSearchView {
 
     EditText searchBar;
     SearchPresenterImplementation presenter;
+
+    ArrayList<Meal> searchResults;
 
     public MainSearchFragment() {
         // Required empty public constructor
@@ -30,7 +38,7 @@ public class MainSearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        searchResults=new ArrayList<>();
     }
 
     @Override
@@ -43,20 +51,34 @@ public class MainSearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         searchBar = view.findViewById(R.id.searchBar);
-        presenter = new SearchPresenterImplementation();
-        //on enter get text eb3to ll retrofit.getsearch(searchbar.gettext)
-
+        presenter = new SearchPresenterImplementation(this);
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((actionId == EditorInfo.IME_ACTION_DONE)) {
                     //Your Action as go button
-                    String blah = searchBar.getText().toString();
-                    Log.i("Text", "onEditorAction: " + blah);
-
+                    String mealName = searchBar.getText().toString();
+                    Log.i("Text", "onEditorAction: " + mealName);
+                    presenter.searchByMealName(mealName);
+                    Fragment fragment = new SearchResultFragment(searchResults);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    public void showResults(List<Meal> results) {
+        searchResults.addAll(results);
+    }
+
+    @Override
+    public void showErr(String error) {
+        Toast.makeText(this.requireContext(), error, Toast.LENGTH_SHORT).show();
     }
 }
