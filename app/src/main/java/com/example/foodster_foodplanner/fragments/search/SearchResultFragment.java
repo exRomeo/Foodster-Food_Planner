@@ -48,7 +48,6 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        results = new ArrayList<>();
 
     }
 
@@ -66,7 +65,7 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
         adapter = new CardsGridAdapter(this.requireContext(), results, this, R.drawable.heart);
         resultsMenu.setLayoutManager(layoutManager);
         resultsMenu.setAdapter(adapter);
-
+        //adapter.notifyDataSetChanged();
     }
 
     @Override

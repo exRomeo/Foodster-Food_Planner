@@ -28,7 +28,6 @@ public class MainSearchFragment extends Fragment implements NameSearchView {
 
     EditText searchBar;
     SearchPresenterImplementation presenter;
-
     ArrayList<Meal> searchResults;
 
     public MainSearchFragment() {
