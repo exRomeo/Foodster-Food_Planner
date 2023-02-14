@@ -58,35 +58,13 @@ public class PlannerFragment extends Fragment implements PlannerView {
         super.onViewCreated(view, savedInstanceState);
         plannerPresenter = new PlannerPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())), this);
         binding = FragmentPlannerBinding.bind(view);
-        binding.saturdayAdd.setOnClickListener(v -> createDialog(1).show());
-        binding.sundayAdd.setOnClickListener(v -> createDialog(2).show());
-        binding.mondayAdd.setOnClickListener(v -> createDialog(3).show());
-        binding.tuesdayAdd.setOnClickListener(v -> createDialog(4).show());
-        binding.wednesdayAdd.setOnClickListener(v -> createDialog(5).show());
-        binding.thursdayAdd.setOnClickListener(v -> createDialog(6).show());
-        binding.fridayAdd.setOnClickListener(v -> createDialog(7).show());
-
-        saturdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        sundayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        mondayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        tuesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        wednesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        thursdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        fridayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-
-        binding.saturdayRecyclerView.setAdapter(saturdayAdapter);
-        binding.sundayRecyclerView.setAdapter(sundayAdapter);
-        binding.mondayRecyclerView.setAdapter(mondayAdapter);
-        binding.tuesdayRecyclerView.setAdapter(tuesdayAdapter);
-        binding.wednesdayRecyclerView.setAdapter(wednesdayAdapter);
-        binding.thursdayRecyclerView.setAdapter(thursdayAdapter);
-        binding.fridayRecyclerView.setAdapter(fridayAdapter);
+        createListenersForDays();
+        prepareRecyclerViews();
         plannerPresenter.updateRecyclerViews();
 
     }
 
     public MaterialAlertDialogBuilder createDialog(int day) {
-
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this.requireContext());
         View v = getLayoutInflater().inflate(R.layout.dialog_list_view, null);
         dialog.setView(v);
@@ -98,7 +76,10 @@ public class PlannerFragment extends Fragment implements PlannerView {
         dialog.setTitle("Planning for Next " + PlannerView.days[day]);
         plannerPresenter.getMealList();
         dialog.setNegativeButton("Cancel", (d, which) -> d.dismiss());
-        dialog.setPositiveButton("Done", (dialogInterface, i) -> addMealToPlan(dialogAdapter.getSelectedItem(), day));
+        dialog.setPositiveButton("Done", (dialogInterface, i) -> {
+            if (i >= 0)
+                addMealToPlan(dialogAdapter.getSelectedItem(), day);
+        });
         return dialog;
     }
 
@@ -154,5 +135,33 @@ public class PlannerFragment extends Fragment implements PlannerView {
     public void updateFridayMeals(List<Meal> mealList) {
         fridayAdapter.setList(mealList);
         fridayAdapter.notifyDataSetChanged();
+    }
+
+    private void prepareRecyclerViews() {
+        saturdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+        sundayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+        mondayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+        tuesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+        wednesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+        thursdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+        fridayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
+
+        binding.saturdayRecyclerView.setAdapter(saturdayAdapter);
+        binding.sundayRecyclerView.setAdapter(sundayAdapter);
+        binding.mondayRecyclerView.setAdapter(mondayAdapter);
+        binding.tuesdayRecyclerView.setAdapter(tuesdayAdapter);
+        binding.wednesdayRecyclerView.setAdapter(wednesdayAdapter);
+        binding.thursdayRecyclerView.setAdapter(thursdayAdapter);
+        binding.fridayRecyclerView.setAdapter(fridayAdapter);
+    }
+
+    private void createListenersForDays() {
+        binding.saturdayAdd.setOnClickListener(v -> createDialog(1).show());
+        binding.sundayAdd.setOnClickListener(v -> createDialog(2).show());
+        binding.mondayAdd.setOnClickListener(v -> createDialog(3).show());
+        binding.tuesdayAdd.setOnClickListener(v -> createDialog(4).show());
+        binding.wednesdayAdd.setOnClickListener(v -> createDialog(5).show());
+        binding.thursdayAdd.setOnClickListener(v -> createDialog(6).show());
+        binding.fridayAdd.setOnClickListener(v -> createDialog(7).show());
     }
 }
