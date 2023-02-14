@@ -61,12 +61,9 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.ViewHo
             tvMealTitle = view.findViewById(R.id.tv_meal_title);
             ivMealImage = view.findViewById(R.id.iv_meal_image);
             radioButton = view.findViewById(R.id.radioButton);
-            radioButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    selectedItem = getAdapterPosition();
-                    notifyDataSetChanged();
-                }
+            radioButton.setOnClickListener(view1 -> {
+                selectedItem = getAdapterPosition();
+                notifyDataSetChanged();
             });
         }
 
@@ -77,6 +74,8 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.ViewHo
     }
 
     public Meal getSelectedItem() {
-        return list.get(selectedItem);
+        if (selectedItem >= 0)
+            return list.get(selectedItem);
+        return null;
     }
 }
