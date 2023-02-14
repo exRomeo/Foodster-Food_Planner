@@ -74,7 +74,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
         Fragment fragment = new MealFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
+        //fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

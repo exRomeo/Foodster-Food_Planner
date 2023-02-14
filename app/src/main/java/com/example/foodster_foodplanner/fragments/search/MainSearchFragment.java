@@ -59,12 +59,12 @@ public class MainSearchFragment extends Fragment implements NameSearchView {
                     String mealName = searchBar.getText().toString();
                     Log.i("Text", "onEditorAction: " + mealName);
                     presenter.searchByMealName(mealName);
-                    Fragment fragment = new SearchResultFragment(searchResults);
+                   /* Fragment fragment = new SearchResultFragment(searchResults);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.filters, fragment);
+                   fragmentTransaction.replace(R.id.filters, fragment);
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
                 }
                 return false;
             }
