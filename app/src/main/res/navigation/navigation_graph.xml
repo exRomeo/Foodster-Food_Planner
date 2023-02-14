@@ -14,7 +14,11 @@
         android:id="@+id/mainSearchFragment"
         android:name="com.example.foodster_foodplanner.fragments.search.MainSearchFragment"
         android:label="fragment_main_search"
-        tools:layout="@layout/fragment_main_search" />
+        tools:layout="@layout/fragment_main_search" >
+        <action
+            android:id="@+id/action_mainSearchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mealFragment"
         android:name="com.example.foodster_foodplanner.fragments.meal.MealFragment"
@@ -36,4 +40,13 @@
         android:id="@+id/plannerFragment"
         android:name="com.example.foodster_foodplanner.fragments.planner.PlannerFragment"
         android:label="PlannerFragment" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.foodster_foodplanner.fragments.search.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <argument
+            android:name="results"
+            app:argType="com.example.foodster_foodplanner.models.MealModel" />
+    </fragment>
 </navigation>
