@@ -9,7 +9,7 @@
         android:icon="@drawable/search"
         android:title="Search" />
     <item
-        android:id="@+id/favoritesFragmentFragment"
+        android:id="@+id/favoritesFragment"
         android:icon="@drawable/heart"
         android:title="Favorites"/>
     <item
