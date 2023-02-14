@@ -6,13 +6,14 @@ import androidx.room.TypeConverters;
 
 import com.example.foodster_foodplanner.localdatabase.DateConverter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity(tableName = "meal")
 @TypeConverters({DateConverter.class})
-public class Meal {
+public class Meal implements Serializable {
     @PrimaryKey
     private final int idMeal;
     private final String strMeal;
