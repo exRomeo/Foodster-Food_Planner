@@ -64,7 +64,6 @@ public class RetrofitClientImpl implements RetrofitClient {
         };
         randomCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
-       // randomCall.subscribe(observer);
 
     }
 

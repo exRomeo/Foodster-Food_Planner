@@ -6,19 +6,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodster_foodplanner.R;
 
 public class MainSearchFragment extends Fragment {
 
+    EditText searchBar;
+    SearchPresenterImplementation presenter;
 
     public MainSearchFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +34,7 @@ public class MainSearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_search, container, false);
     }
@@ -36,5 +42,21 @@ public class MainSearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        searchBar = view.findViewById(R.id.searchBar);
+        presenter = new SearchPresenterImplementation();
+        //on enter get text eb3to ll retrofit.getsearch(searchbar.gettext)
+
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((actionId == EditorInfo.IME_ACTION_DONE)) {
+                    //Your Action as go button
+                    String blah = searchBar.getText().toString();
+                    Log.i("Text", "onEditorAction: " + blah);
+
+                }
+                return false;
+            }
+        });
     }
 }
