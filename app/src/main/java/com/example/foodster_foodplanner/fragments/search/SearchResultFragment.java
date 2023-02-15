@@ -1,23 +1,26 @@
 package com.example.foodster_foodplanner.fragments.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
-import com.example.foodster_foodplanner.fragments.meal.MealFragment;
+import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,8 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
     private CardsGridAdapter adapter;
     private RecyclerView resultsMenu;
     RecyclerView.LayoutManager layoutManager;
+    View screenView;
+    NamePresenterImpl presenter;
 
     public SearchResultFragment() {
         // Required empty public constructor
@@ -54,27 +59,26 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        screenView = view;
         resultsMenu = view.findViewById(R.id.results_menu);
+        presenter = new NamePresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         layoutManager = new LinearLayoutManager(this.requireContext());
         adapter = new CardsGridAdapter(this.requireContext(), results, this, R.drawable.heart);
         resultsMenu.setLayoutManager(layoutManager);
         resultsMenu.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFavoriteClick(Meal meal) {
-
+        Toast.makeText(this.requireContext(), "Meal is added: " + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
+        presenter.addToFavorites(meal);
     }
 
     @Override
     public void onCardClick(Meal meal) {
-//        MealPresenterImpl.setMeal(meal);
-        Fragment fragment = new MealFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        Intent i = new Intent(this.requireContext(), MealActivity.class);
+        i.putExtra("meal",meal);
+        startActivity(i); Navigation.findNavController(screenView).navigate(MainSearchFragmentDirections.actionMainSearchFragmentToMealFragment(meal));
+
     }
 }

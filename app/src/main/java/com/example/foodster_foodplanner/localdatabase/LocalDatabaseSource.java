@@ -38,8 +38,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public void insertDaily(List<Meal> meals) {
-
+    public void insertDaily(Meal meal) {
+         new Thread(()->mealDao.insertMeal(meal)).start();
     }
 
     @Override
@@ -58,8 +58,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public List<Meal> getListOfDaily() {
-        return null;
+    public Flowable<List<Meal>> getListOfDaily(String date) {
+        return mealDao.getDailyMeals(date);
     }
 
     @Override

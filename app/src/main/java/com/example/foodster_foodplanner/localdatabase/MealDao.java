@@ -2,6 +2,8 @@ package com.example.foodster_foodplanner.localdatabase;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Upsert;
 
@@ -25,4 +27,9 @@ public interface MealDao {
     void removeFavorite(Meal meal);
     @Query("SELECT * FROM meal WHERE day = :day")
     Flowable<List<Meal>> getPlannedMeals(int day);
+
+    @Query("select * from meal where date = :date")
+    Flowable<List<Meal>> getDailyMeals(String date);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMeal(Meal meal);
 }

@@ -22,7 +22,10 @@ import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -33,6 +36,9 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     private PageViewerAdapter adapter;
     private Handler slider;
     private HomePresenterImplementation presenter;
+    private String todayDate;
+    int flag = 0;
+    String TAG = "here";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -57,11 +63,17 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
         presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         viewPager2 = view.findViewById(R.id.viewPager);
         slider = new Handler();
-        //check in dp lw feh meals b date l nahrda .. ah? get them w add f list daily w eb3tha ll adapter
-        // w delete ll b date embarih
-        //mfish -> call presenter
-        presenter.getMeals();
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date today = new Date();
+
+        todayDate = formatter.format(today);
+
         setAdapter();
+
+        presenter.getDailyFromDb(todayDate);
+
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -70,35 +82,41 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
                 slider.postDelayed(sliderRunnable, 3000);
             }
         });
+
     }
 
     @Override
     public void onCardClick(Meal meal) {
-        /*NavHostFragment.findNavController(this)
-                .navigate(HomeFragmentDirections.actionHomeFragmentToMealFragment(meal));*/
+      
         Intent i = new Intent(this.requireContext(), MealActivity.class);
         i.putExtra("meal",meal);
         startActivity(i);
+
     }
 
     @Override
     public void showDailyMeals(List<Meal> dailyTen) {
-        daily.add(dailyTen.get(0));
+        adapter.setList(dailyTen);
         adapter.notifyDataSetChanged();
-        //set date
-        //add to db
+        addToDatabase(dailyTen);
     }
+
 
     @Override
     public void showError(String errMsg) {
         Toast.makeText(getActivity(), errMsg, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void showFromDataBase(List<Meal> dailyTen) {
+        adapter.setList(dailyTen);
+        adapter.notifyDataSetChanged();
     }
 
     public void setAdapter() {
         adapter = new PageViewerAdapter(daily, viewPager2, this, this.requireContext());
         viewPager2.setAdapter(adapter);
-        Log.i("trace", "setAdapter: here");
+        Log.i(TAG, "ana f set l adapter");
     }
 
     private Runnable sliderRunnable = new Runnable() {
@@ -114,6 +132,14 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     public void onFavoriteClick(Meal meal) {
         Toast.makeText(this.requireContext(), "Meal is added: " + meal.getStrMeal(), Toast.LENGTH_SHORT).show();
         presenter.addToFavs(meal);
+    }
+
+    public void addToDatabase(List<Meal> dailyRecieved) {
+        for (Meal m : dailyRecieved) {
+            m.setDate(todayDate);
+            presenter.addDailyToDb(m);
+            Log.i(TAG, "meal added to db");
+        }
     }
 
 }

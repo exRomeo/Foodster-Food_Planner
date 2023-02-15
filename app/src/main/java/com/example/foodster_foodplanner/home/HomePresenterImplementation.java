@@ -10,40 +10,51 @@ import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
+import java.util.Date;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenterImplementation implements HomePresenter, NetworkDelegate {
     private RetrofitClientImpl retrofit;
     private Repository repository;
     private HomeView view;
 
-    public HomePresenterImplementation(HomeView view, Repository repository){
-     this.repository= repository;
-      this.view=view;
-      retrofit= RetrofitClientImpl.getInstance();
+
+    public HomePresenterImplementation(HomeView view, Repository repository) {
+        this.repository = repository;
+        this.view = view;
+        retrofit = RetrofitClientImpl.getInstance();
     }
+
     @Override
     public void getMeals() {
         for (int i = 0; i < 9; i++) {
             retrofit.getRandomMeal(this);
-            Log.i("trace", "createCall: here ");
         }
     }
 
     @Override
     public void addToFavs(Meal meal) {
-        meal.setFavorite(true);
         repository.addFavorite(meal);
     }
 
     @Override
-    public void addDailyToDb(List<Meal> dailyTen) {
-
+    public void addDailyToDb(Meal meal) {
+        repository.insertMeal(meal);
     }
 
     @Override
-    public void getDailyFromDb() {
-
+    public void getDailyFromDb(String date) {
+        repository.getDailyMeals(date).subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribe(item -> {
+                    if(item.isEmpty()){
+                        getMeals();
+                    }
+                    view.showFromDataBase(item);
+                });
     }
 
     @Override

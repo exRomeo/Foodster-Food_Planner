@@ -46,10 +46,15 @@ public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
         holder.mealName.setText(dailyMeals.get(position).getStrMeal());
         Glide.with(context).load(dailyMeals.get(position).getStrMealThumb()).apply(new RequestOptions()).into(holder.mealImage);
         holder.mealImage.setOnClickListener(view -> cardClickListener.onCardClick(dailyMeals.get(position)));
+        holder.addToFavorites.setOnClickListener(view -> cardClickListener.onFavoriteClick(dailyMeals.get(position)));
     }
 
     @Override
     public int getItemCount() {
         return dailyMeals.size();
+    }
+
+    public void setList(List<Meal> dailyMeals){
+        this.dailyMeals=dailyMeals;
     }
 }
