@@ -63,7 +63,7 @@ public class RepositoryImpl implements Repository {
     @Override
     public void getRandomMeal(NetworkDelegate networkDelegate) {
         retrofitClient.getRandomMeal(networkDelegate);
-
+    }
     public Flowable<List<Meal>> getDailyMeals(String date) {
         return roomInterface.getListOfDaily(date);
     }

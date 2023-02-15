@@ -11,9 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodster_foodplanner.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
@@ -62,7 +64,7 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
         screenView = view;
         resultsMenu = view.findViewById(R.id.results_menu);
         presenter = new NamePresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
-        layoutManager = new LinearLayoutManager(this.requireContext());
+        layoutManager = new GridLayoutManager(this.requireContext(),2);
         adapter = new CardsGridAdapter(this.requireContext(), results, this, R.drawable.heart);
         resultsMenu.setLayoutManager(layoutManager);
         resultsMenu.setAdapter(adapter);
@@ -78,7 +80,6 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
     public void onCardClick(Meal meal) {
         Intent i = new Intent(this.requireContext(), MealActivity.class);
         i.putExtra("meal",meal);
-        startActivity(i); Navigation.findNavController(screenView).navigate(MainSearchFragmentDirections.actionMainSearchFragmentToMealFragment(meal));
-
+        startActivity(i);
     }
 }
