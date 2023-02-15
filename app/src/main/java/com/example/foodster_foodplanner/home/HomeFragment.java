@@ -91,17 +91,15 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
     @Override
     public void showDailyMeals(List<Meal> dailyTen) {
-        daily.add(dailyTen.get(0));
+        adapter.setList(dailyTen);
         adapter.notifyDataSetChanged();
         addToDatabase(dailyTen);
-        Log.i(TAG, "successffulll w show");
     }
 
 
     @Override
     public void showError(String errMsg) {
         Toast.makeText(getActivity(), errMsg, Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -132,13 +130,11 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     }
 
     public void addToDatabase(List<Meal> dailyRecieved) {
-        flag = 1;
         for (Meal m : dailyRecieved) {
             m.setDate(todayDate);
             presenter.addDailyToDb(m);
             Log.i(TAG, "meal added to db");
         }
-
     }
 
 }

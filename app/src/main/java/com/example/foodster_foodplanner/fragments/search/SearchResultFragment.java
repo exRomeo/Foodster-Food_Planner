@@ -1,5 +1,6 @@
 package com.example.foodster_foodplanner.fragments.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,9 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
 
     @Override
     public void onCardClick(Meal meal) {
-        Navigation.findNavController(screenView).navigate(MainSearchFragmentDirections.actionMainSearchFragmentToMealFragment(meal));
+        Intent i = new Intent(this.requireContext(), MealActivity.class);
+        i.putExtra("meal",meal);
+        startActivity(i); Navigation.findNavController(screenView).navigate(MainSearchFragmentDirections.actionMainSearchFragmentToMealFragment(meal));
 
     }
 }
