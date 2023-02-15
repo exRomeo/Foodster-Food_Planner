@@ -51,19 +51,14 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     public void getDailyFromDb(String date) {
         repository.getDailyMeals(date).subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).subscribe(item -> {
-                            if (item == null) {
-                                getMeals();
-                                Log.i("test", "nulll ");
-                            } else {
-                                view.showFromDataBase(item);
-                                Log.i("test", "not null ");
-                            }
+                            view.showFromDataBase(item);
                         },
                         throwable -> {
+                            getMeals();
                             getDailyFromDb(date);
                         }
-    );
-}
+                );
+    }
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {

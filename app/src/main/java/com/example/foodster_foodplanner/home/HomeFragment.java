@@ -69,13 +69,9 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
         todayDate = formatter.format(today);
 
-        Log.i(TAG, "date" + todayDate);
+        setAdapter();
 
         presenter.getDailyFromDb(todayDate);
-
-        Log.i(TAG, "dine method");
-
-        setAdapter();
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -110,7 +106,7 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
     @Override
     public void showFromDataBase(List<Meal> dailyTen) {
-        daily.addAll(dailyTen);
+        adapter.setList(dailyTen);
         adapter.notifyDataSetChanged();
     }
 
