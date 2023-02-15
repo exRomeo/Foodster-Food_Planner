@@ -72,8 +72,11 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
         Log.i(TAG, "date" + todayDate);
 
         presenter.getDailyFromDb(todayDate);
+
         Log.i(TAG, "dine method");
+
         setAdapter();
+
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {

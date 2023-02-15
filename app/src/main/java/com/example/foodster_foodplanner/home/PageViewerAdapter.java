@@ -53,4 +53,8 @@ public class PageViewerAdapter extends RecyclerView.Adapter<PageViewerHolder> {
     public int getItemCount() {
         return dailyMeals.size();
     }
+
+    public void setList(List<Meal> dailyMeals){
+        this.dailyMeals=dailyMeals;
+    }
 }

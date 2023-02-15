@@ -33,7 +33,7 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     public void getMeals() {
         for (int i = 0; i < 9; i++) {
             retrofit.getRandomMeal(this);
-            Log.i("trace", "createCall: here ");
+            Log.i("trace", "get mealss ");
         }
     }
 
@@ -51,14 +51,19 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     public void getDailyFromDb(String date) {
         repository.getDailyMeals(date).subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).subscribe(item -> {
-                    if(item==null){
-                        getMeals();
-                    }
-                    else{
-                        view.showFromDataBase(item);
-                    }
-                });
-    }
+                            if (item == null) {
+                                getMeals();
+                                Log.i("test", "nulll ");
+                            } else {
+                                view.showFromDataBase(item);
+                                Log.i("test", "not null ");
+                            }
+                        },
+                        throwable -> {
+                            getDailyFromDb(date);
+                        }
+    );
+}
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {
