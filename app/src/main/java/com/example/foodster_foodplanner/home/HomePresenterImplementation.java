@@ -10,12 +10,19 @@ import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
+import java.util.Date;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenterImplementation implements HomePresenter, NetworkDelegate {
     private RetrofitClientImpl retrofit;
     private Repository repository;
     private HomeView view;
+
+    public List<Meal> dailyFromDb;
 
     public HomePresenterImplementation(HomeView view, Repository repository){
      this.repository= repository;
@@ -36,19 +43,25 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     }
 
     @Override
-    public void addDailyToDb(List<Meal> dailyTen) {
-
+    public void addDailyToDb(Meal meal) {
+       repository.insertMeal(meal);
     }
 
     @Override
-    public void getDailyFromDb() {
-
+    public void getDailyFromDb(Date date) {
+        repository.getDailyMeals(date).subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribe(item->dailyFromDb.addAll(item));
     }
 
-    @Override
-    public boolean mealsFound() {
-        return false;
-    }
+   /** @Override
+    public boolean mealsFound(Date date) {
+        if(dailyFromDb==null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }**/
 
     @Override
     public void onResponseSuccess(List<Meal> meals) {

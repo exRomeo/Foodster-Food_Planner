@@ -69,7 +69,7 @@ public class Meal implements Serializable {
     private final String strCreativeCommonsConfirmed;
     private final String dateModified;
     private boolean isFavorite;
-    private final Date date;
+    private Date date;
 
     private int day;
 
@@ -376,7 +376,7 @@ public class Meal implements Serializable {
         this.day = day;
     }
 
-
+    public void setDate(Date date){this.date=date;}
     public List<String> getIngredientsList() {
         List<String> ingredientsList = new ArrayList<>();
         ingredientsList.add(strIngredient1);
