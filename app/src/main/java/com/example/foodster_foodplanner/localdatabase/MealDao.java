@@ -9,7 +9,6 @@ import androidx.room.Upsert;
 
 import com.example.foodster_foodplanner.models.Meal;
 
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -30,7 +29,7 @@ public interface MealDao {
     Flowable<List<Meal>> getPlannedMeals(int day);
 
     @Query("select * from meal where date= :date")
-    Flowable<List<Meal>> getDailyMeals(Date date);
+    Flowable<List<Meal>> getDailyMeals(String date);
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(Meal meal);
 }

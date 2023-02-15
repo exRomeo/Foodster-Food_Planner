@@ -17,7 +17,7 @@ public interface RoomInterface {
     Flowable<List<Meal>> getListOfFavorites();
     Flowable<List<Meal>> getPlannedMeals(int day);
 
-    Flowable<List<Meal>> getListOfDaily(Date date);
+    Flowable<List<Meal>> getListOfDaily(String date);
 
     List<Meal> getListOfWeekly();
 

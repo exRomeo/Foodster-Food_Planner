@@ -11,7 +11,7 @@ public interface HomePresenter {
     public void getMeals();
     public void addToFavs(Meal meal);
     public void addDailyToDb(Meal meal);
-    public void getDailyFromDb(Date date);
+    public void getDailyFromDb(String date);
 
 
 }

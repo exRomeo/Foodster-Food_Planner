@@ -19,7 +19,7 @@ public interface Repository {
     void addFavorite(Meal meal);
     void planMeal(Meal meal,int day);
     Flowable<List<Meal>> getPlannedMeals(int day);
-    Flowable<List<Meal>> getDailyMeals(Date date);
+    Flowable<List<Meal>> getDailyMeals(String date);
     void insertMeal(Meal meal);
 
 }

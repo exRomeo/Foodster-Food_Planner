@@ -58,7 +58,7 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public Flowable<List<Meal>> getDailyMeals(Date date) {
+    public Flowable<List<Meal>> getDailyMeals(String date) {
         return roomInterface.getListOfDaily(date);
     }
 

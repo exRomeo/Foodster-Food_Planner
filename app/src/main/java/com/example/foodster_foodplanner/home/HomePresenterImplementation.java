@@ -24,11 +24,12 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
 
     public List<Meal> dailyFromDb;
 
-    public HomePresenterImplementation(HomeView view, Repository repository){
-     this.repository= repository;
-      this.view=view;
-      retrofit= RetrofitClientImpl.getInstance();
+    public HomePresenterImplementation(HomeView view, Repository repository) {
+        this.repository = repository;
+        this.view = view;
+        retrofit = RetrofitClientImpl.getInstance();
     }
+
     @Override
     public void getMeals() {
         for (int i = 0; i < 9; i++) {
@@ -44,13 +45,13 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
 
     @Override
     public void addDailyToDb(Meal meal) {
-       repository.insertMeal(meal);
+        repository.insertMeal(meal);
     }
 
     @Override
-    public void getDailyFromDb(Date date) {
+    public void getDailyFromDb(String date) {
         repository.getDailyMeals(date).subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribe(item->dailyFromDb.addAll(item));
+                observeOn(AndroidSchedulers.mainThread()).subscribe(item -> dailyFromDb.addAll(item));
     }
 
     @Override
