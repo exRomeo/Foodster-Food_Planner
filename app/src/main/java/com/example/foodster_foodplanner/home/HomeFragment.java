@@ -71,15 +71,9 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
         Log.i(TAG, "date" + todayDate);
 
-        if (flag == 1) {
-            presenter.getDailyFromDb(todayDate);
-            Log.i(TAG, "l2a meals w 3ml adapter");
-
-        } else {
-            presenter.getMeals();
-            Log.i(TAG, "ml2ash f ra7 presenter w da b3d adapter");
-        }
-         setAdapter();
+        presenter.getDailyFromDb(todayDate);
+        Log.i(TAG, "dine method");
+        setAdapter();
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
