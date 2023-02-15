@@ -10,7 +10,7 @@ import java.util.Objects;
 public class MealPresenterImpl implements MealPresenter {
     private Meal _meal;
     private final Repository repository;
-    private MealView mealView;
+    private final MealView mealView;
 
     public MealPresenterImpl(MealView mealView, Repository repository) {
         this.repository = repository;
@@ -42,7 +42,7 @@ public class MealPresenterImpl implements MealPresenter {
     public String getMeasures(Meal meal) {
         StringBuilder measures = new StringBuilder();
         meal.getMeasuresList().forEach(s -> {
-            if (!Objects.equals(s, "") && s != null) {
+            if (!Objects.equals(s, "") && !Objects.equals(s, " ") && s != null) {
                 measures.append("\n").append(s);
             }
         });
@@ -51,7 +51,7 @@ public class MealPresenterImpl implements MealPresenter {
 
     @Override
     public Meal getMeal() {
-        return MealFragmentArgs.fromBundle(((Fragment) mealView).getArguments()).getMeal();
+        return (Meal)((Fragment) mealView).getArguments().getSerializable("meal") /*MealFragmentArgs.fromBundle(((Fragment) mealView).getArguments()).getMeal()*/;
     }
 
     @Override

@@ -21,7 +21,7 @@ import java.util.List;
 public class DayListAdapter extends RecyclerView.Adapter<DayListAdapter.ViewHolder> {
     private final Context context;
     private List<Meal> list;
-    private OnCardClickListener onCardClickListener;
+    private final OnCardClickListener onCardClickListener;
 
     public DayListAdapter(Context context, List<Meal> list,OnCardClickListener onCardClickListener) {
         this.context = context;

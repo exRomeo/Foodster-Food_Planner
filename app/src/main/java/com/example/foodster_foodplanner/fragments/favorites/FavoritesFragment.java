@@ -1,6 +1,7 @@
 package com.example.foodster_foodplanner.fragments.favorites;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.foodster_foodplanner.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
@@ -71,8 +72,11 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public void onCardClick(Meal meal) {
-        NavHostFragment.findNavController(this)
-                .navigate(FavoritesFragmentDirections.actionFavoritesFragmentToMealFragment(meal));
+/*        NavHostFragment.findNavController(this)
+                .navigate(FavoritesFragmentDirections.actionFavoritesFragmentToMealFragment(meal));*/
+        Intent i = new Intent(this.requireContext(), MealActivity.class);
+        i.putExtra("meal",meal);
+        startActivity(i);
     }
 
     @SuppressLint("NotifyDataSetChanged")

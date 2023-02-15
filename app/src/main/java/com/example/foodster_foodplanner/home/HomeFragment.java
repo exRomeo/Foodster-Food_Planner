@@ -1,5 +1,6 @@
 package com.example.foodster_foodplanner.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,9 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.foodster_foodplanner.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
@@ -53,7 +54,7 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new HomePresenterImplementation(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         viewPager2 = view.findViewById(R.id.viewPager);
         slider = new Handler();
         //check in dp lw feh meals b date l nahrda .. ah? get them w add f list daily w eb3tha ll adapter
@@ -73,9 +74,13 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
     @Override
     public void onCardClick(Meal meal) {
-        NavHostFragment.findNavController(this)
-                .navigate(HomeFragmentDirections.actionHomeFragmentToMealFragment(meal));
+        /*NavHostFragment.findNavController(this)
+                .navigate(HomeFragmentDirections.actionHomeFragmentToMealFragment(meal));*/
+        Intent i = new Intent(this.requireContext(), MealActivity.class);
+        i.putExtra("meal",meal);
+        startActivity(i);
     }
+
     @Override
     public void showDailyMeals(List<Meal> dailyTen) {
         daily.add(dailyTen.get(0));

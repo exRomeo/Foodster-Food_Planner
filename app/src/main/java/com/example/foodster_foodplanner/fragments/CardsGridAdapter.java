@@ -1,7 +1,6 @@
 package com.example.foodster_foodplanner.fragments;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,6 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
         holder.getTopRightButton().setOnClickListener(view -> onCardClickListener.onFavoriteClick(currentMeal));
         holder.getTopRightButton().setImageResource(icon);
         holder.getTitle().setText(currentMeal.getStrMeal());
-        Log.i("TAG", "onBindViewHolder: "+ currentMeal.getStrMeal());
         Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
         holder.getCardView().setOnClickListener(v -> { onCardClickListener.onCardClick(currentMeal);
         });

@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
@@ -36,7 +35,6 @@ public class MealFragment extends Fragment implements MealView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -55,7 +53,7 @@ public class MealFragment extends Fragment implements MealView {
         showMeal(currentMeal);
         binding.addToPlan.setOnClickListener(v -> createDialog().show());
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
-        binding.backButton.setOnClickListener(v -> NavHostFragment.findNavController(this).popBackStack());
+        binding.backButton.setOnClickListener(v -> /*NavHostFragment.findNavController(this).popBackStack()*/ requireActivity().finish());
 
     }
 

@@ -144,15 +144,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="16dp" />
 
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/circular_shape"
-                app:layout_constraintStart_toStartOf="@+id/guideline15"
-                app:layout_constraintTop_toTopOf="@+id/guideline16"
-                app:srcCompat="@drawable/arrow_small_left" />
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline22"
                 android:layout_width="wrap_content"
@@ -189,6 +180,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
 
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circular_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_small_left" />
 
     <Button
         android:id="@+id/add_to_plan"
