@@ -53,16 +53,6 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
                 observeOn(AndroidSchedulers.mainThread()).subscribe(item->dailyFromDb.addAll(item));
     }
 
-   /** @Override
-    public boolean mealsFound(Date date) {
-        if(dailyFromDb==null){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }**/
-
     @Override
     public void onResponseSuccess(List<Meal> meals) {
         view.showDailyMeals(meals);

@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
             presenter.addDailyToDb(m);
             Log.i(TAG, "meal added to db");
         }
-        
+
     }
 
 }
