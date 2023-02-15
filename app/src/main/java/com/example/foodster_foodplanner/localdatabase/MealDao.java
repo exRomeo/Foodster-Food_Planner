@@ -2,11 +2,14 @@ package com.example.foodster_foodplanner.localdatabase;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Upsert;
 
 import com.example.foodster_foodplanner.models.Meal;
 
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -25,4 +28,9 @@ public interface MealDao {
     void removeFavorite(Meal meal);
     @Query("SELECT * FROM meal WHERE day = :day")
     Flowable<List<Meal>> getPlannedMeals(int day);
+
+    @Query("select * from meal where date= :date")
+    Flowable<List<Meal>> getDailyMeals(Date date);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMeal(Meal meal);
 }

@@ -4,6 +4,7 @@ import com.example.foodster_foodplanner.localdatabase.RoomInterface;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClient;
 
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -54,5 +55,15 @@ public class RepositoryImpl implements Repository{
     @Override
     public Flowable<List<Meal>> getPlannedMeals(int day) {
         return roomInterface.getPlannedMeals(day);
+    }
+
+    @Override
+    public Flowable<List<Meal>> getDailyMeals(Date date) {
+        return roomInterface.getListOfDaily(date);
+    }
+
+    @Override
+    public void insertMeal(Meal meal) {
+        roomInterface.insertDaily(meal);
     }
 }

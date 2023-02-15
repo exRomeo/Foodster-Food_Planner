@@ -46,6 +46,11 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     }
 
     @Override
+    public boolean mealsFound() {
+        return false;
+    }
+
+    @Override
     public void onResponseSuccess(List<Meal> meals) {
         view.showDailyMeals(meals);
     }

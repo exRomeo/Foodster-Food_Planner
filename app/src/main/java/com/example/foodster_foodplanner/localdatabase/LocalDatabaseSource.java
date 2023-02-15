@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.foodster_foodplanner.models.Meal;
 
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -38,8 +39,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public void insertDaily(List<Meal> meals) {
-
+    public void insertDaily(Meal meal) {
+         new Thread(()->mealDao.insertMeal(meal)).start();
     }
 
     @Override
@@ -58,8 +59,8 @@ public class LocalDatabaseSource implements RoomInterface {
     }
 
     @Override
-    public List<Meal> getListOfDaily() {
-        return null;
+    public Flowable<List<Meal>> getListOfDaily(Date date) {
+        return mealDao.getDailyMeals(date);
     }
 
     @Override

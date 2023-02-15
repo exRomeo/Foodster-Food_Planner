@@ -9,4 +9,7 @@ public interface HomePresenter {
     public void addToFavs(Meal meal);
     public void addDailyToDb(List<Meal> dailyTen);
     public void getDailyFromDb();
+    public boolean mealsFound();
+
+
 }
