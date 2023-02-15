@@ -24,9 +24,9 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ScreenMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        navController = Navigation.findNavController(this,R.id.main_fragment_host);
-       BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-       NavigationUI.setupWithNavController(bottomNavigationView,navController);
+        navController = Navigation.findNavController(this, R.id.main_fragment_host);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         menu = findViewById(R.id.menuIcon);
         menu.setOnClickListener(new View.OnClickListener() {

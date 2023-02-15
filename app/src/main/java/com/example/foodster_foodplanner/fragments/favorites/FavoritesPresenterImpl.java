@@ -4,6 +4,7 @@ import com.example.foodster_foodplanner.Repository.Repository;
 import com.example.foodster_foodplanner.models.Meal;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 class FavoritesPresenterImpl implements FavoritesPresenter {
@@ -18,7 +19,7 @@ class FavoritesPresenterImpl implements FavoritesPresenter {
 
     @Override
     public void getFavorites() {
-        repository.getFavoritesList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(favoritesView::showMeals);
+       Disposable d = repository.getFavoritesList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(favoritesView::showMeals);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.foodster_foodplanner.Repository;
 
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 
 import java.util.List;
 
@@ -18,5 +19,6 @@ public interface Repository {
     void addFavorite(Meal meal);
     void planMeal(Meal meal,int day);
     Flowable<List<Meal>> getPlannedMeals(int day);
+    void getRandomMeal(NetworkDelegate networkDelegate);
 
 }
