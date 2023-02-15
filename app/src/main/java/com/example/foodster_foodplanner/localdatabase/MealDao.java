@@ -28,7 +28,7 @@ public interface MealDao {
     @Query("SELECT * FROM meal WHERE day = :day")
     Flowable<List<Meal>> getPlannedMeals(int day);
 
-    @Query("select * from meal where date= :date")
+    @Query("select * from meal where date = :date")
     Flowable<List<Meal>> getDailyMeals(String date);
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(Meal meal);

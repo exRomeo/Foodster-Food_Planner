@@ -73,16 +73,13 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
         if (flag == 1) {
             presenter.getDailyFromDb(todayDate);
-            daily = presenter.dailyFromDb;
-            setAdapter();
             Log.i(TAG, "l2a meals w 3ml adapter");
 
         } else {
             presenter.getMeals();
-            setAdapter();
             Log.i(TAG, "ml2ash f ra7 presenter w da b3d adapter");
         }
-
+         setAdapter();
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -112,6 +109,12 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     public void showError(String errMsg) {
         Toast.makeText(getActivity(), errMsg, Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void showFromDataBase(List<Meal> dailyTen) {
+        daily.addAll(dailyTen);
+        adapter.notifyDataSetChanged();
     }
 
     public void setAdapter() {

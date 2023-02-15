@@ -22,7 +22,6 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     private Repository repository;
     private HomeView view;
 
-    public List<Meal> dailyFromDb;
 
     public HomePresenterImplementation(HomeView view, Repository repository) {
         this.repository = repository;
@@ -51,7 +50,7 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     @Override
     public void getDailyFromDb(String date) {
         repository.getDailyMeals(date).subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribe(item -> dailyFromDb.addAll(item));
+                observeOn(AndroidSchedulers.mainThread()).subscribe(item -> view.showFromDataBase(item));
     }
 
     @Override
