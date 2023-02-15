@@ -48,17 +48,6 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
         Log.i("TAG", "onBindViewHolder: "+ currentMeal.getStrMeal());
         Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
         holder.getCardView().setOnClickListener(v -> { onCardClickListener.onCardClick(currentMeal);
-//            MealPresenterImpl.setMeal(currentMeal);
-//            Fragment fragment = new MealFragment();
-//            FragmentManager fragmentManager = context.getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
-//            fragmentTransaction.addToBackStack(null);
-//            fragmentTransaction.commit();
-            //TODO navigation functionality
-            /** make it go to the meal view and show meal details
-             * cant really picture how would the code look right
-             * will do after stitching the ui together :D */
         });
     }
 

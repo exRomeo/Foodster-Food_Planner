@@ -15,4 +15,5 @@ public interface PlannerView {
     void updateWednesdayMeals(List<Meal> mealList);
     void updateThursdayMeals(List<Meal> mealList);
     void updateFridayMeals(List<Meal> mealList);
+
 }

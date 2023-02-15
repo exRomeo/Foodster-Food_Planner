@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentPlannerBinding;
+import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
@@ -22,7 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlannerFragment extends Fragment implements PlannerView {
+public class PlannerFragment extends Fragment implements PlannerView, OnCardClickListener {
     FragmentPlannerBinding binding;
     PlannerPresenter plannerPresenter;
     MealListAdapter dialogAdapter;
@@ -139,14 +141,13 @@ public class PlannerFragment extends Fragment implements PlannerView {
     }
 
     private void createAdapters(){
-        saturdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        sundayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        mondayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        tuesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        wednesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        thursdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-        fridayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>());
-
+        saturdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
+        sundayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
+        mondayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
+        tuesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
+        wednesdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
+        thursdayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
+        fridayAdapter = new DayListAdapter(this.requireContext(), new ArrayList<>(),this);
     }
 
     private void prepareRecyclerViews() {
@@ -167,5 +168,16 @@ public class PlannerFragment extends Fragment implements PlannerView {
         binding.wednesdayAdd.setOnClickListener(v -> createDialog(5).show());
         binding.thursdayAdd.setOnClickListener(v -> createDialog(6).show());
         binding.fridayAdd.setOnClickListener(v -> createDialog(7).show());
+    }
+
+    @Override
+    public void onFavoriteClick(Meal meal) {
+
+    }
+
+    @Override
+    public void onCardClick(Meal meal) {
+        NavHostFragment.findNavController(this)
+                .navigate(PlannerFragmentDirections.actionPlannerFragmentToMealFragment(meal));
     }
 }

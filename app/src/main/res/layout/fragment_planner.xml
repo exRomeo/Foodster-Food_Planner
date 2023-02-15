@@ -1,656 +1,798 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragments.planner.PlannerFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".fragments.planner.PlannerFragment">
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/manrope_bold"
-            android:text="@string/this_week"
-            android:textSize="@dimen/default_size"
-            app:layout_constraintStart_toStartOf="@+id/guideline17"
-            app:layout_constraintTop_toTopOf="@+id/guideline18" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="32dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/saturday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/saturday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/saturday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toTopOf="@+id/guideline20">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/saturday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/saturday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/saturday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/saturday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/saturday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/saturday_guideline26" />
-
-                <TextView
-                    android:id="@+id/saturday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/saturday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/saturday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/saturday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/saturday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/saturday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/saturday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sunday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/sunday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/sunday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/saturday_recyclerView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/sunday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/sunday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/sunday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/sunday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/sunday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/sunday_guideline26" />
-
-                <TextView
-                    android:id="@+id/sunday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/sunday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/sunday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/sunday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/sunday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/sunday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/sunday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/monday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/monday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/monday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/sunday_recyclerView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/monday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/monday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/monday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/monday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/monday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/monday_guideline26" />
-
-                <TextView
-                    android:id="@+id/monday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/monday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/monday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/monday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/monday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/monday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/monday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tuesday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/tuesday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/tuesday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/monday_recyclerView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/tuesday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/tuesday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/tuesday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/tuesday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/tuesday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/tuesday_guideline26" />
-
-                <TextView
-                    android:id="@+id/tuesday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/tuesday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/tuesday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/tuesday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/tuesday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/tuesday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/tuesday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/wednesday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/wednesday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/wednesday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/tuesday_recyclerView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/wednesday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/wednesday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/wednesday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/wednesday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/wednesday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/wednesday_guideline26" />
-
-                <TextView
-                    android:id="@+id/wednesday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/wednesday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/wednesday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/wednesday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/wednesday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/wednesday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/wednesday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/thursday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/thursday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/thursday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/wednesday_recyclerView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/thursday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/thursday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/thursday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/thursday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/thursday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/thursday_guideline26" />
-
-                <TextView
-                    android:id="@+id/thursday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/thursday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/thursday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/thursday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/thursday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/thursday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/thursday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/friday_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/friday_card"
-            tools:listitem="@layout/meal_icon"
-            tools:orientation="horizontal" />
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/friday_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/foodster_yellow"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline21"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
-            app:layout_constraintTop_toBottomOf="@+id/thursday_recyclerView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/friday_guideline23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
-
-                <TextView
-                    android:id="@+id/friday_textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/friday"
-                    android:textSize="@dimen/default_size"
-                    app:layout_constraintBottom_toTopOf="@+id/friday_guideline25"
-                    app:layout_constraintStart_toStartOf="@+id/friday_guideline23"
-                    app:layout_constraintTop_toTopOf="@+id/friday_guideline26" />
-
-                <TextView
-                    android:id="@+id/friday_add"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/round_rect_no_stroke"
-                    android:fontFamily="@font/manrope_bold"
-                    android:text="@string/add_from_favorites"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/friday_textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/friday_guideline24"
-                    app:layout_constraintTop_toTopOf="@+id/friday_textView9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/friday_guideline24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/friday_guideline25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/friday_guideline26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/this_week"
+        android:textSize="@dimen/default_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.04" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/saturday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/saturday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/saturday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/guideline20">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/saturday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/saturday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/saturday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/saturday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/saturday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/saturday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/saturday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/saturday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/saturday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/saturday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/saturday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/saturday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/saturday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sunday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/sunday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sunday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/saturday_recyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sunday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/sunday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/sunday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/sunday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/sunday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/sunday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/sunday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/sunday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/sunday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/sunday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sunday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sunday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sunday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/monday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/monday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/monday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/sunday_recyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/monday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/monday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/monday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/monday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/monday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/monday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/monday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/monday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/monday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/monday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/monday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/monday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/monday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tuesday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/tuesday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/tuesday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/monday_recyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/tuesday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/tuesday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/tuesday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/tuesday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/tuesday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/tuesday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/tuesday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/tuesday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/tuesday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/tuesday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/tuesday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/tuesday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/tuesday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/wednesday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/wednesday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wednesday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/tuesday_recyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/wednesday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/wednesday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/wednesday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/wednesday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/wednesday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/wednesday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/wednesday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/wednesday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/wednesday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/wednesday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/wednesday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/wednesday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/wednesday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/thursday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/thursday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/thursday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/wednesday_recyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/thursday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/thursday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/thursday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/thursday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/thursday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/thursday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/thursday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/thursday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/thursday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/thursday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/thursday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/thursday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/thursday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/friday_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/friday_card"
+                tools:listitem="@layout/meal_icon"
+                tools:orientation="horizontal" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/friday_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:cardBackgroundColor="@color/foodster_yellow"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/thursday_recyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/friday_guideline23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="16dp" />
+
+                    <TextView
+                        android:id="@+id/friday_textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/manrope_bold"
+                        android:text="@string/friday"
+                        android:textSize="@dimen/default_size"
+                        app:layout_constraintBottom_toTopOf="@+id/friday_guideline25"
+                        app:layout_constraintStart_toStartOf="@+id/friday_guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/friday_guideline26" />
+
+                    <TextView
+                        android:id="@+id/friday_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_rect_no_stroke"
+                        android:fontFamily="@font/manrope_bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/add_from_favorites"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/friday_textView9"
+                        app:layout_constraintEnd_toStartOf="@+id/friday_guideline24"
+                        app:layout_constraintTop_toTopOf="@+id/friday_textView9" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/friday_guideline24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/friday_guideline25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.90" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/friday_guideline26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/sunday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/sunday_recyclerView"
+                app:layout_constraintTop_toTopOf="@+id/sunday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/saturday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/saturday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/saturday_recyclerView"
+                app:layout_constraintStart_toEndOf="@+id/saturday_recyclerView"
+                app:layout_constraintTop_toTopOf="@+id/saturday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/sunday_recyclerView"
+                app:layout_constraintStart_toStartOf="@+id/guideline21"
+                app:layout_constraintTop_toTopOf="@+id/sunday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/monday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/monday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/monday_recyclerView"
+                app:layout_constraintStart_toStartOf="@+id/guideline21"
+                app:layout_constraintTop_toTopOf="@+id/monday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tuesday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/tuesday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tuesday_recyclerView"
+                app:layout_constraintStart_toStartOf="@+id/guideline21"
+                app:layout_constraintTop_toTopOf="@+id/tuesday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/wednesday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/wednesday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/thursday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/thursday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/friday_recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/friday_recyclerView"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/friday_recyclerView"
+                app:layout_constraintStart_toStartOf="@+id/guideline21"
+                app:layout_constraintTop_toTopOf="@+id/friday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/thursday_recyclerView"
+                app:layout_constraintStart_toStartOf="@+id/guideline21"
+                app:layout_constraintTop_toTopOf="@+id/thursday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/wednesday_recyclerView"
+                app:layout_constraintStart_toStartOf="@+id/guideline21"
+                app:layout_constraintTop_toTopOf="@+id/wednesday_recyclerView"
+                app:srcCompat="@drawable/arrow_right" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

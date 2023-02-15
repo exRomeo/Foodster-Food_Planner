@@ -1,6 +1,9 @@
 package com.example.foodster_foodplanner.fragments.search;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,22 +13,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.fragments.meal.MealFragment;
-import com.example.foodster_foodplanner.fragments.meal.MealPresenterImpl;
-import com.example.foodster_foodplanner.home.OnFavoriteIconClickListener;
 import com.example.foodster_foodplanner.models.Meal;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class SearchResultFragment extends Fragment implements OnCardClickListener {
@@ -75,7 +69,7 @@ public class SearchResultFragment extends Fragment implements OnCardClickListene
 
     @Override
     public void onCardClick(Meal meal) {
-        MealPresenterImpl.setMeal(meal);
+//        MealPresenterImpl.setMeal(meal);
         Fragment fragment = new MealFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

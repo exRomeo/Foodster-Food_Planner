@@ -10,16 +10,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
-import com.example.foodster_foodplanner.fragments.meal.MealFragment;
-import com.example.foodster_foodplanner.fragments.meal.MealPresenterImpl;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
@@ -32,6 +31,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
     FragmentFavoritesBinding binder;
     CardsGridAdapter cardsGridAdapter;
     FavoritesPresenter presenter;
+    NavController navController;
 
 
     public FavoritesFragment() {
@@ -47,7 +47,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        presenter = new FavoritesPresenterImpl(this,RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        presenter = new FavoritesPresenterImpl(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
 
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
@@ -57,6 +57,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binder = FragmentFavoritesBinding.bind(view);
+        navController = Navigation.findNavController(view);
         cardsGridAdapter = new CardsGridAdapter(this.requireContext(),
                 new ArrayList<>(), this, R.drawable.cross);
         binder.mealsGrid.setAdapter(cardsGridAdapter);
@@ -70,13 +71,8 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public void onCardClick(Meal meal) {
-        MealPresenterImpl.setMeal(meal);
-        Fragment fragment = new MealFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.replace(R.id.mainFragmentContainer, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        NavHostFragment.findNavController(this)
+                .navigate(FavoritesFragmentDirections.actionFavoritesFragmentToMealFragment(meal));
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -85,6 +81,7 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
         cardsGridAdapter.setList(meals);
         cardsGridAdapter.notifyDataSetChanged();
     }
+
     @Override
     public void removeButton(Meal meal) {
         presenter.removeMeal(meal);
@@ -93,6 +90,6 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public void showError(String message) {
-        Toast.makeText(this.requireContext(),message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

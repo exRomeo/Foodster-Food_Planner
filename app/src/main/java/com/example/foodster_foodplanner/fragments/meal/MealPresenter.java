@@ -8,4 +8,6 @@ public interface MealPresenter {
     void removeMeal(Meal meal);
     String getIngredients(Meal meal);
     String getMeasures(Meal meal);
+    Meal getMeal();
+    void planMeal(Meal meal, int day);
 }

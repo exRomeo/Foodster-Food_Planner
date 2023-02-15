@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MealFragment extends Fragment implements MealView {
-    MealPresenterImpl mealPresenter;
+    MealPresenter mealPresenter;
     FragmentMealBinding binding;
     Meal currentMeal;
 
@@ -42,7 +42,7 @@ public class MealFragment extends Fragment implements MealView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mealPresenter = new MealPresenterImpl(RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        mealPresenter = new MealPresenterImpl(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         return inflater.inflate(R.layout.fragment_meal, container, false);
     }
 
@@ -50,10 +50,10 @@ public class MealFragment extends Fragment implements MealView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMealBinding.bind(view);
-        currentMeal = MealPresenterImpl.getMeal();
+        currentMeal = mealPresenter.getMeal();
         showMeal(currentMeal);
         binding.addToPlan.setOnClickListener(v -> createDialog().show());
-        binding.rightBottomButton.setOnClickListener(v -> addToFavorites(MealPresenterImpl.getMeal()));
+        binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
         binding.backButton.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
     }

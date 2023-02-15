@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.fragments.OnCardClickListener;
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -21,10 +21,12 @@ import java.util.List;
 public class DayListAdapter extends RecyclerView.Adapter<DayListAdapter.ViewHolder> {
     private final Context context;
     private List<Meal> list;
+    private OnCardClickListener onCardClickListener;
 
-    public DayListAdapter(Context context, List<Meal> list) {
+    public DayListAdapter(Context context, List<Meal> list,OnCardClickListener onCardClickListener) {
         this.context = context;
         this.list = list;
+        this.onCardClickListener = onCardClickListener;
     }
 
     @NonNull
@@ -40,7 +42,7 @@ public class DayListAdapter extends RecyclerView.Adapter<DayListAdapter.ViewHold
         Meal currentMeal = list.get(position);
         holder.tvMealTitle.setText(currentMeal.getStrMeal());
         Glide.with(context).asBitmap().load(currentMeal.getStrMealThumb()).override(150).into(holder.ivMealImage);
-        holder.cvIcon.setOnClickListener(v -> Toast.makeText(context, currentMeal.getStrMeal(), Toast.LENGTH_SHORT).show());
+        holder.cvIcon.setOnClickListener(v -> onCardClickListener.onCardClick(currentMeal));
     }
 
     @Override
