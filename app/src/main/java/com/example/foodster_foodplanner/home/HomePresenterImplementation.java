@@ -32,7 +32,6 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
 
     @Override
     public void addToFavs(Meal meal) {
-        meal.setFavorite(true);
         repository.addFavorite(meal);
     }
 

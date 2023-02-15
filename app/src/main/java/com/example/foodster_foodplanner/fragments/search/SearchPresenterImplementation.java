@@ -14,7 +14,6 @@ public class SearchPresenterImplementation implements SearchPresenter, NetworkDe
     private RetrofitClientImpl retrofit;
     private Repository repository;
     NameSearchView view;
-
     public SearchPresenterImplementation(NameSearchView view) {
         this.view=view;
         retrofit = RetrofitClientImpl.getInstance();
