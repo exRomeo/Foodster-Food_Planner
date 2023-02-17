@@ -18,9 +18,11 @@ import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class MealFragment extends Fragment implements MealView {
     MealPresenter mealPresenter;
@@ -38,8 +40,7 @@ public class MealFragment extends Fragment implements MealView {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mealPresenter = new MealPresenterImpl(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         return inflater.inflate(R.layout.fragment_meal, container, false);
@@ -55,7 +56,18 @@ public class MealFragment extends Fragment implements MealView {
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
         binding.backButton.setOnClickListener(v -> requireActivity().finish());
 
+
+
+        YouTubePlayerView youTubePlayerView = view.findViewById(R.id.youtube_view);
+        getLifecycle().addObserver(youTubePlayerView);
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                youTubePlayer.cueVideo(currentMeal.getStrYoutube().substring(currentMeal.getStrYoutube().indexOf('=')+1),0);
+            }
+        });
     }
+
 
     @Override
     public void showMeal(Meal meal) {
@@ -97,5 +109,7 @@ public class MealFragment extends Fragment implements MealView {
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         return builder;
     }
-
 }
+
+
+
