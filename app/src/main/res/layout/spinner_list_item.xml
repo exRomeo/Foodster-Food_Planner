@@ -9,8 +9,9 @@
     android:gravity="center"
     android:orientation="horizontal"
     android:padding="4dp"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="5dp">
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

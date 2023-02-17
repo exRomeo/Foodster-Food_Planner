@@ -18,6 +18,7 @@ import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -59,6 +60,8 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
 
     @Override
     public int getItemCount() {
+        if(list == null)
+            list = new ArrayList<>();
         return list.size();
     }
 

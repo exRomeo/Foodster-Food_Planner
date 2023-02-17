@@ -10,9 +10,12 @@
         android:id="@+id/spinner_filter"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="4dp"
+        tools:listitem="@layout/spinner_list_item"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
