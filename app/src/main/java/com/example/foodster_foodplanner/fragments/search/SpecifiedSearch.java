@@ -1,17 +1,21 @@
 package com.example.foodster_foodplanner.fragments.search;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.databinding.FragmentSpecifiedSearchBinding;
+import com.example.foodster_foodplanner.fragments.filters.FilterActivity;
 
 public class SpecifiedSearch extends Fragment {
-
+    FragmentSpecifiedSearchBinding binding;
     public SpecifiedSearch() {
         // Required empty public constructor
     }
@@ -32,6 +36,23 @@ public class SpecifiedSearch extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding = FragmentSpecifiedSearchBinding.bind(view);
+        binding.searchCountry.setOnClickListener(v->{
+            Intent i = new Intent(this.requireContext(), FilterActivity.class);
+            i.putExtra("filter_by","country");
+            startActivity(i);
+        });
 
+        binding.searchCategory.setOnClickListener(v->{
+            Intent i = new Intent(this.requireContext(), FilterActivity.class);
+            i.putExtra("filter_by","category");
+            startActivity(i);
+        });
+
+        binding.searchIng.setOnClickListener(v->{
+            Intent i = new Intent(this.requireContext(), FilterActivity.class);
+            i.putExtra("filter_by","ingredient");
+            startActivity(i);
+        });
     }
 }

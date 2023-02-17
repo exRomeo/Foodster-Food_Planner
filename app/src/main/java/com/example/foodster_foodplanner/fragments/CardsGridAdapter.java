@@ -13,9 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.Repository.RepositoryImpl;
+import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.ViewHolder> {
     private final Context context;
@@ -41,11 +46,14 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
     @Override
     public void onBindViewHolder(@NonNull CardsGridAdapter.ViewHolder holder, int position) {
         Meal currentMeal = list.get(position);
-        holder.getTopRightButton().setOnClickListener(view -> onCardClickListener.onFavoriteClick(currentMeal));
-        holder.getTopRightButton().setImageResource(icon);
-        holder.getTitle().setText(currentMeal.getStrMeal());
-        Glide.with(context).load(currentMeal.getStrMealThumb()).into(holder.getMealImg());
-        holder.getCardView().setOnClickListener(v -> { onCardClickListener.onCardClick(currentMeal);
+        if (currentMeal.getStrMealThumb() == null) {
+            Disposable d = RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(context))
+                    .getMealByID(currentMeal.getIdMeal()).subscribe(mealModel -> showMealCard(holder, mealModel.getMeals().get(0)));
+        } else {
+            showMealCard(holder, currentMeal);
+        }
+        holder.getCardView().setOnClickListener(v -> {
+            onCardClickListener.onCardClick(currentMeal);
         });
     }
 
@@ -87,5 +95,12 @@ public class CardsGridAdapter extends RecyclerView.Adapter<CardsGridAdapter.View
 
     public void setList(List<Meal> list) {
         this.list = list;
+    }
+
+    public void showMealCard(ViewHolder holder, Meal meal) {
+        holder.getTopRightButton().setOnClickListener(view -> onCardClickListener.onFavoriteClick(meal));
+        holder.getTopRightButton().setImageResource(icon);
+        holder.getTitle().setText(meal.getStrMeal());
+        Glide.with(context).load(meal.getStrMealThumb()).into(holder.getMealImg());
     }
 }

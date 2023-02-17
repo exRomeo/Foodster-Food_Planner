@@ -41,7 +41,7 @@ public class RetrofitClientImpl implements RetrofitClient {
         
         Observable<MealModel> randomCall = api.getRandomMeal();
 
-        Observer<MealModel> observer =new Observer<MealModel>() {
+        Observer<MealModel> observer = new Observer<>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -49,12 +49,12 @@ public class RetrofitClientImpl implements RetrofitClient {
 
             @Override
             public void onNext(@NonNull MealModel mealModel) {
-                   networkDelegate.onResponseSuccess(mealModel.getMeals());
+                networkDelegate.onResponseSuccess(mealModel.getMeals());
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-               networkDelegate.onResponseFailure(e.getMessage());
+                networkDelegate.onResponseFailure(e.getMessage());
             }
 
             @Override
@@ -85,5 +85,70 @@ public class RetrofitClientImpl implements RetrofitClient {
                 .retry(10)
                 .subscribe(mealModel -> networkDelegate.onResponseSuccess(mealModel.getMeals()),
                         throwable -> networkDelegate.onResponseFailure(throwable.getMessage()));
+    }
+
+    @Override
+    public void getCountryList(NetworkDelegate networkDelegate) {
+        String query="list";
+        Observable<MealModel> meal = api.getCountryList(query);
+        Disposable d = meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10)
+                .subscribe(mealModel -> networkDelegate.onResponseSuccess(mealModel.getMeals()),
+                        throwable -> networkDelegate.onResponseFailure(throwable.getMessage()));
+    }
+
+    @Override
+    public void getCategoryList(NetworkDelegate networkDelegate) {
+        String query="list";
+        Observable<MealModel> meal = api.getCategoryList(query);
+        Disposable d = meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10)
+                .subscribe(mealModel -> networkDelegate.onResponseSuccess(mealModel.getMeals()),
+                        throwable -> networkDelegate.onResponseFailure(throwable.getMessage()));
+    }
+
+    @Override
+    public void getIngredientsList(NetworkDelegate networkDelegate) {
+        String query="list";
+        Observable<MealModel> meal = api.getIngredientList(query);
+        Disposable d = meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10)
+                .subscribe(mealModel -> networkDelegate.onResponseSuccess(mealModel.getMeals()),
+                        throwable -> networkDelegate.onResponseFailure(throwable.getMessage()));
+    }
+
+    @Override
+    public Observable<MealModel> filterByCountry(String country) {
+        Observable<MealModel> meal = api.filterByCountry(country);
+        return meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10);
+    }
+
+    @Override
+    public Observable<MealModel> filterByCategory(String category) {
+        Observable<MealModel> meal = api.filterByCategory(category);
+        return meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10);
+    }
+
+    @Override
+    public Observable<MealModel> filterByIngredient(String ingredient) {
+        Observable<MealModel> meal = api.filterByIngredient(ingredient);
+        return meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10);
+    }
+
+    @Override
+    public Observable<MealModel> getMealByID(int id) {
+        Observable<MealModel> meal = api.getMealByID(id);
+        return meal.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(10);
     }
 }

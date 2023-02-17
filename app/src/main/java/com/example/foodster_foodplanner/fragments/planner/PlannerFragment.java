@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodster_foodplanner.MealActivity;
+import com.example.foodster_foodplanner.fragments.meal.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentPlannerBinding;
@@ -178,8 +178,6 @@ public class PlannerFragment extends Fragment implements PlannerView, OnCardClic
 
     @Override
     public void onCardClick(Meal meal) {
-/*        NavHostFragment.findNavController(this)
-                .navigate(PlannerFragmentDirections.actionPlannerFragmentToMealFragment(meal));*/
         Intent i = new Intent(this.requireContext(), MealActivity.class);
         i.putExtra("meal",meal);
         startActivity(i);

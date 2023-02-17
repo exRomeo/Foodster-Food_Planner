@@ -2,13 +2,14 @@ package com.example.foodster_foodplanner.Repository;
 
 import com.example.foodster_foodplanner.localdatabase.RoomInterface;
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.models.MealModel;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClient;
 
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class RepositoryImpl implements Repository {
     private static Repository repository;
@@ -64,6 +65,7 @@ public class RepositoryImpl implements Repository {
     public void getRandomMeal(NetworkDelegate networkDelegate) {
         retrofitClient.getRandomMeal(networkDelegate);
     }
+
     public Flowable<List<Meal>> getDailyMeals(String date) {
         return roomInterface.getListOfDaily(date);
     }
@@ -72,5 +74,40 @@ public class RepositoryImpl implements Repository {
     public void insertMeal(Meal meal) {
         roomInterface.insertDaily(meal);
 
+    }
+
+    @Override
+    public void getCountryList(NetworkDelegate networkDelegate) {
+        retrofitClient.getCountryList(networkDelegate);
+    }
+
+    @Override
+    public void getCategoryList(NetworkDelegate networkDelegate) {
+        retrofitClient.getCategoryList(networkDelegate);
+    }
+
+    @Override
+    public void getIngredientsList(NetworkDelegate networkDelegate) {
+        retrofitClient.getIngredientsList(networkDelegate);
+    }
+
+    @Override
+    public Observable<MealModel> filterByCountry(String country) {
+        return retrofitClient.filterByCountry(country);
+    }
+
+    @Override
+    public Observable<MealModel> filterByCategory(String category) {
+        return retrofitClient.filterByCategory(category);
+    }
+
+    @Override
+    public Observable<MealModel> filterByIngredient(String ingredient) {
+        return retrofitClient.filterByIngredient(ingredient);
+    }
+
+    @Override
+    public Observable<MealModel> getMealByID(int id) {
+        return retrofitClient.getMealByID(id);
     }
 }

@@ -1,14 +1,6 @@
 package com.example.foodster_foodplanner.fragments.search;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +9,12 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.models.Meal;
@@ -57,7 +55,6 @@ public class MainSearchFragment extends Fragment implements NameSearchView {
                 if ((actionId == EditorInfo.IME_ACTION_DONE)) {
                     //Your Action as go button
                     String mealName = searchBar.getText().toString();
-                    Log.i("Text", "onEditorAction: " + mealName);
                     presenter.searchByMealName(mealName);
                     Fragment fragment = new SearchResultFragment(searchResults);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

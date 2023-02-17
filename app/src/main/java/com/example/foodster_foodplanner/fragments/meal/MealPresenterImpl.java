@@ -51,7 +51,7 @@ public class MealPresenterImpl implements MealPresenter {
 
     @Override
     public Meal getMeal() {
-        return (Meal)((Fragment) mealView).getArguments().getSerializable("meal") /*MealFragmentArgs.fromBundle(((Fragment) mealView).getArguments()).getMeal()*/;
+        return (Meal)((Fragment) mealView).getArguments().getSerializable("meal") ;
     }
 
     @Override

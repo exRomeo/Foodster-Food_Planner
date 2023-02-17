@@ -3,7 +3,6 @@ package com.example.foodster_foodplanner.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.foodster_foodplanner.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
+import com.example.foodster_foodplanner.fragments.meal.MealActivity;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
@@ -38,7 +37,6 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     private HomePresenterImplementation presenter;
     private String todayDate;
     int flag = 0;
-    String TAG = "here";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -116,7 +114,6 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     public void setAdapter() {
         adapter = new PageViewerAdapter(daily, viewPager2, this, this.requireContext());
         viewPager2.setAdapter(adapter);
-        Log.i(TAG, "ana f set l adapter");
     }
 
     private Runnable sliderRunnable = new Runnable() {
@@ -138,7 +135,6 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
         for (Meal m : dailyRecieved) {
             m.setDate(todayDate);
             presenter.addDailyToDb(m);
-            Log.i(TAG, "meal added to db");
         }
     }
 

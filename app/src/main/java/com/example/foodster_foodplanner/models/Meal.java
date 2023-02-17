@@ -1,6 +1,7 @@
 package com.example.foodster_foodplanner.models;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -8,7 +9,6 @@ import com.example.foodster_foodplanner.localdatabase.DateConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity(tableName = "meal")
@@ -24,6 +24,10 @@ public class Meal implements Serializable {
     private final String strMealThumb;
     private final String strTags;
     private final String strYoutube;
+    @Ignore
+    private String strIngredient;
+    @Ignore
+    private String strDescription;
     private final String strIngredient1;
     private final String strIngredient2;
     private final String strIngredient3;
@@ -70,8 +74,9 @@ public class Meal implements Serializable {
     private final String dateModified;
     private boolean isFavorite;
     private String date;
-
     private int day;
+
+    private static String[] flags = {"us", "gp", "ca", "cn", "hr", "nl", "eg", "fr", "gr", "in", "ie", "it", "jm", "jp", "kn", "my", "mx", "ma", "pl", "pt", "ru", "es", "th", "tn", "tr", "https://cdn-icons-png.flaticon.com/512/3593/3593455.png", "vn"};
 
 
     public Meal(int idMeal, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified, String date) {
@@ -368,6 +373,7 @@ public class Meal implements Serializable {
     public String getDate() {
         return date;
     }
+
     public int getDay() {
         return day;
     }
@@ -376,7 +382,10 @@ public class Meal implements Serializable {
         this.day = day;
     }
 
-    public void setDate(String date){this.date=date;}
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public List<String> getIngredientsList() {
         List<String> ingredientsList = new ArrayList<>();
         ingredientsList.add(strIngredient1);
@@ -425,5 +434,35 @@ public class Meal implements Serializable {
         measuresList.add(strMeasure19);
         measuresList.add(strMeasure20);
         return measuresList;
+    }
+
+    public static String getFlag(int position) {
+        String url;
+        if(position == 25) {
+            url = flags[position];
+        } else {
+            url = "https://www.themealdb.com/images/icons/flags/big/64/" + flags[position] + ".png";
+        }
+        return url;
+    }
+
+    public String getStrIngredient() {
+        return strIngredient;
+    }
+
+    public String getStrDescription() {
+        return strDescription;
+    }
+
+    public void setStrIngredient(String strIngredient) {
+        this.strIngredient = strIngredient;
+    }
+
+    public void setStrDescription(String strDescription) {
+        this.strDescription = strDescription;
+    }
+
+    public String getCategoryThumb() {
+        return "https://www.themealdb.com/images/category/" + strCategory + ".png";
     }
 }

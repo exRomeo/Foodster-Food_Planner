@@ -2,8 +2,6 @@ package com.example.foodster_foodplanner.localdatabase;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -13,13 +11,10 @@ import io.reactivex.rxjava3.core.Flowable;
 public class LocalDatabaseSource implements RoomInterface {
 
     private static LocalDatabaseSource LOCAL_INSTANCE = null;
-    private Context context;
-    private MealDao mealDao;
-    private LiveData<List<Meal>> mealsList;
+    private final MealDao mealDao;
 
 
     private LocalDatabaseSource(Context context) {
-        this.context = context;
         LocalDatabase db = LocalDatabase.getInstance(context.getApplicationContext());
         mealDao = db.mealDao();
     }

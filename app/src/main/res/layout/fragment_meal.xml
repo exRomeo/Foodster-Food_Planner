@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/manrope_bold"
-                android:text="@string/instructios"
+                android:text="@string/instructions"
                 app:layout_constraintEnd_toEndOf="@+id/amounts_text"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
                 app:layout_constraintTop_toBottomOf="@+id/amounts_text" />

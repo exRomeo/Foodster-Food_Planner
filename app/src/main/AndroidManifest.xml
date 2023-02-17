@@ -15,7 +15,11 @@
         android:theme="@style/Theme.FoodsterFoodPlanner"
         tools:targetApi="31">
         <activity
-            android:name=".MealActivity"
+            android:name=".fragments.filters.FilterActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.meal.MealActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

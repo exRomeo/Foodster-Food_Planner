@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner;
+package com.example.foodster_foodplanner.fragments.meal;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.foodster_foodplanner.fragments.meal.MealFragment;
+import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.models.Meal;
 
 public class MealActivity extends AppCompatActivity {
