@@ -16,7 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="300dp"
@@ -34,9 +34,10 @@
 
                     <TextView
                         android:id="@+id/mealName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:fontFamily="@font/manropebold"
+                        android:gravity="center"
                         android:text="@string/meal_name"
                         android:textSize="24sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,13 +50,10 @@
 
             <ImageView
                 android:id="@+id/mealImage"
-                android:layout_width="324dp"
-                android:layout_height="270dp"
-                android:scaleX="1.25"
-                android:scaleY="1.25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/breakfas" />
 

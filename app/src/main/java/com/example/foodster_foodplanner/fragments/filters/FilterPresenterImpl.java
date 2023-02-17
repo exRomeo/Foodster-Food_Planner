@@ -49,7 +49,8 @@ public class FilterPresenterImpl implements FilterPresenter, NetworkDelegate {
 
     @Override
     public void addToFavorites(Meal meal) {
-        repository.addFavorite(meal);
+        Disposable d = repository.getMealByID(meal.getIdMeal()).subscribe(mealModel -> repository.addFavorite(mealModel.getMeals().get(0)));
+
     }
 
     @Override
