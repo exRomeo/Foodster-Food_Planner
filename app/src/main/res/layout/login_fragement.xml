@@ -33,7 +33,7 @@
         app:cornerRadius="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googleButton" />
+        app:layout_constraintTop_toBottomOf="@+id/login_google" />
 
     <TextView
         android:id="@+id/textView3"
@@ -84,12 +84,12 @@
         android:contentDescription="use facebook to login"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/googleButton"
+        app:layout_constraintStart_toEndOf="@+id/login_google"
         app:layout_constraintTop_toBottomOf="@+id/editPassword"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
-        android:id="@+id/googleButton"
+        android:id="@+id/login_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"

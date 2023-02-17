@@ -37,7 +37,8 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     private Handler slider;
     private HomePresenterImplementation presenter;
     private String todayDate;
-    int flag = 0;
+
+    static Integer LOGGED_FLAG;
     String TAG = "here";
 
     public HomeFragment() {
@@ -60,28 +61,28 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
-        viewPager2 = view.findViewById(R.id.viewPager);
-        slider = new Handler();
+            presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+            viewPager2 = view.findViewById(R.id.viewPager);
+            slider = new Handler();
 
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-        Date today = new Date();
+            Date today = new Date();
 
-        todayDate = formatter.format(today);
+            todayDate = formatter.format(today);
 
-        setAdapter();
+            setAdapter();
 
-        presenter.getDailyFromDb(todayDate);
+            presenter.getDailyFromDb(todayDate);
 
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                slider.removeCallbacks(sliderRunnable);
-                slider.postDelayed(sliderRunnable, 3000);
-            }
-        });
+            viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                @Override
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+                    slider.removeCallbacks(sliderRunnable);
+                    slider.postDelayed(sliderRunnable, 3000);
+                }
+            });
 
     }
 
