@@ -65,6 +65,8 @@ public class FilterFragment extends Fragment implements OnCardClickListener, Fil
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 filter(meals.get(i));
+                spinnerAdapter.setSelection(i);
+                adapterView.findViewById(R.id.image_selected).setVisibility(View.VISIBLE);
             }
 
             @Override

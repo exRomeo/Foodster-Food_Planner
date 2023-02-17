@@ -21,6 +21,7 @@ public class SpinnerAdapter extends ArrayAdapter<Meal> {
     private final Context context;
     private List<Meal> list;
     String type;
+    int selection;
 
     public SpinnerAdapter(@NonNull Context context, int itemResourceID, List<Meal> meals, String type) {
         super(context, itemResourceID, meals);
@@ -37,6 +38,12 @@ public class SpinnerAdapter extends ArrayAdapter<Meal> {
                view = inflater.inflate(R.layout.spinner_list_item, parent, false);
         TextView tvFilter = view.findViewById(R.id.tv_filter);
         ImageView ivFilter = view.findViewById(R.id.iv_filter);
+        ImageView ivSelected = view.findViewById(R.id.image_selected);
+        if(selection == position) {
+            ivSelected.setVisibility(View.VISIBLE);
+        } else {
+            ivSelected.setVisibility(View.INVISIBLE);
+        }
         tvFilter.setText(getText(position));
         Glide.with(context).load(getImgURL(position)).into(ivFilter);
         return view;
@@ -55,6 +62,9 @@ public class SpinnerAdapter extends ArrayAdapter<Meal> {
     public void setList(List<Meal> list) {
         this.list = list;
     }
+    public void setSelection(int selection){
+        this.selection = selection;
+    }
 
     String getImgURL(int position) {
         String imgURL = null;
@@ -68,7 +78,6 @@ public class SpinnerAdapter extends ArrayAdapter<Meal> {
             case "ingredient":
                 imgURL = list.get(position).getIngredientThumbPreview(list.get(position).getStrIngredient());
                 break;
-
         }
         return imgURL;
     }
