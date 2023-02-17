@@ -53,7 +53,7 @@ public class MealFragment extends Fragment implements MealView {
         showMeal(currentMeal);
         binding.addToPlan.setOnClickListener(v -> createDialog().show());
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
-        binding.backButton.setOnClickListener(v -> /*NavHostFragment.findNavController(this).popBackStack()*/ requireActivity().finish());
+        binding.backButton.setOnClickListener(v -> requireActivity().finish());
 
     }
 
@@ -86,7 +86,11 @@ public class MealFragment extends Fragment implements MealView {
         builder.setSingleChoiceItems(days, checkedItem.get(), (dialog, which) -> checkedItem.set(which));
         builder.setPositiveButton("OK", (dialog, which) -> {
             if (checkedItem.get() != -1) {
-                Toast.makeText(this.requireContext(),"Planned for next\n" + days[checkedItem.get()], Toast.LENGTH_SHORT).show();
+                if (checkedItem.get() == 0) {
+                    Toast.makeText(this.requireContext(), "Plan Canceled!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this.requireContext(), "Planned for next\n" + days[checkedItem.get()], Toast.LENGTH_SHORT).show();
+                }
                 mealPresenter.planMeal(currentMeal, checkedItem.get());
             }
         });

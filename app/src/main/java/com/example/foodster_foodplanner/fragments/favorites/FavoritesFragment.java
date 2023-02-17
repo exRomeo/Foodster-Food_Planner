@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.foodster_foodplanner.MealActivity;
+import com.example.foodster_foodplanner.fragments.meal.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
@@ -72,8 +72,6 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
 
     @Override
     public void onCardClick(Meal meal) {
-/*        NavHostFragment.findNavController(this)
-                .navigate(FavoritesFragmentDirections.actionFavoritesFragmentToMealFragment(meal));*/
         Intent i = new Intent(this.requireContext(), MealActivity.class);
         i.putExtra("meal",meal);
         startActivity(i);
