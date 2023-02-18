@@ -19,9 +19,6 @@ import android.widget.Toast;
 
 import com.example.foodster_foodplanner.MainScreen;
 import com.example.foodster_foodplanner.R;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.identity.Identity;
-import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -35,7 +32,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.concurrent.Executor;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LoginFragment extends Fragment {
 
@@ -52,21 +53,20 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_google_client_id))
-                .requestEmail()
-                .build();
-        client = GoogleSignIn.getClient(this.requireContext(),options);
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_google_client_id)).requestEmail().requestProfile().requestId().build();
+        client = GoogleSignIn.getClient(this.requireContext(), options);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this.requireContext());
+        if(account!=null){
+            updateUI(account);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.login_fragement, container, false);
     }
 
@@ -97,7 +97,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = client.getSignInIntent();
-                startActivityForResult(i,1);}
+                startActivityForResult(i, 111);
+            }
         });
 
     }
@@ -105,26 +106,24 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
+        if (requestCode == 111) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
-                FirebaseAuth.getInstance().signInWithCredential(credential)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    Intent intent = new Intent(getActivity(),MainScreen.class);
-                                    startActivity(intent);
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            updateUI(account);
 
-                                }else {
-                                    Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
+                        } else {
+                            Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
 
-                            }
-                        });
+                    }
+                });
 
             } catch (ApiException e) {
                 e.printStackTrace();
@@ -133,15 +132,10 @@ public class LoginFragment extends Fragment {
         }
 
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!= null){
-            Intent intent = new Intent(getContext(),MainScreen.class);
-            intent.putExtra("User Name",user.getDisplayName());
-            startActivity(intent);
-        }
+    public void updateUI(GoogleSignInAccount account){
+        Intent intent = new Intent(getActivity(), MainScreen.class);
+        intent.putExtra("user_name", account.getDisplayName());
+        startActivity(intent);
     }
 
 }

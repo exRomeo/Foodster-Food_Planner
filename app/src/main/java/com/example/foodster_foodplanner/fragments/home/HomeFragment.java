@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     static Integer LOGGED_FLAG;
     String TAG = "here";
 
+    TextView userNameText;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -61,36 +63,37 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-            presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
-            viewPager2 = view.findViewById(R.id.viewPager);
-            slider = new Handler();
+        presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        viewPager2 = view.findViewById(R.id.viewPager);
+        userNameText = view.findViewById(R.id.userLoginName);
+        slider = new Handler();
 
-            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Intent login_intent = getActivity().getIntent();
+        String userName = login_intent.getStringExtra("user_name");
+        userNameText.setText(userName);
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date today = new Date();
+        todayDate = formatter.format(today);
 
-            Date today = new Date();
+        setAdapter();
 
-            todayDate = formatter.format(today);
+        presenter.getDailyFromDb(todayDate);
 
-            setAdapter();
-
-            presenter.getDailyFromDb(todayDate);
-
-            viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                @Override
-                public void onPageSelected(int position) {
-                    super.onPageSelected(position);
-                    slider.removeCallbacks(sliderRunnable);
-                    slider.postDelayed(sliderRunnable, 3000);
-                }
-            });
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                slider.removeCallbacks(sliderRunnable);
+                slider.postDelayed(sliderRunnable, 3000);
+            }
+        });
 
     }
 
     @Override
     public void onCardClick(Meal meal) {
-      
         Intent i = new Intent(this.requireContext(), MealActivity.class);
-        i.putExtra("meal",meal);
+        i.putExtra("meal", meal);
         startActivity(i);
 
     }
