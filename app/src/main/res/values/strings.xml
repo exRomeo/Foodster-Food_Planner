@@ -96,6 +96,7 @@
     <string name="instructios">Instructions :</string>
     <string name="guestLogin">Login as a guest</string>
     <string name="search">Search</string>
+    <string name="specified_search">Specified Search</string>
     <string name="default_google_client_id">283596832584-d90rd3rvvrpno9kv2ipv2bf1jm8ru797.apps.googleusercontent.com</string>
     <string name="hello">Hello</string>
     <string name="loggedin_user_name">Name</string>
