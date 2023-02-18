@@ -1,20 +1,16 @@
-package com.example.foodster_foodplanner.home;
-
-import android.util.Log;
+package com.example.foodster_foodplanner.fragments.home;
 
 
 import com.example.foodster_foodplanner.Repository.Repository;
-import com.example.foodster_foodplanner.Repository.RepositoryImpl;
-import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenterImplementation implements HomePresenter, NetworkDelegate {
@@ -58,6 +54,11 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     }
 
     @Override
+    public void getCountryMeals(String country) {
+
+    }
+
+    @Override
     public void onResponseSuccess(List<Meal> meals) {
         view.showDailyMeals(meals);
     }
@@ -65,5 +66,25 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     @Override
     public void onResponseFailure(String errorMessage) {
         view.showError(errorMessage);
+    }
+
+    public String generateCountryName(){
+        Random random = new Random();
+        int index= random.nextInt(10);
+
+        ArrayList<String> countries= new ArrayList<>();
+
+        countries.add("Egyptian");
+        countries.add("Indian");
+        countries.add("Chinese");
+        countries.add("English");
+        countries.add("American");
+        countries.add("Spanish");
+        countries.add("Japanese");
+        countries.add("Thai");
+        countries.add("Mexican");
+        countries.add("Canadian");
+
+       return countries.get(index);
     }
 }

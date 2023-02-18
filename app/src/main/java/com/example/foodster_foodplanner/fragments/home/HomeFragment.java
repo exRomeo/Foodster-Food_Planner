@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.home;
+package com.example.foodster_foodplanner.fragments.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,9 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     private HomePresenterImplementation presenter;
     private String todayDate;
     int flag = 0;
-
+    static Integer LOGGED_FLAG;
+    String TAG = "here";
+    TextView userNameText;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -60,12 +63,14 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
         super.onViewCreated(view, savedInstanceState);
         presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         viewPager2 = view.findViewById(R.id.viewPager);
+        userNameText = view.findViewById(R.id.userLoginName);
         slider = new Handler();
 
+        Intent login_intent = getActivity().getIntent();
+        String userName = login_intent.getStringExtra("user_name");
+        userNameText.setText(userName);
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
         Date today = new Date();
-
         todayDate = formatter.format(today);
 
         setAdapter();
@@ -85,9 +90,8 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
     @Override
     public void onCardClick(Meal meal) {
-      
         Intent i = new Intent(this.requireContext(), MealActivity.class);
-        i.putExtra("meal",meal);
+        i.putExtra("meal", meal);
         startActivity(i);
 
     }
