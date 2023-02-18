@@ -1,4 +1,4 @@
-package com.example.foodster_foodplanner.home;
+package com.example.foodster_foodplanner.fragments.home;
 
 import android.content.Intent;
 import android.os.Bundle;

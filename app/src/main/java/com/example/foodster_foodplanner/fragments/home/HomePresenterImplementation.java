@@ -1,20 +1,14 @@
-package com.example.foodster_foodplanner.home;
-
-import android.util.Log;
+package com.example.foodster_foodplanner.fragments.home;
 
 
 import com.example.foodster_foodplanner.Repository.Repository;
-import com.example.foodster_foodplanner.Repository.RepositoryImpl;
-import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
 
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenterImplementation implements HomePresenter, NetworkDelegate {

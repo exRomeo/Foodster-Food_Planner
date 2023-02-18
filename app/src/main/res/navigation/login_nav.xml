@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_nav"
     app:startDestination="@+id/loginFragment">
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.foodster_foodplanner.fragments.login.LoginFragment"
-        android:label="MealFragment"
+        android:label="LoginFragment"
         tools:layout="@layout/login_fragement">
         <action
-            android:id="@+id/action_loginFragment_to_signupFragment2"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
+
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.foodster_foodplanner.fragments.signup.SignupFragment"
-        android:label="MealFragment"
+        android:label="SignupFragment"
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"

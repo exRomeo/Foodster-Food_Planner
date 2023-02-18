@@ -1,14 +1,12 @@
 package com.example.foodster_foodplanner.fragments.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,12 +19,13 @@ import android.widget.Toast;
 
 import com.example.foodster_foodplanner.MainScreen;
 import com.example.foodster_foodplanner.R;
-import com.example.foodster_foodplanner.fragments.signup.SignupFragment;
-import com.example.foodster_foodplanner.home.HomeFragment;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.Identity;
-import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,14 +42,10 @@ public class LoginFragment extends Fragment {
     TextView signupLink;
     Button login;
     Intent intent;
-    private SignInClient oneTapClient;
-    private BeginSignInRequest signInRequest;
-    Context context;
+    private GoogleSignInClient client;
     ImageButton use_google;
     private static final String TAG = "GOOGle";
-    private static final int REQ_ONE_TAP = 1;
-    private boolean showOneTapUI = true;
-    private FirebaseAuth mAuth;
+
     Intent homeIntent;
 
     public LoginFragment() {
@@ -61,8 +56,11 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this.requireContext();
-        mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_google_client_id))
+                .requestEmail()
+                .build();
+        client = GoogleSignIn.getClient(this.requireContext(),options);
     }
 
     @Override
@@ -75,6 +73,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        View my_view = view;
         signupLink = view.findViewById(R.id.signupLink);
         login = view.findViewById(R.id.loginBtn);
         use_google = view.findViewById(R.id.login_google);
@@ -82,19 +81,13 @@ public class LoginFragment extends Fragment {
         signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new SignupFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                Navigation.findNavController(my_view).navigate(R.id.action_loginFragment_to_signupFragment);
             }
         });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 intent = new Intent(getActivity(), MainScreen.class);
                 startActivity(intent);
             }
@@ -103,11 +96,8 @@ public class LoginFragment extends Fragment {
         use_google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                oneTapClient = Identity.getSignInClient(context);
-                signInRequest = BeginSignInRequest.builder().setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder().setSupported(true).build()).setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder().setSupported(true)
-                        //add our server's client ID in strings if changed(get from https://console.cloud.google.com/apis)
-                        .setServerClientId(getString(R.string.default_google_client_id)).setFilterByAuthorizedAccounts(true).build()).setAutoSelectEnabled(true).build();
-            }
+                Intent i = client.getSignInIntent();
+                startActivityForResult(i,1);}
         });
 
     }
@@ -115,38 +105,42 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQ_ONE_TAP:
-                try {
-                    SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
-                    String idToken = credential.getGoogleIdToken();
-                    if (idToken != null) {
-                        AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
-                        mAuth.signInWithCredential(firebaseCredential).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+        if(requestCode == 1){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI
-                                    Log.d(TAG, "signInWithCredential:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    String name= user.getDisplayName();
-                                    homeIntent=new Intent(context, MainScreen.class);
-                                    homeIntent.putExtra("Display Name",name);
-                                    startActivity(homeIntent);
-                                    //updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(context, "signInWithCredential:failed", Toast.LENGTH_SHORT).show();
-                                    Log.w(TAG, "signInWithCredential:failure", task.getException());
+                                if(task.isSuccessful()){
+                                    Intent intent = new Intent(getActivity(),MainScreen.class);
+                                    startActivity(intent);
+
+                                }else {
+                                    Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
+
                             }
                         });
-                        Log.d(TAG, "Got ID token.");
-                    }
-                } catch (ApiException e) {
-                    e.getMessage();
-                }
-                break;
+
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!= null){
+            Intent intent = new Intent(getContext(),MainScreen.class);
+            intent.putExtra("User Name",user.getDisplayName());
+            startActivity(intent);
         }
     }
 
