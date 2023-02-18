@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodster_foodplanner.databinding.ActivityIntroBinding;
-import com.example.foodster_foodplanner.fragments.login.LoginFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class IntroActivity extends AppCompatActivity {
     ActivityIntroBinding binding;
@@ -20,7 +21,12 @@ public class IntroActivity extends AppCompatActivity {
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
         Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
-            startActivity(new Intent(binding.getRoot().getContext(), MainActivity.class));
+            Log.i("TAG", "checking logged in state ->> " + FirebaseAuth.getInstance().getCurrentUser());
+            if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            } else {
+                startActivity(new Intent(getApplicationContext(), MainScreen.class));
+            };
         }, 2000);
 
 
