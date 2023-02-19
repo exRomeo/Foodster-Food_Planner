@@ -41,10 +41,8 @@ public class LoginFragment extends Fragment {
 
     TextView signupLink;
     Button login;
-    Intent intent;
     private GoogleSignInClient client;
     ImageButton use_google;
-
     EditText emailBox, passwordBox;
 
     private static final String TAG = "GOOGle";

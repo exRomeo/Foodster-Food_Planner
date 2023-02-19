@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         email.setText(user.getEmail());
         String display = user.getDisplayName();
-        if (display.length()==0) {
+        if (display==null) {
             String initial = "UN";
             name.setText(" ");
             initials.setText(initial);

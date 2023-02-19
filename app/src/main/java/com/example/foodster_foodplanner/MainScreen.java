@@ -34,7 +34,7 @@ public class MainScreen extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String name = user.getDisplayName();
-            if (name.length()==0) {
+            if (name==null) {
                 String initial = "UN";
                 userProfile.setText(initial);
             } else {
