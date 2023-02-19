@@ -11,15 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import com.example.foodster_foodplanner.fragments.meal.MealActivity;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentFavoritesBinding;
 import com.example.foodster_foodplanner.fragments.CardsGridAdapter;
 import com.example.foodster_foodplanner.fragments.OnCardClickListener;
+import com.example.foodster_foodplanner.fragments.meal.MealActivity;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
@@ -32,8 +30,6 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
     FragmentFavoritesBinding binder;
     CardsGridAdapter cardsGridAdapter;
     FavoritesPresenter presenter;
-    NavController navController;
-
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -53,12 +49,10 @@ public class FavoritesFragment extends Fragment implements OnCardClickListener, 
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binder = FragmentFavoritesBinding.bind(view);
-        navController = Navigation.findNavController(view);
         cardsGridAdapter = new CardsGridAdapter(this.requireContext(),
                 new ArrayList<>(), this, R.drawable.cross);
         binder.mealsGrid.setAdapter(cardsGridAdapter);

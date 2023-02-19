@@ -19,6 +19,7 @@
         android:hint="Enter User Name"
         android:inputType="textPersonName"
         android:padding="12dp"
+        android:textColorHint="@color/palette_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -74,18 +75,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editUserName" />
 
-    <ImageButton
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/facebookButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="40dp"
-        android:backgroundTint="@color/white"
+        android:layout_width="28dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="60dp"
         android:contentDescription="use facebook to login"
-        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/login_google"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword"
+        app:layout_constraintTop_toTopOf="@+id/login_google"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
@@ -126,6 +125,7 @@
         android:hint="Enter Password"
         android:inputType="textPassword"
         android:padding="12dp"
+        android:textColorHint="@color/palette_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -152,6 +152,7 @@
         android:padding="8dp"
         android:text="@string/guestLogin"
         app:layout_constraintBottom_toTopOf="@+id/editUserName"
+        android:textColor="@color/foodster_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

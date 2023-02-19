@@ -17,18 +17,16 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> {
-            Log.i("TAG", "checking logged in state ->> " + FirebaseAuth.getInstance().getCurrentUser());
+        setContentView(binding.getRoot());
+        Log.i("TAG", "checking logged in state ->> " + FirebaseAuth.getInstance().getCurrentUser());
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(IntroActivity.this, MainActivity.class));
             } else {
-                startActivity(new Intent(getApplicationContext(), MainScreen.class));
+                startActivity(new Intent(IntroActivity.this, MainScreen.class));
             };
         }, 2000);
-
-
     }
 }
