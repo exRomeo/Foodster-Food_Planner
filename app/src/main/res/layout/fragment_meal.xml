@@ -241,4 +241,12 @@
         app:iconTint="@color/foodster_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fav_button_guideline" />
+
+    <Button
+        android:id="@+id/bkpbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Backup this meal"
+        app:layout_constraintBottom_toTopOf="@+id/add_to_plan"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

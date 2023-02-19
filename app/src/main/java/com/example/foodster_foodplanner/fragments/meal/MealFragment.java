@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.foodster_foodplanner.BackupMechanism;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentMealBinding;
@@ -55,7 +56,7 @@ public class MealFragment extends Fragment implements MealView {
         binding.addToPlan.setOnClickListener(v -> createDialog().show());
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
         binding.backButton.setOnClickListener(v -> requireActivity().finish());
-
+        binding.bkpbtn.setOnClickListener(v-> new BackupMechanism().backupMeal(currentMeal));
 
 
         YouTubePlayerView youTubePlayerView = view.findViewById(R.id.youtube_view);
