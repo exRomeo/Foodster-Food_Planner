@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="8dp"
+
     tools:context="fragments.login.LoginFragment">
 
     <EditText
@@ -29,8 +29,9 @@
         android:layout_width="130dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/foodster_yellow"
-        android:text="LOGIN"
+        android:text="@string/login"
         android:textColor="@color/foodster_black"
+        android:textSize="@dimen/main_size"
         app:cornerRadius="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
         android:layout_marginTop="124dp"
         android:fontFamily="@font/manropebold"
         android:text="@string/enter_user_name"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="#757575"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.183"
@@ -57,7 +58,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/manroperegular"
         android:text="@string/ask_to_signup"
-        android:textColor="#B3363130"
+        android:textColor="#75757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
@@ -110,7 +111,7 @@
         android:fontFamily="@font/manropesemibold"
         android:padding="12dp"
         android:text="@string/signupHyperLink"
-        android:textColor="@color/foodster_black"
+        android:textColor="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -136,10 +137,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/barbariska"
-        android:text="@string/app_title"
+        android:fontFamily="@font/rfbarbariskarough2_regular"
+        android:text="@string/foodster"
         android:textColor="@color/foodster_black"
-        android:textSize="32sp"
+        android:textSize="@dimen/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,8 +152,8 @@
         android:fontFamily="@font/manrope_bold"
         android:padding="8dp"
         android:text="@string/guestLogin"
-        app:layout_constraintBottom_toTopOf="@+id/editUserName"
         android:textColor="@color/foodster_black"
+        app:layout_constraintBottom_toTopOf="@+id/editUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

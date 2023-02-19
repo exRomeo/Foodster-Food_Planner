@@ -5,11 +5,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="4dp"
+    app:cardBackgroundColor="#FFFFFF"
     app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
         <TextView
             android:id="@+id/tv_meal_title"
@@ -19,6 +21,7 @@
             android:fontFamily="@font/manrope_regular"
             android:gravity="center"
             android:text="@string/meal_text"
+            android:textColor="#757575"
             android:textSize="@dimen/main_size"
             app:layout_constraintEnd_toEndOf="@+id/cardView3"
             app:layout_constraintStart_toStartOf="@+id/cardView3"
@@ -28,6 +31,7 @@
             android:id="@+id/cardView3"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="100dp"
             app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"

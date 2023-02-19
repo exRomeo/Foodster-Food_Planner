@@ -25,6 +25,7 @@ public class MainScreen extends AppCompatActivity {
         binding = ScreenMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         navController = Navigation.findNavController(this, R.id.main_fragment_host);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
