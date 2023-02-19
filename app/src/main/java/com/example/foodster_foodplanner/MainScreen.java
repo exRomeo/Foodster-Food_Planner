@@ -33,20 +33,16 @@ public class MainScreen extends AppCompatActivity {
         userProfile = findViewById(R.id.initials);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            String name = user.getDisplayName();
-            if (name==null) {
-                String initial = "UN";
-                userProfile.setText(initial);
+            if (user.isAnonymous()) {
+                userProfile.setText("A");
             } else {
-                String initial = " ";
-                initial += user.getDisplayName().charAt(0);
-                userProfile.setText(initial);
+                userProfile.setText(user.getEmail().substring(0, 2));
             }
         }
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(MainScreen.this, ProfileActivity.class);
+                Intent intent = new Intent(MainScreen.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,17 +55,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        email.setText(user.getEmail());
-        String display = user.getDisplayName();
-        if (display==null) {
-            String initial = "UN";
-            name.setText(" ");
-            initials.setText(initial);
-        } else {
-            name.setText(user.getDisplayName());
-            String initial = " ";
-            initial += user.getDisplayName().charAt(0);
-            initials.setText(initial);
+        if (user.isAnonymous()){
+            name.setText("Hey Anonymous!");
+            email.setText("Please signup to display your data");
+            initials.setText("A");
+        }
+        else {
+            name.setText(user.getEmail());
+            initials.setText(user.getEmail().substring(0, 2));
+            email.setText(" ");
         }
     }
 }

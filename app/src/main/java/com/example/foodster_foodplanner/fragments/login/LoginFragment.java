@@ -44,7 +44,6 @@ public class LoginFragment extends Fragment {
     private GoogleSignInClient client;
     ImageButton use_google;
     EditText emailBox, passwordBox;
-
     private static final String TAG = "GOOGle";
 
     public LoginFragment() {
