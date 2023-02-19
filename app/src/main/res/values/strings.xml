@@ -101,4 +101,6 @@
     <string name="hello">Hello</string>
     <string name="loggedin_user_name">Name</string>
     <string name="aroun_the_world">Around The World</string>
+    <string name="visit_profile">Go to your profile</string>
+    <string name="signout">Signout</string>
 </resources>
