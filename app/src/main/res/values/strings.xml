@@ -106,4 +106,7 @@
     <string name="facebook_client_token">2264e41517e63ca17e77fa5fea552a01</string>
     <string name="passowrd_restriction"><![CDATA[Use 8 or more characters with a mix of letters, numbers & symbols]]></string>
     <string name="email">Email</string>
+    <string name="visit_profile">Go to your profile</string>
+    <string name="signout">Signout</string>
+    <string name="email_login">Email</string>
 </resources>

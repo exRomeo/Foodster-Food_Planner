@@ -3,7 +3,7 @@ package com.example.foodster_foodplanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -12,12 +12,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.foodster_foodplanner.databinding.ScreenMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainScreen extends AppCompatActivity {
-    ImageButton menu;
-    Intent intent;
     ScreenMainBinding binding;
     NavController navController;
+
+    TextView userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,19 @@ public class MainScreen extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        menu = findViewById(R.id.menuIcon);
-        menu.setOnClickListener(new View.OnClickListener() {
+        userProfile = findViewById(R.id.initials);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            if (user.isAnonymous()) {
+                userProfile.setText("A");
+            } else {
+                userProfile.setText(user.getEmail().substring(0, 2));
+            }
+        }
+        userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(MainScreen.this, NavigationScreen.class);
+                Intent intent = new Intent(MainScreen.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

@@ -39,10 +39,12 @@
             android:backgroundTint="@color/white"
             android:contentDescription="menu icon"
             android:padding="12dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/menu_burger" />
+            app:srcCompat="@drawable/menu_burger"
+            tools:visibility="invisible" />
 
         <TextView
             android:id="@+id/textView"
@@ -54,6 +56,18 @@
             android:text="@string/app_title"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/initials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/profile_circle"
+            android:gravity="center"
+            android:text="YN"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.List;
@@ -45,16 +47,14 @@ public class LoginFragment extends Fragment {
     TextView signupLink;
     TextView guestLogin;
     Button login;
-    Intent intent;
     private GoogleSignInClient client;
     ImageButton use_google;
 
     FirebaseAuth firebaseAuth;
     CallbackManager callbackManager;
     LoginButton fbLogin;
+    EditText emailBox, passwordBox;
     private static final String TAG = "GOOGle";
-
-    Intent homeIntent;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -73,6 +73,11 @@ public class LoginFragment extends Fragment {
 //        if (account != null) {
 //            updateUI(account);
 //        }
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        FirebaseUser user = auth.getCurrentUser();
+//        if (user != null) {
+//            loginUser(user);
+//        }
     }
 
     @Override
@@ -88,7 +93,8 @@ public class LoginFragment extends Fragment {
         login = view.findViewById(R.id.loginBtn);
         use_google = view.findViewById(R.id.login_google);
         guestLogin = view.findViewById(R.id.guestLogin);
-
+        emailBox = view.findViewById(R.id.editUserName);
+        passwordBox = view.findViewById(R.id.editPassword);
         fbLogin = initFbButton(view);
         signupLink.setOnClickListener(v -> {
             FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -100,8 +106,13 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getActivity(), MainScreen.class);
-                startActivity(intent);
+                String emailAdress = emailBox.getText().toString();
+                String pass = passwordBox.getText().toString();
+                if (!emailAdress.matches("") && !pass.matches("")) {
+                    checkUserDate(emailAdress, pass);
+                } else {
+                    Toast.makeText(getContext(), "Please enter data or choose a login method", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -129,7 +140,7 @@ public class LoginFragment extends Fragment {
         });
 
     }
-
+    ///google
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -218,5 +229,29 @@ public class LoginFragment extends Fragment {
                     }
                 });
     }
+
+
+
+    private void checkUserDate(String emailAdress, String pass) {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signInWithEmailAndPassword(emailAdress, pass).addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success");
+                    FirebaseUser user = auth.getCurrentUser();
+                    updateUI();
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(requireContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+    }
+
 
 }

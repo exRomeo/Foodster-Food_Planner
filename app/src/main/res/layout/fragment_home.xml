@@ -87,13 +87,15 @@
                     android:fontFamily="@font/manrope_bold"
                     android:text="@string/aroun_the_world"
                     android:textColor="@color/foodster_black"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/country_meals_menu"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
 
         </LinearLayout>
     </ScrollView>
