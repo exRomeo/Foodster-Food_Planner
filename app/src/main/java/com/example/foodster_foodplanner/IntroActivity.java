@@ -22,11 +22,11 @@ public class IntroActivity extends AppCompatActivity {
         Log.i("TAG", "checking logged in state ->> " + FirebaseAuth.getInstance().getCurrentUser());
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                 startActivity(new Intent(IntroActivity.this, MainActivity.class));
             } else {
                 startActivity(new Intent(IntroActivity.this, MainScreen.class));
-            };
+            }
         }, 2000);
     }
 }

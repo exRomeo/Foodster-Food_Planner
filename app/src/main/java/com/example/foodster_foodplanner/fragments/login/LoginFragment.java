@@ -14,10 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.foodster_foodplanner.MainScreen;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.fragments.signup.SignupFragment;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -43,6 +44,7 @@ import java.util.List;
 public class LoginFragment extends Fragment {
 
     TextView signupLink;
+    TextView guestLogin;
     Button login;
     Intent intent;
     private GoogleSignInClient client;
@@ -77,23 +79,23 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.login_fragement, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        View my_view = view;
         signupLink = view.findViewById(R.id.signupLink);
         login = view.findViewById(R.id.loginBtn);
         use_google = view.findViewById(R.id.login_google);
+        guestLogin = view.findViewById(R.id.guestLogin);
 
         fbLogin = initFbButton(view);
-        signupLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(my_view).navigate(R.id.action_loginFragment_to_signupFragment);
-            }
+        signupLink.setOnClickListener(v -> {
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerView, new SignupFragment());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +112,21 @@ public class LoginFragment extends Fragment {
                 Intent i = client.getSignInIntent();
                 startActivityForResult(i, 111);
             }
+        });
+
+        guestLogin.setOnClickListener(v -> {
+            firebaseAuth.signInAnonymously()
+                    .addOnCompleteListener(this.requireActivity(), task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                        }
+                    });
         });
 
     }
