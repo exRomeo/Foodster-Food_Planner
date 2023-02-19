@@ -21,6 +21,7 @@ import com.example.foodster_foodplanner.fragments.meal.MealActivity;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -68,7 +69,7 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
         Intent login_intent = getActivity().getIntent();
         String userName = login_intent.getStringExtra("user_name");
-        userNameText.setText(userName);
+        userNameText.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         todayDate = formatter.format(today);

@@ -104,4 +104,6 @@
     <string name="facebook_app_id">859831555085282</string>
     <string name="fb_login_protocol_scheme">fb859831555085282</string>
     <string name="facebook_client_token">2264e41517e63ca17e77fa5fea552a01</string>
+    <string name="passowrd_restriction"><![CDATA[Use 8 or more characters with a mix of letters, numbers & symbols]]></string>
+    <string name="email">Email</string>
 </resources>

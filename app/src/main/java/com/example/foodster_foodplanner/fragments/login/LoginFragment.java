@@ -36,7 +36,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.List;
@@ -70,10 +69,10 @@ public class LoginFragment extends Fragment {
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_google_client_id)).requestEmail().requestProfile().requestId().build();
         client = GoogleSignIn.getClient(this.requireContext(), options);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this.requireContext());
-        if (account != null) {
-            updateUI(account);
-        }
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this.requireContext());
+//        if (account != null) {
+//            updateUI(account);
+//        }
     }
 
     @Override
@@ -120,8 +119,8 @@ public class LoginFragment extends Fragment {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            updateUI(user);
+//                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            updateUI();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());
@@ -144,7 +143,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            updateUI(account);
+                            updateUI();
 
                         } else {
                             Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -161,15 +160,9 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void updateUI(GoogleSignInAccount account) {
-        Intent intent = new Intent(getActivity(), MainScreen.class);
-        intent.putExtra("user_name", account.getDisplayName());
-        startActivity(intent);
-    }
 
-
-    private void updateUI(FirebaseUser user) {
-        Toast.makeText(this.requireContext(), "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+    private void updateUI() {
+        Toast.makeText(this.requireContext(), "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this.requireContext(), MainScreen.class));
     }
 
@@ -215,8 +208,8 @@ public class LoginFragment extends Fragment {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.i("TAG", "signInWithCredential:success " + firebaseAuth.getCurrentUser().getDisplayName());
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        updateUI(user);
+//                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        updateUI();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.i("TAG", "signInWithCredential:failure", task.getException());

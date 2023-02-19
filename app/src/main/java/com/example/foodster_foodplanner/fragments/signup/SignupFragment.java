@@ -1,8 +1,10 @@
 package com.example.foodster_foodplanner.fragments.signup;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,24 +17,14 @@ import androidx.fragment.app.Fragment;
 import com.example.foodster_foodplanner.MainScreen;
 import com.example.foodster_foodplanner.R;
 import com.example.foodster_foodplanner.databinding.FragmentSignupBinding;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.List;
 
 public class SignupFragment extends Fragment implements SignupView {
     FragmentSignupBinding binding;
     FirebaseAuth firebaseAuth;
-    CallbackManager callbackManager;
-    LoginButton loginButton;
+
+    SignupPresenterImpl presenter;
 
     public SignupFragment() {
         // Required empty public constructor
@@ -43,12 +35,12 @@ public class SignupFragment extends Fragment implements SignupView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
-        callbackManager = CallbackManager.Factory.create();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        presenter = new SignupPresenterImpl(firebaseAuth, this);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_signup, container, false);
     }
@@ -58,41 +50,21 @@ public class SignupFragment extends Fragment implements SignupView {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentSignupBinding.bind(view);
         binding.tvLogin.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
-        loginButton = view.findViewById(R.id.fb_button);
-        loginButton.setReadPermissions(List.of("email", "public_profile"));
-        loginButton.setFragment(this);
-        loginButton.setBackgroundResource(R.drawable.facebook);
-        loginButton.setCompoundDrawables(null, null, null, null);
-        loginButton.setText("");
-        loginButton.setLoginText("");
-        loginButton.setLogoutText("");
-
-        loginButton.setOnClickListener(view1 -> Log.i("TAG", "onViewCreated: "));
-        loginButton.registerCallback(callbackManager, new FacebookCallback<>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-                Log.i("TAG", "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-                Log.i("TAG", "facebook:onCancel");
-            }
-
-            @Override
-            public void onError(@NonNull FacebookException exception) {
-                // App code
-                Log.i("TAG", "facebook:onError", exception);
+        binding.passwordField.addTextChangedListener(passwordFieldWatcher());
+        binding.emailField.addTextChangedListener(emailFieldWatcher());
+        binding.signupButton.setOnClickListener(v->{
+            if(getPassword().equals(getConfirmPassword())){
+                binding.passwordRestriction.setVisibility(View.GONE);
+            }else{
+                binding.passwordRestriction.setText("Password and Confirm password don't Match");
+                binding.passwordRestriction.setTextColor(Color.RED);
             }
         });
     }
 
     @Override
     public String getName() {
-        return binding.nameField.getText().toString();
+        return binding.emailField.getText().toString();
     }
 
     @Override
@@ -102,31 +74,75 @@ public class SignupFragment extends Fragment implements SignupView {
 
     @Override
     public String getConfirmPassword() {
-        return binding.confirmPasswordField.getFontFeatureSettings().toString();
+        return binding.confirmPasswordField.getText().toString();
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d("TAG", "handleFacebookAccessToken:" + token);
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this.requireActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.i("TAG", "signInWithCredential:success " + firebaseAuth.getCurrentUser().getDisplayName());
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        updateUI(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.i("TAG", "signInWithCredential:failure", task.getException());
-                        Toast.makeText(requireContext(), "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void updateUI(FirebaseUser user) {
+    public void updateUI(FirebaseUser user) {
         Toast.makeText(this.requireContext(), "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this.requireContext(), MainScreen.class));
+    }
+
+    @Override
+    public void validPassword() {
+        binding.passwordRestriction.setTextColor(Color.GREEN);
+        binding.signupButton.setEnabled(true);
+    }
+
+    @Override
+    public void invalidPassword() {
+        binding.passwordRestriction.setTextColor(Color.RED);
+        binding.signupButton.setEnabled(false);
+    }
+
+    @Override
+    public void validEmail() {
+        binding.emailRestriction.setText(" is Valid");
+        binding.emailRestriction.setTextColor(Color.GREEN);
+    }
+
+    @Override
+    public void invalidEmail() {
+        binding.emailRestriction.setText(" is Invalid");
+        binding.emailRestriction.setTextColor(Color.RED);
+        binding.signupButton.setEnabled(false);
+    }
+    public TextWatcher passwordFieldWatcher(){
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String password = editable.toString();
+                presenter.validatePassword(password);
+            }
+        };
+    }
+
+    public TextWatcher emailFieldWatcher(){
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.validateEmail(editable.toString());
+            }
+        };
     }
 }
