@@ -34,8 +34,8 @@ public class MainScreen extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String name = user.getDisplayName();
-            if (name==null) {
-                String initial = "YN";
+            if (name.length()==0) {
+                String initial = "UN";
                 userProfile.setText(initial);
             } else {
                 String initial = " ";
@@ -47,6 +47,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(MainScreen.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

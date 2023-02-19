@@ -25,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_navigation_screen);
         email = findViewById(R.id.email);
         name = findViewById(R.id.display_name);
         initials = findViewById(R.id.initials_profile);
@@ -56,15 +57,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         email.setText(user.getEmail());
-        name.setText(user.getDisplayName());
         String display = user.getDisplayName();
-        if (display == null) {
-            String initial = "YN";
-            name.setText(initial);
+        if (display.length()==0) {
+            String initial = "UN";
+            name.setText(" ");
+            initials.setText(initial);
         } else {
+            name.setText(user.getDisplayName());
             String initial = " ";
             initial += user.getDisplayName().charAt(0);
-            name.setText(initial);
+            initials.setText(initial);
         }
     }
 }
