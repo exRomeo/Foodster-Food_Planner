@@ -174,6 +174,7 @@ public class LoginFragment extends Fragment {
 
     private void updateUI() {
         Toast.makeText(this.requireContext(), "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+        Log.i("TAG", "Guesss Who Logged in: " + FirebaseAuth.getInstance().getCurrentUser().getEmail() + " " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         startActivity(new Intent(this.requireContext(), MainScreen.class));
     }
 

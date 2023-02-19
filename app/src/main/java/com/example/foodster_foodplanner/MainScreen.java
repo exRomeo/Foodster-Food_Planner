@@ -32,12 +32,18 @@ public class MainScreen extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         userProfile = findViewById(R.id.initials);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             if (user.isAnonymous()) {
                 userProfile.setText("A");
             } else {
-                userProfile.setText(user.getEmail().substring(0, 2));
+                if(user.getDisplayName()!=null) {
+                    userProfile.setText(user.getDisplayName().substring(0,2).toUpperCase());
+                } else {
+                    if( user.getEmail() != null)
+                        userProfile.setText(user.getEmail().substring(0,2).toUpperCase());
+                }
             }
         }
         userProfile.setOnClickListener(new View.OnClickListener() {
