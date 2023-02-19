@@ -29,11 +29,18 @@ public class MainScreen extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        userProfile = binding.initials;
+        userProfile = findViewById(R.id.initials);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            char initial = user.getDisplayName().charAt(0);
-            userProfile.setText(initial);
+            String name = user.getDisplayName();
+            if (name==null) {
+                String initial = "YN";
+                userProfile.setText(initial);
+            } else {
+                String initial = " ";
+                initial += user.getDisplayName().charAt(0);
+                userProfile.setText(initial);
+            }
         }
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override

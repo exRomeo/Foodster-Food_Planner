@@ -103,4 +103,5 @@
     <string name="aroun_the_world">Around The World</string>
     <string name="visit_profile">Go to your profile</string>
     <string name="signout">Signout</string>
+    <string name="email_login">Email</string>
 </resources>
