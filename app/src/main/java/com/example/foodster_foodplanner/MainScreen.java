@@ -1,5 +1,6 @@
 package com.example.foodster_foodplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -45,7 +46,7 @@ public class MainScreen extends AppCompatActivity {
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.profileFragment);
+                Intent intent= new Intent(MainScreen.this, ProfileActivity.class);
             }
         });
     }
