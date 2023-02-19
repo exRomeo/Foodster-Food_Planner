@@ -1,5 +1,7 @@
 package com.example.foodster_foodplanner.Repository;
 
+import com.example.foodster_foodplanner.firestoreBackup.FirestoreBackup;
+import com.example.foodster_foodplanner.firestoreBackup.FirestoreBackupImpl;
 import com.example.foodster_foodplanner.localdatabase.RoomInterface;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.models.MealModel;
@@ -10,20 +12,24 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RepositoryImpl implements Repository {
     private static Repository repository;
     private final RetrofitClient retrofitClient;
     private final RoomInterface roomInterface;
+    private final FirestoreBackup firestoreBackup;
 
     private RepositoryImpl(RetrofitClient retrofitClient, RoomInterface roomInterface) {
         this.retrofitClient = retrofitClient;
         this.roomInterface = roomInterface;
+        this.firestoreBackup = FirestoreBackupImpl.getInstance();
     }
 
-    public static Repository getInstance(RetrofitClient retrofitClient, RoomInterface roomIntervace) {
+    public static Repository getInstance(RetrofitClient retrofitClient, RoomInterface roomInterface) {
         if (repository == null)
-            repository = new RepositoryImpl(retrofitClient, roomIntervace);
+            repository = new RepositoryImpl(retrofitClient, roomInterface);
         return repository;
     }
 
@@ -109,5 +115,20 @@ public class RepositoryImpl implements Repository {
     @Override
     public Observable<MealModel> getMealByID(int id) {
         return retrofitClient.getMealByID(id);
+    }
+
+    @Override
+    public Flowable<List<Meal>> getAllPlannedMeals() {
+        return roomInterface.getAllPlannedMeals();
+    }
+
+    @Override
+    public void backupFavorites() {
+        Disposable d = getFavoritesList().subscribeOn(Schedulers.io()).subscribe(firestoreBackup::backupMealList);
+    }
+
+    @Override
+    public void backupPlannedMeals() {
+        Disposable d = getAllPlannedMeals().subscribeOn(Schedulers.io()).subscribe(firestoreBackup::backupMealList);
     }
 }

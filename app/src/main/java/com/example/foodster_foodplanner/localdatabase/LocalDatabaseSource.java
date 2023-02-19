@@ -2,6 +2,8 @@ package com.example.foodster_foodplanner.localdatabase;
 
 import android.content.Context;
 
+import androidx.room.Database;
+
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -50,6 +52,11 @@ public class LocalDatabaseSource implements RoomInterface {
     @Override
     public Flowable<List<Meal>> getPlannedMeals(int day) {
         return mealDao.getPlannedMeals(day);
+    }
+
+    @Override
+    public Flowable<List<Meal>> getAllPlannedMeals() {
+        return mealDao.getAllPlannedMeals();
     }
 
     @Override

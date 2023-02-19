@@ -18,18 +18,25 @@ public interface MealDao {
 
     @Query("SELECT * FROM meal WHERE isFavorite = 1")
     Flowable<List<Meal>> getFavoritesList();
+
     @Query("SELECT * FROM meal WHERE isFavorite = 1 AND idMeal =:idMeal")
     Flowable<Meal> getFavorite(int idMeal);
+
     @Upsert
     void updateMeal(Meal meal);
 
     @Delete
     void removeFavorite(Meal meal);
+
     @Query("SELECT * FROM meal WHERE day = :day")
     Flowable<List<Meal>> getPlannedMeals(int day);
 
+    @Query("SELECT * FROM meal WHERE day > 0")
+    Flowable<List<Meal>> getAllPlannedMeals();
+
     @Query("select * from meal where date = :date")
     Flowable<List<Meal>> getDailyMeals(String date);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(Meal meal);
 }

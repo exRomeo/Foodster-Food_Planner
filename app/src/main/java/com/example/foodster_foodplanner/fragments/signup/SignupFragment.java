@@ -40,7 +40,7 @@ public class SignupFragment extends Fragment implements SignupView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        presenter = new SignupPresenterImpl(firebaseAuth, this);
+        presenter = new SignupPresenterImpl(this);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_signup, container, false);
     }
