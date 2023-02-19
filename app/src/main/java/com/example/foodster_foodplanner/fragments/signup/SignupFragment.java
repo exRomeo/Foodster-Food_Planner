@@ -24,7 +24,7 @@ public class SignupFragment extends Fragment implements SignupView {
     FragmentSignupBinding binding;
     FirebaseAuth firebaseAuth;
 
-    SignupPresenterImpl presenter;
+    SignupPresenter presenter;
 
     public SignupFragment() {
         // Required empty public constructor

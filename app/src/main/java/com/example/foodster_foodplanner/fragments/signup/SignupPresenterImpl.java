@@ -4,7 +4,7 @@ import com.example.foodster_foodplanner.fragments.CredentialsValidator;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class SignupPresenterImpl {
+public class SignupPresenterImpl implements SignupPresenter {
 
     private final SignupView signupView;
 
@@ -13,7 +13,7 @@ public class SignupPresenterImpl {
         this.signupView = signupView;
     }
 
-
+    @Override
     public void validatePassword(final String password) {
         Disposable d = CredentialsValidator.getInstance().validatePassword(password).subscribe(isValid -> {
             if (isValid) {
@@ -24,6 +24,7 @@ public class SignupPresenterImpl {
         });
     }
 
+    @Override
     public void validateEmail(final String email) {
         Disposable d = CredentialsValidator.getInstance().validateEmail(email).subscribe(isValid -> {
             if (isValid) {
@@ -33,5 +34,4 @@ public class SignupPresenterImpl {
             }
         });
     }
-
 }
