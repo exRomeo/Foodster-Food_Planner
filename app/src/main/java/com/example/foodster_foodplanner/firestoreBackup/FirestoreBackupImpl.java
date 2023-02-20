@@ -3,12 +3,11 @@ package com.example.foodster_foodplanner.firestoreBackup;
 import android.util.Log;
 
 import com.example.foodster_foodplanner.models.Meal;
+import com.example.foodster_foodplanner.models.MealModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FirestoreBackupImpl implements FirestoreBackup {
     private static FirestoreBackup firestoreBackup;
@@ -25,47 +24,60 @@ public class FirestoreBackupImpl implements FirestoreBackup {
         return firestoreBackup;
     }
 
-    @Override
-    public void backupMeal(Meal meal) {
-
-        if (meal.isFavorite()) {
-            backFavorite(meal);
-        } else {
-            backPlanned(meal);
-        }
-    }
+//    @Override
+//    public void backupMeal(Meal meal) {
+//
+//        if (meal.isFavorite()) {
+//            backFavorite(meal);
+//        } else {
+//            backPlanned(meal);
+//        }
+//    }
 
     @Override
     public void backupMealList(List<Meal> mealList) {
-        mealList.forEach(this::backupMeal);
-    }
-
-    private void backFavorite(Meal meal) {
-        Map<String, Meal> mealMap = new HashMap<>();
-        mealMap.put(meal.getStrMeal(), meal);
-        firestore.document(currentUserPath() + favoritesPath + meal.getStrMeal()).set(mealMap).addOnCompleteListener(task -> {
+        MealModel mealModel = new MealModel();
+        mealModel.setMeals(mealList);
+        firestore.document(currentUserPath() + favoritesPath).set(mealModel).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Log.i("TAG", "onComplete: success");
             } else {
                 Log.i("TAG", "onComplete: fail");
             }
         });
+//        mealList.forEach(this::backupMeal);
     }
 
-    private void backPlanned(Meal meal) {
-        Map<String, Meal> mealMap = new HashMap<>();
-        mealMap.put(meal.getStrMeal(), meal);
+//    private void backFavorite(Meal meal) {
+//        Map<String, Meal> mealMap = new HashMap<>();
+//        mealMap.put(meal.getStrMeal(), meal);
+//        firestore.document(currentUserPath() + favoritesPath + meal.getStrMeal()).set(mealMap).addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                Log.i("TAG", "onComplete: success");
+//            } else {
+//                Log.i("TAG", "onComplete: fail");
+//            }
+//        });
+//    }
 
-        firestore.document(currentUserPath() + plansPath + meal.getStrMeal()).set(mealMap).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.i("TAG", "onComplete: success");
-            } else {
-                Log.i("TAG", "onComplete: fail");
-            }
-        });
+//    private void backPlanned(Meal meal) {
+//        Map<String, Meal> mealMap = new HashMap<>();
+//        mealMap.put(meal.getStrMeal(), meal);
+//
+//        firestore.document(currentUserPath() + plansPath + meal.getStrMeal()).set(mealMap).addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                Log.i("TAG", "onComplete: success");
+//            } else {
+//                Log.i("TAG", "onComplete: fail");
+//            }
+//        });
+//
+//    }
+public void backupMeal(Meal meal){
+        //un used
+         }
 
-    }
     private String currentUserPath() {
-        return "foodsterData/users/" + FirebaseAuth.getInstance().getUid();
+        return "foodsterData/" + FirebaseAuth.getInstance().getUid();
     }
 }
