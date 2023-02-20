@@ -70,7 +70,7 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
 
     public String generateCountryName(){
         Random random = new Random();
-        int index= random.nextInt(10);
+        int index= random.nextInt(11);
 
         ArrayList<String> countries= new ArrayList<>();
 
@@ -81,6 +81,7 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
         countries.add("American");
         countries.add("Spanish");
         countries.add("Japanese");
+        countries.add("French");
         countries.add("Thai");
         countries.add("Mexican");
         countries.add("Canadian");

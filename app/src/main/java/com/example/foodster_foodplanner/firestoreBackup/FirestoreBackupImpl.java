@@ -2,11 +2,17 @@ package com.example.foodster_foodplanner.firestoreBackup;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.models.MealModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FirestoreBackupImpl implements FirestoreBackup {
@@ -50,7 +56,21 @@ public class FirestoreBackupImpl implements FirestoreBackup {
 
     @Override
     public List<Meal> retrieveFavList() {
-        return null;
+        List<Meal> backedFavs = new ArrayList<>();
+        firestore.document(currentUserPath() + favoritesPath).get().addOnSuccessListener(new OnSuccessListener<>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                MealModel list = documentSnapshot.toObject(MealModel.class);
+                backedFavs.addAll(list.getMeals());
+                Log.i("Retrieve", "onSuccess: retrieved" + list.getMeals().get(0).getStrMeal());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("Retrieve", "onFailure: " + e.getMessage());
+            }
+        });
+        return backedFavs;
     }
 
 //    private void backFavorite(Meal meal) {
