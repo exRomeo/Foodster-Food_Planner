@@ -48,6 +48,11 @@ public class FirestoreBackupImpl implements FirestoreBackup {
 //        mealList.forEach(this::backupMeal);
     }
 
+    @Override
+    public List<Meal> retrieveFavList() {
+        return null;
+    }
+
 //    private void backFavorite(Meal meal) {
 //        Map<String, Meal> mealMap = new HashMap<>();
 //        mealMap.put(meal.getStrMeal(), meal);
