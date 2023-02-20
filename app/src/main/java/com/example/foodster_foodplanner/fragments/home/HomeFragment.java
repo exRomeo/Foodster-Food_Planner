@@ -97,16 +97,13 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
             }
         });
 
-        presenter.getCountryMeals();
         setRecyclerAdapter();
+        presenter.getCountryMeals();
     }
 
     @Override
     public void onCardClick(Meal meal) {
-        Intent i = new Intent(this.requireContext(), MealActivity.class);
-        i.putExtra("meal", meal);
-        startActivity(i);
-
+        presenter.getMealByID(meal.getIdMeal());
     }
 
     @Override
@@ -137,6 +134,13 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     @Override
     public void setName(String CountryName) {
         region.setText(CountryName);
+    }
+
+    @Override
+    public void goToMeal(Meal meal) {
+        Intent i = new Intent(this.requireContext(), MealActivity.class);
+        i.putExtra("meal", meal);
+        startActivity(i);
     }
 
     public void setAdapter() {

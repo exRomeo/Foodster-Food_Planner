@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenterImplementation implements HomePresenter, NetworkDelegate {
@@ -69,6 +70,13 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     @Override
     public void onResponseFailure(String errorMessage) {
         view.showError(errorMessage);
+    }
+
+    @Override
+    public void getMealByID(int id) {
+        Disposable d = repository.getMealByID(id).subscribe(mealModel -> {
+            view.goToMeal(mealModel.getMeals().get(0));
+        });
     }
 
     public String generateCountryName(){

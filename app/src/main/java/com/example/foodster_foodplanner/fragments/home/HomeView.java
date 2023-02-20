@@ -10,4 +10,5 @@ public interface HomeView {
     public void showFromDataBase(List<Meal> dailyTen);
     public void showFromCountry(List<Meal> countryList);
     public void setName(String CountryName);
+    public void goToMeal(Meal meal);
 }
