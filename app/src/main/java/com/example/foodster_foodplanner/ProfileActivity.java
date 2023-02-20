@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
@@ -57,9 +56,9 @@ ProfilePresenter presenter;
                     auth.signOut();
                     Toast.makeText(ProfileActivity.this, user.getEmail() + "You are signed out!", Toast.LENGTH_SHORT).show();
                     Intent login = new Intent(ProfileActivity.this, MainActivity.class);
-
-                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(login);
+                    finish();
                 }
             }
         });
