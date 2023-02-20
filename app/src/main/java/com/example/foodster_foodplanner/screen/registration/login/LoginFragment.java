@@ -131,6 +131,7 @@ public class LoginFragment extends Fragment {
         });
 
     }
+
     ///google
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -161,7 +162,6 @@ public class LoginFragment extends Fragment {
         }
 
     }
-
 
 
     public LoginButton initFbButton(@NonNull View view) {
@@ -241,12 +241,15 @@ public class LoginFragment extends Fragment {
     }
 
     private void updateUI() {
-        Toast.makeText(this.requireContext(), "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+        String user = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        if (user == null)
+            user = "User";
+        Toast.makeText(this.requireContext(), "Welcome " + user, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this.requireContext(), MainScreenActivity.class));
     }
-    private void restoreData(){
+
+    private void restoreData() {
         FirestoreBackupImpl.getInstance().retrieveFavList(this.requireContext());
-        Log.i("DAAAAAAAAAAAATAAAAAAAAAAAAAAA REEEEEEEEEEEEEEESTOREEEEEEEEEEEEEEE", "RESTORING");
     }
 
 }

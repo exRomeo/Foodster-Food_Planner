@@ -14,6 +14,7 @@
         android:layout_marginStart="16dp"
         android:fontFamily="@font/manrope_bold"
         android:text="@string/this_week"
+        android:textColor="#757575"
         android:textSize="@dimen/default_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

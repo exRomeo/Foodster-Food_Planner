@@ -23,7 +23,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        FirebaseApp.initializeApp(/*context=*/ this);
+        FirebaseApp.initializeApp(this);
         FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
         firebaseAppCheck.installAppCheckProviderFactory(
                 PlayIntegrityAppCheckProviderFactory.getInstance());
