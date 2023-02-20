@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileView{
     TextView signout;
     ImageButton back;
     Button backupFavorites;
-    Button backupPlanner;
+    Button restore;
     TextView favoritesCount;
     TextView plannedCount;
 ProfilePresenter presenter;
@@ -40,7 +40,7 @@ ProfilePresenter presenter;
         signout = findViewById(R.id.signout);
         back = findViewById(R.id.BackIcon);
         backupFavorites = findViewById(R.id.backup_favs);
-        backupPlanner = findViewById(R.id.backup_plans);
+        restore = findViewById(R.id.restore);
         favoritesCount = findViewById(R.id.favs_count);
         plannedCount = findViewById(R.id.plan_count);
 
@@ -72,8 +72,9 @@ ProfilePresenter presenter;
         backupFavorites.setOnClickListener(v -> {
             RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).backupFavorites();
         });
-        backupPlanner.setOnClickListener(v ->{
-            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).backupPlannedMeals();
+        restore.setOnClickListener(v ->{
+//            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this));
+//            restoreTEsting
         });
     }
 

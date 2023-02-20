@@ -127,8 +127,5 @@ public class RepositoryImpl implements Repository {
         Disposable d = getFavoritesList().subscribeOn(Schedulers.io()).subscribe(firestoreBackup::backupMealList);
     }
 
-    @Override
-    public void backupPlannedMeals() {
-        Disposable d = getAllPlannedMeals().subscribeOn(Schedulers.io()).subscribe(firestoreBackup::backupMealList);
-    }
+
 }

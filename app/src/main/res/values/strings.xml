@@ -115,5 +115,5 @@
     <string name="favorite_meals">Total Meals in Favorites</string>
     <string name="planner_meals">Total Meals In Planner</string>
     <string name="backup_favs">Backup Favorites</string>
-    <string name="backup_plans">Backup Planner</string>
+    <string name="restore">Restore</string>
 </resources>
