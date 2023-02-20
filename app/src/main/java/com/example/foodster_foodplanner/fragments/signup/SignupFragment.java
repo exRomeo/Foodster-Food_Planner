@@ -52,10 +52,11 @@ public class SignupFragment extends Fragment implements SignupView {
         binding.tvLogin.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
         binding.passwordField.addTextChangedListener(passwordFieldWatcher());
         binding.emailField.addTextChangedListener(emailFieldWatcher());
-        binding.signupButton.setOnClickListener(v->{
-            if(getPassword().equals(getConfirmPassword())){
+        binding.signupButton.setOnClickListener(v -> {
+            if (getPassword().equals(getConfirmPassword())) {
                 binding.passwordRestriction.setVisibility(View.GONE);
-            }else{
+                presenter.signup(getEmail(), getPassword());
+            } else{
                 binding.passwordRestriction.setText("Password and Confirm password don't Match");
                 binding.passwordRestriction.setTextColor(Color.RED);
             }
@@ -63,7 +64,7 @@ public class SignupFragment extends Fragment implements SignupView {
     }
 
     @Override
-    public String getName() {
+    public String getEmail() {
         return binding.emailField.getText().toString();
     }
 

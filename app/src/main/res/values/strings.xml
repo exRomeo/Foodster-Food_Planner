@@ -109,4 +109,7 @@
     <string name="visit_profile">Go to your profile</string>
     <string name="signout">Signout</string>
     <string name="email_login">Email</string>
+    <string name="use_google_to_login">use google to login</string>
+    <string name="login_using_google">login using google</string>
+    <string name="use_facebook_to_login">use facebook to login</string>
 </resources>

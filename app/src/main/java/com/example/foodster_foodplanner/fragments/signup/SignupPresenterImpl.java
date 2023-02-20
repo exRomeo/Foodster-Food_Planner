@@ -1,16 +1,27 @@
 package com.example.foodster_foodplanner.fragments.signup;
 
+import android.app.Activity;
+import android.util.Log;
+
+import androidx.fragment.app.Fragment;
+
 import com.example.foodster_foodplanner.fragments.CredentialsValidator;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
 public class SignupPresenterImpl implements SignupPresenter {
 
     private final SignupView signupView;
-
+    private final FirebaseAuth firebaseAuth;
+    private final Activity activity;
 
     public SignupPresenterImpl(SignupView signupView) {
         this.signupView = signupView;
+        firebaseAuth = FirebaseAuth.getInstance();
+        this.activity = ((Fragment) signupView).requireActivity();
     }
 
     @Override
@@ -31,6 +42,17 @@ public class SignupPresenterImpl implements SignupPresenter {
                 signupView.validEmail();
             } else {
                 signupView.invalidEmail();
+            }
+        });
+    }
+
+    @Override
+    public void signup(String email, String password) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activity, task -> {
+            if (task.isSuccessful()) {
+                Log.i("TAG", "onComplete: task  " + Objects.requireNonNull(firebaseAuth.getCurrentUser()).getEmail());
+            } else {
+                Log.i("TAG", "onComplete: Failed");
             }
         });
     }
