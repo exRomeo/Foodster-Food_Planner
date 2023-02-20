@@ -35,7 +35,7 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
 
     @Override
     public void addToFavs(Meal meal) {
-        repository.addFavorite(meal);
+        Disposable d = repository.getMealByID(meal.getIdMeal()).subscribe(mealModel -> repository.addFavorite(mealModel.getMeals().get(0)));
     }
 
     @Override

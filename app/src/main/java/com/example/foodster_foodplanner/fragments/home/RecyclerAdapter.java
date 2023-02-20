@@ -45,6 +45,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     @Override
     public int getItemCount() {
+        if (countryMeals == null)
+            return 0;
         return countryMeals.size();
     }
 
