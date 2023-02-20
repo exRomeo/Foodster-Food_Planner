@@ -80,6 +80,7 @@ ProfilePresenter presenter;
             }
         });
         restore.setOnClickListener(v ->{
+            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).restoreFavorites(this);
 //            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this));
 //            restoreTEsting
             FirestoreBackupImpl.getInstance().retrieveFavList(this);

@@ -54,8 +54,11 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
     }
 
     @Override
-    public void getCountryMeals(String country) {
-
+    public void getCountryMeals() {
+        String name = generateCountryName();
+        repository.filterByCountry(name).subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribe(item -> view.showFromCountry(item.getMeals()));
+        view.setName(name);
     }
 
     @Override
@@ -85,6 +88,6 @@ public class HomePresenterImplementation implements HomePresenter, NetworkDelega
         countries.add("Mexican");
         countries.add("Canadian");
 
-       return countries.get(index);
+        return countries.get(index);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.foodster_foodplanner.Repository;
 
+import android.content.Context;
+
 import com.example.foodster_foodplanner.firestoreBackup.FirestoreBackup;
 import com.example.foodster_foodplanner.firestoreBackup.FirestoreBackupImpl;
 import com.example.foodster_foodplanner.localdatabase.RoomInterface;
@@ -125,6 +127,11 @@ public class RepositoryImpl implements Repository {
     @Override
     public void backupFavorites() {
         Disposable d = getFavoritesList().subscribeOn(Schedulers.io()).subscribe(firestoreBackup::backupMealList);
+    }
+
+    @Override
+    public void restoreFavorites(Context context) {
+       firestoreBackup.retrieveFavList(context);
     }
 
     @Override

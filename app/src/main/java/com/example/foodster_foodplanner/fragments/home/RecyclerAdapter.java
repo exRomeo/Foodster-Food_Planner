@@ -18,20 +18,20 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private Context context;
-    private List<Meal>  countryMeals;
+    private List<Meal> countryMeals;
     private OnCardClickListener cardClickListener;
 
-    public RecyclerAdapter(Context context,List<Meal>  countryMeals,OnCardClickListener cardClickListener){
-        this.context=context;
-        this.countryMeals=countryMeals;
-        this.cardClickListener=cardClickListener;
+    public RecyclerAdapter(Context context, List<Meal> countryMeals, OnCardClickListener cardClickListener) {
+        this.context = context;
+        this.countryMeals = countryMeals;
+        this.cardClickListener = cardClickListener;
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.home_country_card,parent,false);
+        View view = inflater.inflate(R.layout.home_country_card, parent, false);
         return new RecyclerViewHolder(view);
     }
 
@@ -46,5 +46,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     @Override
     public int getItemCount() {
         return countryMeals.size();
+    }
+
+    public void setList(List<Meal> countryList) {
+        countryMeals = countryList;
     }
 }

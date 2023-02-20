@@ -8,4 +8,6 @@ public interface HomeView {
     public void showDailyMeals(List<Meal> dailyTen);
     public void showError(String errMsg);
     public void showFromDataBase(List<Meal> dailyTen);
+    public void showFromCountry(List<Meal> countryList);
+    public void setName(String CountryName);
 }

@@ -1,5 +1,7 @@
 package com.example.foodster_foodplanner.Repository;
 
+import android.content.Context;
+
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.models.MealModel;
 import com.example.foodster_foodplanner.retrofitclient.NetworkDelegate;
@@ -44,6 +46,7 @@ public interface Repository {
     Observable<MealModel> getMealByID(int id);
     Flowable<List<Meal>> getAllPlannedMeals();
     void backupFavorites();
+    void restoreFavorites(Context context);
     void emptyDatabase();
 
 }
