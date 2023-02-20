@@ -42,6 +42,8 @@ public interface Repository {
 
     Observable<MealModel> filterByIngredient(String ingredient);
     Observable<MealModel> getMealByID(int id);
-
+    Flowable<List<Meal>> getAllPlannedMeals();
+    void backupFavorites();
+    void backupPlannedMeals();
 
 }

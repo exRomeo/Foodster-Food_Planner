@@ -9,6 +9,9 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodster_foodplanner.databinding.ActivityIntroBinding;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class IntroActivity extends AppCompatActivity {
@@ -17,18 +20,20 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> {
-            Log.i("TAG", "checking logged in state ->> " + FirebaseAuth.getInstance().getCurrentUser());
-            if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        setContentView(binding.getRoot());
+        FirebaseApp.initializeApp(/*context=*/ this);
+        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+        firebaseAppCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance());
+        Log.i("TAG", "checking logged in state ->> " + FirebaseAuth.getInstance().getCurrentUser());
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                startActivity(new Intent(IntroActivity.this, MainActivity.class));
             } else {
-                startActivity(new Intent(getApplicationContext(), MainScreen.class));
-            };
+                startActivity(new Intent(IntroActivity.this, MainScreen.class));
+            }
         }, 2000);
-
-
     }
 }

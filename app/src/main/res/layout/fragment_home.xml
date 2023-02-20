@@ -42,9 +42,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
+
+                    android:alpha="0.8"
                     android:paddingTop="24dp"
                     android:paddingBottom="24dp"
                     android:text="@string/loggedin_user_name"
+                    android:textColor="@color/foodster_black"
                     android:textSize="24sp" />
             </LinearLayout>
 

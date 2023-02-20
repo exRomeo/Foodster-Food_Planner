@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.foodster_foodplanner.R;
+import com.example.foodster_foodplanner.Repository.Repository;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.databinding.FragmentMealBinding;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
@@ -28,7 +29,7 @@ public class MealFragment extends Fragment implements MealView {
     MealPresenter mealPresenter;
     FragmentMealBinding binding;
     Meal currentMeal;
-
+    Repository repository;
     public MealFragment() {
         // Required empty public constructor
     }
@@ -41,8 +42,9 @@ public class MealFragment extends Fragment implements MealView {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        repository = RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext()));
         // Inflate the layout for this fragment
-        mealPresenter = new MealPresenterImpl(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
+        mealPresenter = new MealPresenterImpl(this, repository);
         return inflater.inflate(R.layout.fragment_meal, container, false);
     }
 
@@ -55,7 +57,7 @@ public class MealFragment extends Fragment implements MealView {
         binding.addToPlan.setOnClickListener(v -> createDialog().show());
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
         binding.backButton.setOnClickListener(v -> requireActivity().finish());
-
+        binding.bkpbtn.setOnClickListener(v->  repository.backupFavorites());
 
 
         YouTubePlayerView youTubePlayerView = view.findViewById(R.id.youtube_view);

@@ -1,13 +1,13 @@
 package com.example.foodster_foodplanner;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,8 +62,25 @@ public class ProfileActivity extends AppCompatActivity {
         }
         else {
             name.setText(user.getEmail());
-            initials.setText(user.getEmail().substring(0, 2));
+            initials.setText(getUserText(user));
             email.setText(" ");
         }
+    }
+
+    private String getUserText(FirebaseUser user){
+        String userText = null;
+        if (user != null) {
+            if (user.isAnonymous()) {
+                userText = "A";
+            } else {
+                if(user.getDisplayName()!=null) {
+                    userText = user.getDisplayName().substring(0,2).toUpperCase();
+                } else {
+                    if( user.getEmail() != null)
+                        userText = user.getEmail().substring(0,2).toUpperCase();
+                }
+            }
+        }
+        return userText;
     }
 }

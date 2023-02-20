@@ -101,7 +101,15 @@
     <string name="hello">Hello</string>
     <string name="loggedin_user_name">Name</string>
     <string name="aroun_the_world">Around The World</string>
+    <string name="facebook_app_id">859831555085282</string>
+    <string name="fb_login_protocol_scheme">fb859831555085282</string>
+    <string name="facebook_client_token">2264e41517e63ca17e77fa5fea552a01</string>
+    <string name="passowrd_restriction"><![CDATA[Use 8 or more characters with a mix of letters, numbers & symbols]]></string>
+    <string name="email">Email</string>
     <string name="visit_profile">Go to your profile</string>
     <string name="signout">Signout</string>
     <string name="email_login">Email</string>
+    <string name="use_google_to_login">use google to login</string>
+    <string name="login_using_google">login using google</string>
+    <string name="use_facebook_to_login">use facebook to login</string>
 </resources>

@@ -10,13 +10,14 @@
     android:gravity="center"
     android:orientation="horizontal"
     android:padding="4dp"
+    app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="0dp"
-    app:cardElevation="0dp"
-    >
+    app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
@@ -42,6 +43,7 @@
             android:layout_marginStart="4dp"
             android:fontFamily="@font/manrope_regular"
             android:text="@string/meal_text"
+            android:textColor="#757575"
             android:textSize="@dimen/main_size"
             app:layout_constraintBottom_toBottomOf="@+id/cardView4"
             app:layout_constraintStart_toEndOf="@+id/cardView4"

@@ -2,7 +2,6 @@ package com.example.foodster_foodplanner.localdatabase;
 
 import com.example.foodster_foodplanner.models.Meal;
 
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -15,7 +14,10 @@ public interface RoomInterface {
     void insertWeekly(Meal meal);
 
     Flowable<List<Meal>> getListOfFavorites();
+
     Flowable<List<Meal>> getPlannedMeals(int day);
+
+    Flowable<List<Meal>> getAllPlannedMeals();
 
     Flowable<List<Meal>> getListOfDaily(String date);
 
