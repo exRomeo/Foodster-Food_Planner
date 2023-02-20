@@ -9,7 +9,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class ProfilePresenterImpl implements ProfilePresenter{
     private final Repository repository;
     private final ProfileView profileView;
-
     public ProfilePresenterImpl(Repository repository, ProfileView profileView) {
         this.repository = repository;
         this.profileView = profileView;
@@ -32,4 +31,16 @@ public class ProfilePresenterImpl implements ProfilePresenter{
                 .subscribe(meals -> profileView.setPlannedCount(String.valueOf(meals.size())),
                         e->profileView.setPlannedCount("None"));
     }
+
+    @Override
+    public void removeUserData() {
+       repository.emptyDatabase();
+    }
+
+    @Override
+    public void backupFavorites() {
+        repository.backupFavorites();
+    }
+
+
 }

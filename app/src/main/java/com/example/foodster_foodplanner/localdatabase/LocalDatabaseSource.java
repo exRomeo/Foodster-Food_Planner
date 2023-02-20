@@ -2,8 +2,6 @@ package com.example.foodster_foodplanner.localdatabase;
 
 import android.content.Context;
 
-import androidx.room.Database;
-
 import com.example.foodster_foodplanner.models.Meal;
 
 import java.util.List;
@@ -92,6 +90,11 @@ public class LocalDatabaseSource implements RoomInterface {
     @Override
     public void removeWeeklyMeal(int idMeal) {
 
+    }
+
+    @Override
+    public void emptyDatabase() {
+        new Thread(mealDao::emptyDatabase).start();
     }
 
 }

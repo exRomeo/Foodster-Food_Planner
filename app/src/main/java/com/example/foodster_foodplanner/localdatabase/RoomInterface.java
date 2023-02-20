@@ -32,6 +32,6 @@ public interface RoomInterface {
     void removeFavoriteMeal(Meal meal);
 
     void removeWeeklyMeal(int idMeal);
-
+    void emptyDatabase();
 
 }

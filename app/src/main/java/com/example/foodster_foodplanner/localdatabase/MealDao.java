@@ -39,4 +39,7 @@ public interface MealDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(Meal meal);
+
+    @Query("DELETE FROM meal")
+    void emptyDatabase();
 }
