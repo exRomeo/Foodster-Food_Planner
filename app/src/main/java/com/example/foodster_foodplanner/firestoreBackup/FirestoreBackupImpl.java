@@ -1,9 +1,12 @@
 package com.example.foodster_foodplanner.firestoreBackup;
 
+import android.content.Context;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 
+import com.example.foodster_foodplanner.Repository.Repository;
+import com.example.foodster_foodplanner.Repository.RepositoryImpl;
+import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.models.Meal;
 import com.example.foodster_foodplanner.models.MealModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -12,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FirestoreBackupImpl implements FirestoreBackup {
@@ -55,22 +57,30 @@ public class FirestoreBackupImpl implements FirestoreBackup {
     }
 
     @Override
-    public List<Meal> retrieveFavList() {
-        List<Meal> backedFavs = new ArrayList<>();
+    public void retrieveFavList(Context context) {
         firestore.document(currentUserPath() + favoritesPath).get().addOnSuccessListener(new OnSuccessListener<>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 MealModel list = documentSnapshot.toObject(MealModel.class);
-                backedFavs.addAll(list.getMeals());
-                Log.i("Retrieve", "onSuccess: retrieved" + list.getMeals().get(0).getStrMeal());
+                if(list != null) {
+                    setList(list.getMeals(), context);
+                    Log.i("TAG", "onSuccess: retrieved" + list.getMeals().get(0).getStrMeal());
+                } else {
+                    Log.i("TAG", "onSuccess: List IS Empty");
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onFailure(Exception e) {
                 Log.i("Retrieve", "onFailure: " + e.getMessage());
             }
         });
-        return backedFavs;
+
+    }
+    private void setList(List<Meal> list,Context context){
+        list.forEach(meal -> Log.i("TAG", "setList: "+meal.getStrMeal()) );
+        Repository repository = RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(context));
+        list.forEach(repository::addFavorite);
     }
 
 //    private void backFavorite(Meal meal) {

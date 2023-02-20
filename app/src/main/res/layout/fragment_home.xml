@@ -88,14 +88,29 @@
                     android:text="@string/aroun_the_world"
                     android:textColor="@color/foodster_black"
                     android:textSize="16dp"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/countryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:alpha="0.7"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="Chinese"
+                    android:textColor="@color/foodster_black"
+                    android:textSize="16sp" />
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/country_meals_menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
         </LinearLayout>
     </ScrollView>

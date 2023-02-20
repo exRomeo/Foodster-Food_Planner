@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodster_foodplanner.R;
@@ -35,14 +37,16 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
 
     private ViewPager2 viewPager2;
     private List<Meal> daily;
+    private List<Meal> aroundTheWorld;
     private PageViewerAdapter adapter;
     private Handler slider;
     private HomePresenterImplementation presenter;
     private String todayDate;
-    int flag = 0;
-    static Integer LOGGED_FLAG;
-    String TAG = "here";
-    TextView userNameText;
+    private TextView userNameText;
+    private TextView region;
+    private RecyclerView countryRecycler;
+    private RecyclerAdapter recyclerAdapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -57,6 +61,7 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         daily = new ArrayList<>();
+        aroundTheWorld = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -65,11 +70,16 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
         super.onViewCreated(view, savedInstanceState);
         presenter = new HomePresenterImplementation(this, RepositoryImpl.getInstance(RetrofitClientImpl.getInstance(), LocalDatabaseSource.getInstance(this.requireContext())));
         viewPager2 = view.findViewById(R.id.viewPager);
+        countryRecycler = view.findViewById(R.id.country_meals_menu);
         userNameText = view.findViewById(R.id.userLoginName);
+        region = view.findViewById(R.id.countryTitle);
+
         slider = new Handler();
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userName = user.getDisplayName();
         userNameText.setText(userName);
+
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         todayDate = formatter.format(today);
@@ -87,6 +97,8 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
             }
         });
 
+        presenter.getCountryMeals();
+        setRecyclerAdapter();
     }
 
     @Override
@@ -116,9 +128,28 @@ public class HomeFragment extends Fragment implements OnCardClickListener, HomeV
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void showFromCountry(List<Meal> countryList) {
+        recyclerAdapter.setList(countryList);
+        recyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setName(String CountryName) {
+        region.setText(CountryName);
+    }
+
     public void setAdapter() {
         adapter = new PageViewerAdapter(daily, viewPager2, this, this.requireContext());
         viewPager2.setAdapter(adapter);
+    }
+
+    public void setRecyclerAdapter() {
+        recyclerAdapter = new RecyclerAdapter(requireContext(), aroundTheWorld, this);
+        countryRecycler.setAdapter(recyclerAdapter);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+        countryRecycler.setLayoutManager(layoutManager);
     }
 
     private Runnable sliderRunnable = new Runnable() {
