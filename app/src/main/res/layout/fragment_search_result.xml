@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:backgroundTint="@color/white"
-    tools:context=".fragments.search.SearchResultFragment">
+    tools:context=".screen.search.SearchResultFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/results_menu"

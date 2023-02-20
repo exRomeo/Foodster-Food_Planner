@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodster_foodplanner.databinding.ActivityIntroBinding;
+import com.example.foodster_foodplanner.screen.registration.RegistrationActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
@@ -30,9 +31,9 @@ public class IntroActivity extends AppCompatActivity {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                startActivity(new Intent(IntroActivity.this, MainActivity.class));
+                startActivity(new Intent(IntroActivity.this, RegistrationActivity.class));
             } else {
-                startActivity(new Intent(IntroActivity.this, MainScreen.class));
+                startActivity(new Intent(IntroActivity.this, MainScreenActivity.class));
             }
         }, 2000);
     }

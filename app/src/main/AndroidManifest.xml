@@ -23,20 +23,20 @@
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 
         <activity
-            android:name=".fragments.filters.FilterActivity"
+            android:name=".screen.filters.FilterActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".fragments.meal.MealActivity"
+            android:name=".screen.meal.MealActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainScreen"
+            android:name=".MainScreenActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".screen.profile.ProfileActivity"
             android:exported="false"
             android:noHistory="true"
             android:screenOrientation="portrait" />
@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".screen.registration.RegistrationActivity"
             android:exported="true"
             android:noHistory="true"
             android:screenOrientation="portrait" />
