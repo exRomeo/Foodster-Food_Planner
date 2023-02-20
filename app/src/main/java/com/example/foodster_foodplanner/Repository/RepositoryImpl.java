@@ -134,5 +134,10 @@ public class RepositoryImpl implements Repository {
        firestoreBackup.retrieveFavList(context);
     }
 
+    @Override
+    public void emptyDatabase() {
+        roomInterface.emptyDatabase();
+    }
+
 
 }

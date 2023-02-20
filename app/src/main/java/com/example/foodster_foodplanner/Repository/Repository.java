@@ -47,5 +47,6 @@ public interface Repository {
     Flowable<List<Meal>> getAllPlannedMeals();
     void backupFavorites();
     void restoreFavorites(Context context);
+    void emptyDatabase();
 
 }

@@ -3,7 +3,6 @@ package com.example.foodster_foodplanner.firestoreBackup;
 import android.content.Context;
 import android.util.Log;
 
-
 import com.example.foodster_foodplanner.Repository.Repository;
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
@@ -32,15 +31,6 @@ public class FirestoreBackupImpl implements FirestoreBackup {
         return firestoreBackup;
     }
 
-//    @Override
-//    public void backupMeal(Meal meal) {
-//
-//        if (meal.isFavorite()) {
-//            backFavorite(meal);
-//        } else {
-//            backPlanned(meal);
-//        }
-//    }
 
     @Override
     public void backupMealList(List<Meal> mealList) {
@@ -53,7 +43,6 @@ public class FirestoreBackupImpl implements FirestoreBackup {
                 Log.i("TAG", "onComplete: fail");
             }
         });
-//        mealList.forEach(this::backupMeal);
     }
 
     @Override
@@ -83,34 +72,6 @@ public class FirestoreBackupImpl implements FirestoreBackup {
         list.forEach(repository::addFavorite);
     }
 
-//    private void backFavorite(Meal meal) {
-//        Map<String, Meal> mealMap = new HashMap<>();
-//        mealMap.put(meal.getStrMeal(), meal);
-//        firestore.document(currentUserPath() + favoritesPath + meal.getStrMeal()).set(mealMap).addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                Log.i("TAG", "onComplete: success");
-//            } else {
-//                Log.i("TAG", "onComplete: fail");
-//            }
-//        });
-//    }
-
-//    private void backPlanned(Meal meal) {
-//        Map<String, Meal> mealMap = new HashMap<>();
-//        mealMap.put(meal.getStrMeal(), meal);
-//
-//        firestore.document(currentUserPath() + plansPath + meal.getStrMeal()).set(mealMap).addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                Log.i("TAG", "onComplete: success");
-//            } else {
-//                Log.i("TAG", "onComplete: fail");
-//            }
-//        });
-//
-//    }
-public void backupMeal(Meal meal){
-        //un used
-         }
 
     private String currentUserPath() {
         return "foodsterData/" + FirebaseAuth.getInstance().getUid();

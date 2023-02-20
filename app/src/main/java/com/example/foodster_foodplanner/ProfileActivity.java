@@ -11,8 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodster_foodplanner.Repository.RepositoryImpl;
+import com.example.foodster_foodplanner.firestoreBackup.FirestoreBackupImpl;
 import com.example.foodster_foodplanner.localdatabase.LocalDatabaseSource;
 import com.example.foodster_foodplanner.retrofitclient.RetrofitClientImpl;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -56,6 +58,7 @@ ProfilePresenter presenter;
                     auth.signOut();
                     Toast.makeText(ProfileActivity.this, user.getEmail() + "You are signed out!", Toast.LENGTH_SHORT).show();
                     Intent login = new Intent(ProfileActivity.this, MainActivity.class);
+                    presenter.removeUserData();
                     login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(login);
                     finish();
@@ -70,12 +73,17 @@ ProfilePresenter presenter;
         });
 
         backupFavorites.setOnClickListener(v -> {
-            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).backupFavorites();
+            if(FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+                Snackbar.make(v,"Please Sign in with an account to use Backup!",Snackbar.LENGTH_SHORT).show();
+            }else{
+                presenter.backupFavorites();
+            }
         });
         restore.setOnClickListener(v ->{
             RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).restoreFavorites(this);
 //            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this));
 //            restoreTEsting
+            FirestoreBackupImpl.getInstance().retrieveFavList(this);
         });
     }
 
