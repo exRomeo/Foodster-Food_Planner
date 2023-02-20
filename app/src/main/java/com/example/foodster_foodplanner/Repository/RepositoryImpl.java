@@ -127,5 +127,12 @@ public class RepositoryImpl implements Repository {
         Disposable d = getFavoritesList().subscribeOn(Schedulers.io()).subscribe(firestoreBackup::backupMealList);
     }
 
+    @Override
+    public void restoreFavorites() {
+        for(Meal m: firestoreBackup.retrieveFavList()){
+            addFavorite(m);
+        }
+    }
+
 
 }

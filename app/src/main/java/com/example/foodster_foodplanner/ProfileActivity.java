@@ -73,6 +73,7 @@ ProfilePresenter presenter;
             RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).backupFavorites();
         });
         restore.setOnClickListener(v ->{
+            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this)).restoreFavorites();
 //            RepositoryImpl.getInstance(null, LocalDatabaseSource.getInstance(this));
 //            restoreTEsting
         });
