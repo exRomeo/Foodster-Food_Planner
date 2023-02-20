@@ -82,6 +82,7 @@ public class FilterFragment extends Fragment implements OnCardClickListener, Fil
 
     @Override
     public void onFavoriteClick(Meal meal) {
+        Toast.makeText(this.requireContext(), meal.getStrMeal() + "\nadded to Favorites", Toast.LENGTH_SHORT).show();
         filterPresenter.addToFavorites(meal);
     }
 

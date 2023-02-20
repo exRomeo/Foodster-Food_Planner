@@ -112,4 +112,8 @@
     <string name="use_google_to_login">use google to login</string>
     <string name="login_using_google">login using google</string>
     <string name="use_facebook_to_login">use facebook to login</string>
+    <string name="favorite_meals">Total Meals in Favorites</string>
+    <string name="planner_meals">Total Meals In Planner</string>
+    <string name="backup_favs">Backup Favorites</string>
+    <string name="backup_plans">Backup Planner</string>
 </resources>

@@ -174,11 +174,10 @@ public class LoginFragment extends Fragment {
 
     private void updateUI() {
         Toast.makeText(this.requireContext(), "Welcome " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
-        Log.i("TAG", "Guesss Who Logged in: " + FirebaseAuth.getInstance().getCurrentUser().getEmail() + " " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         startActivity(new Intent(this.requireContext(), MainScreen.class));
     }
 
-    public LoginButton initFbButton(View view) {
+    public LoginButton initFbButton(@NonNull View view) {
         fbLogin = view.findViewById(R.id.facebookButton);
         fbLogin.setReadPermissions(List.of("email"));
         fbLogin.setFragment(this);
@@ -230,7 +229,6 @@ public class LoginFragment extends Fragment {
                     }
                 });
     }
-
 
 
     private void checkUserDate(String emailAdress, String pass) {

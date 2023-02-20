@@ -56,6 +56,7 @@ public class SignupFragment extends Fragment implements SignupView {
             if (getPassword().equals(getConfirmPassword())) {
                 binding.passwordRestriction.setVisibility(View.GONE);
                 presenter.signup(getEmail(), getPassword());
+                updateUI(FirebaseAuth.getInstance().getCurrentUser());
             } else{
                 binding.passwordRestriction.setText("Password and Confirm password don't Match");
                 binding.passwordRestriction.setTextColor(Color.RED);

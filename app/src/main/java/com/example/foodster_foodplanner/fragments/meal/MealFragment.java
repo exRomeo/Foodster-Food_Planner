@@ -57,7 +57,6 @@ public class MealFragment extends Fragment implements MealView {
         binding.addToPlan.setOnClickListener(v -> createDialog().show());
         binding.rightBottomButton.setOnClickListener(v -> addToFavorites(currentMeal));
         binding.backButton.setOnClickListener(v -> requireActivity().finish());
-        binding.bkpbtn.setOnClickListener(v->  repository.backupFavorites());
 
 
         YouTubePlayerView youTubePlayerView = view.findViewById(R.id.youtube_view);
@@ -83,6 +82,7 @@ public class MealFragment extends Fragment implements MealView {
 
     @Override
     public void addToFavorites(Meal meal) {
+        Toast.makeText(this.requireContext(), meal.getStrMeal() + "\nadded to Favorites", Toast.LENGTH_SHORT).show();
         mealPresenter.addToFavorites(meal);
     }
 

@@ -38,11 +38,11 @@ public class MainScreen extends AppCompatActivity {
             if (user.isAnonymous()) {
                 userProfile.setText("A");
             } else {
-                if(user.getDisplayName()!=null) {
-                    userProfile.setText(user.getDisplayName().substring(0,2).toUpperCase());
+                if (user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
+                    userProfile.setText(user.getDisplayName().substring(0, 2).toUpperCase());
                 } else {
-                    if( user.getEmail() != null)
-                        userProfile.setText(user.getEmail().substring(0,2).toUpperCase());
+                    if (user.getEmail() != null)
+                        userProfile.setText(user.getEmail().substring(0, 2).toUpperCase());
                 }
             }
         }

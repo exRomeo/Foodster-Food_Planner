@@ -7,4 +7,5 @@ import java.util.List;
 public interface FirestoreBackup {
     void backupMeal(Meal meal);
     void backupMealList(List<Meal> mealList);
+
 }
