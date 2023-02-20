@@ -8,7 +8,6 @@ import com.example.foodster_foodplanner.models.Meal;
 import java.util.Objects;
 
 public class MealPresenterImpl implements MealPresenter {
-    private Meal _meal;
     private final Repository repository;
     private final MealView mealView;
 
